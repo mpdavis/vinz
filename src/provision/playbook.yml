@@ -1,0 +1,38 @@
+---
+- hosts: all
+  sudo: yes
+  
+  tasks:
+    - name: Installing packages from apt 
+      apt: pkg=${item} state=installed update-cache=yes
+      with_items:
+        - nginx
+        - build-essential
+        - python-dev
+        - python-pip
+        - supervisor
+
+    - name: Updating python requirements
+      pip: requirements=/vagrant/src/requirements.txt
+
+    - name: Installing gunicorn
+      pip: name=gunicorn
+
+    - name: Copying nginx config
+      copy: src=files/vinz dest=/etc/nginx/sites-enabled/default
+      notify:
+      - service nginx start/enabled
+      - service nginx restarted
+
+    - name: Copying supervisor configuration.
+      copy: src=files/vinz.conf dest=/etc/supervisor/conf.d/vinz.conf
+
+    - name: Reloading supervisor config
+      shell: supervisorctl reload
+
+  handlers:
+    - name: service nginx start/enabled
+      service: name=nginx state=started enabled=yes
+
+    - name: service nginx restarted
+      service: name=nginx state=restarted enabled=yes
