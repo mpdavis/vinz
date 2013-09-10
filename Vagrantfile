@@ -30,10 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # your network.
   # config.vm.network :public_network
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "src/provision/playbook.yml"
-  end
-
+  config.vm.provision "shell", path: "src/provision/setup.sh"
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
