@@ -22,8 +22,8 @@ app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = settings.MONGODB_DB
 
 # Initialize REST API and REST routes
-api = Api(app)
-routes.initialize_routes(api)
+rest_api = Api(app)
+routes.initialize_routes(rest_api)
 
 # Initialize Database connection
 db = MongoEngine(app)
