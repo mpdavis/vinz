@@ -15,6 +15,7 @@ from app.models.auth import User
 class AuditableMixin(object):
     """
     Abstract class meant to be inherited alongside a Mongoengine Document.  Automatically
+    sets the modified_date and creation_date.
     """
     creator = db.ReferenceField(User)
     creation_date = db.DateTimeField()
