@@ -1,4 +1,6 @@
 #!/bin/bash
+/bin/killall python
 
+/bin/echo -e "\n"
 echo "Running development server at 10.13.37.2 on port 80"
-sudo tail -f /var/log/supervisor/vinz-stdout.log
+python /vagrant/app/__init__.py
