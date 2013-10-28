@@ -12,8 +12,6 @@ from flask.ext.mongoengine import MongoEngine
 
 from flask_restful import Api
 
-from app.rest import routes
-
 import settings
 
 
@@ -21,19 +19,20 @@ import settings
 app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = settings.MONGODB_DB
 
+# Initialize Database connection
+db = MongoEngine(app)
+
 # Initialize REST API and REST routes
+from app.rest import routes
 rest_api = Api(app)
 routes.initialize_routes(rest_api)
 
-# Initialize Database connection
-db = MongoEngine(app)
 
 # Serve up the main "single" page, containing the angular frontend application
 @app.route('/')
 def index():
     # TODO Serve up the angular page.
     return render_template('base.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)

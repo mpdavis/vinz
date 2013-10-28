@@ -25,5 +25,5 @@ def initialize_routes(api):
         api.add_resource(resource, path, *args, **kwargs)
 
     # List Routes here
-    add_resource(BASE_API_PATH % '/servers/', ServerResourceList)
-    add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource)
+    add_resource(BASE_API_PATH % '/servers/', ServerResourceList, endpoint='servers')
+    add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource, endpoint='server')
