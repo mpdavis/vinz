@@ -13,4 +13,5 @@ mongoengine==0.8.4
 paramiko==1.11.0
 pycrypto==2.6
 pymongo==2.6.3
+six==1.4.1
 wsgiref==0.1.2
