@@ -1,0 +1,5 @@
+# by default, always use LF
+text eol=lf
+
+# except for batch files
+*.bat text eol=crlf
