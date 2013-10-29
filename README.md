@@ -30,7 +30,7 @@ The first thing we need to do is pull down the base box image to your machine.  
 
     vagrant box add base http://files.vagrantup.com/precise64.box
 
-Now we can start the VM and open the dev console. On Windows simply double-click **run_vagrant.bat**. On Max/Linux:
+Now we can start the VM and open the dev console. On Windows simply double-click **run_vagrant.bat**. On Mac/Linux:
 
     ./run_vagrant.sh
     
