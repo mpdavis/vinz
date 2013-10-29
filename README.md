@@ -37,13 +37,22 @@ Our dev environment takes place inside of a VM thanks to Vagrant.  You don't hav
 The first thing we need to do is pull down the base box image to your machine.  This is a VM image that vagrant can use in order to make VMs from.
 
     vagrant box add base http://files.vagrantup.com/precise64.box
+    
+#### Windows
+
+On Windows, simply double-click `run_vagrant.bat`
+
+This will take about a minute and a half depending on your machine and network connection.  This creates the VM and installs everything needed in order to get it in a state that lets it run our code.
+
+#### OS X
+
+    .run_vagrant.sh
 
 Now we can start the VM and open the dev console. On Windows simply double-click **run_vagrant.bat**. On Mac/Linux:
 
     ./run_vagrant.sh
-    
 
-This will take about a minute and a half depending on your machine and network connection.  This creates the VM and installs everything needed in order to get it in a state that lets it run our code.
+### Developing on Vinz
 
 At this point, the VM should be up and running.  It already has a private network connection to your machine. You can see our application in a browser by going to `http://10.13.37.2`
 The dev console will begin spitting out information related to the requests coming in.
