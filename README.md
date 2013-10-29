@@ -12,7 +12,9 @@ Let's get everything set up.
 You need to take care of a couple of things before getting started.
 
 * [Install Vagrant](http://vagrantup.com)
-* [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads) NOTE: There is a bug in VirtualBox 4.3, [use 4.2 for now](https://www.virtualbox.org/wiki/Download_Old_Builds_4_2).
+* [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads) 
+  * NOTE: There is a bug in VirtualBox 4.3
+  * Use [4.2](https://www.virtualbox.org/wiki/Download_Old_Builds_4_2) for now.
 * [Install Git](http://git-scm.com/downloads)
 * [Set up GitHub](https://help.github.com/articles/set-up-git)
 
