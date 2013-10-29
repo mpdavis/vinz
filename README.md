@@ -48,10 +48,6 @@ This will take about a minute and a half depending on your machine and network c
 
     .run_vagrant.sh
 
-Now we can start the VM and open the dev console. On Windows simply double-click **run_vagrant.bat**. On Mac/Linux:
-
-    ./run_vagrant.sh
-
 ### Developing on Vinz
 
 At this point, the VM should be up and running.  It already has a private network connection to your machine. You can see our application in a browser by going to `http://10.13.37.2`
