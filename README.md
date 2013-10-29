@@ -5,22 +5,22 @@ Vinz is a SSH key management system leveraging ansible to handle a company-wide 
 
 ## Dev Environment
 
-Let's get everything setup.
+Let's get everything set up.
 
-### Pre-Requesites
+### Prerequisites
 
 You need to take care of a couple of things before getting started.
 
 * [Install Vagrant](http://vagrantup.com)
-* [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads) NOTE: There is a bug in VirtualBox 4.3, [use 4.2 for now](https://www.virtualbox.org/wiki/Download_Old_Builds_4_2).
 * [Install Git](http://git-scm.com/downloads)
-* [Setup Github](https://help.github.com/articles/set-up-git)
+* [Set up GitHub](https://help.github.com/articles/set-up-git)
 
 ### Checking out the code
 
 Checking out the code pulls it down to your machine.  Remember where you check the code out to, as that is where you will be editing the code.  Exactly how you check out the code depends on what operating system you are using.  
 
-If you are on Windows, I would reccomend [Github for Windows](http://windows.github.com/)
+If you are on Windows, I would recommend [GitHub for Windows](http://windows.github.com/)
 
 ### Starting VM
 
@@ -30,15 +30,17 @@ The first thing we need to do is pull down the base box image to your machine.  
 
     vagrant box add base http://files.vagrantup.com/precise64.box
 
-Now, we can create the VM and get everything provisioned.  Make sure that you are in the directory where you checked out our source code.
+Now we can start the VM and open the dev console. On Windows simply double-click **run_vagrant.bat**. On Max/Linux:
 
-    vagrant up
+    ./run_vagrant.sh
     
+
 This will take about a minute and a half depending on your machine and network connection.  This creates the VM and installs everything needed in order to get it in a state that lets it run our code.
 
 At this point, the VM should be up and running.  It already has a private network connection to your machine. You can see our application in a browser by going to `http://10.13.37.2`
+The dev console will begin spitting out information related to the requests coming in.
 
-If you edit the source code on the host machine, you can reload the webpage at see your changes.  
+If you edit the source code on the host machine, you can reload the webpage and see your changes.  
 
 ## Problems?
 
