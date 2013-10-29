@@ -20,9 +20,15 @@ You need to take care of a couple of things before getting started.
 
 ### Checking out the code
 
-Checking out the code pulls it down to your machine.  Remember where you check the code out to, as that is where you will be editing the code.  Exactly how you check out the code depends on what operating system you are using.  
+We need to check out the code and get it on your machine locally.  Make sure you keep track of where you check out the code so that you can make changes to it.
+
+#### Windows
 
 If you are on Windows, I would recommend [GitHub for Windows](http://windows.github.com/)
+
+#### OS X
+
+    git clone git@github.com:mpdavis/vinz.git
 
 ### Starting VM
 
