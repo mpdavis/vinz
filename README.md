@@ -1,4 +1,4 @@
-# Vinz
+# Vinz [![Build Status](https://travis-ci.org/mpdavis/vinz.png?branch=master)](https://travis-ci.org/mpdavis/vinz)
 
 Vinz is a SSH key management system leveraging ansible to handle a company-wide deployment of keys.
 
