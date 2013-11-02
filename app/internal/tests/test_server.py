@@ -15,7 +15,7 @@ class TestInternalServer:
         Server.drop_collection()
 
     def test_create_server(self):
-        server = internal.create_server('server3', 'server3.test.com')
+        server = internal.server.create_server('server3', 'server3.test.com')
         assert server.name == 'server3'
         assert server.hostname == 'server3.test.com'
 
