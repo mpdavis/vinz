@@ -14,6 +14,11 @@ class TestInternalServer:
     def teardown(self):
         Server.drop_collection()
 
+    def test_create_server(self):
+        server = internal.create_server('server3', 'server3.test.com')
+        assert server.name == 'server3'
+        assert server.hostname == 'server3.test.com'
+
     def test_get_servers(self):
         servers = internal.server.get_servers()
         assert len(servers) == 2
