@@ -1,5 +1,3 @@
-PROJECT_NAME = 'vinz'
-
 MONGODB_DB = {
     'DB': 'vinz',
     'HOST': 'localhost',
