@@ -2,7 +2,7 @@ import os
 
 from flask.ext.script import Manager, Command, Option
 
-import app
+from app import app
 from app.settings import PROJECT_NAME
 
 
