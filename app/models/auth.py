@@ -20,6 +20,11 @@ class User(db.Document, AuditableMixin):
         return "%s %s" % (self.first_name, self.last_name)
 
 
+class UserGroup(db.Document, AuditableMixin):
+    name = db.StringField(required=True)
+    user_list = db.ListField(db.ReferenceField(User))
+
+
 class PublicKey(db.Document, AuditableMixin):
     owner = db.ReferenceField(User)
     value = db.TextField(required=True)
