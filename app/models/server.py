@@ -7,10 +7,15 @@
 """
 from app import db
 
-from app.models import AuditableMixin
+from app.models.audit import AuditableMixin
 
 
 class Server(db.Document, AuditableMixin):
     name = db.StringField(required=True)
     hostname = db.StringField(required=True)
     key_list = db.ListField()
+
+
+class ServerGroup(db.Document, AuditableMixin):
+    name = db.StringField(required=True)
+    server_list = db.ListField()
