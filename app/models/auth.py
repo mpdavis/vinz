@@ -27,5 +27,5 @@ class UserGroup(db.Document, AuditableMixin):
 
 class PublicKey(db.Document, AuditableMixin):
     owner = db.ReferenceField(User)
-    value = db.TextField(required=True)
+    value = db.StringField(required=True)
     expire_date = db.DateTimeField()
