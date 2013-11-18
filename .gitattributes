@@ -3,3 +3,6 @@ text eol=lf
 
 # except for batch files
 *.bat text eol=crlf
+
+# force lf for sh files
+*.sh test eol=lf
