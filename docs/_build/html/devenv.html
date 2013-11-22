@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development Environment &mdash; Vinz 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Vinz 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Getting Started" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Vinz 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="development-environment">
+<span id="id1"></span><h1>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s get everything set up.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>You need to take care of a couple of things before getting started.</p>
+<ul class="simple">
+<li>Install <a class="reference external" href="http://vagrantup.com">Vagrant</a></li>
+<li>Install <a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirutalBox</a></li>
+<li>Install <a class="reference external" href="http://git-scm.com/downloads">Git</a></li>
+<li>Setup <a class="reference external" href="https://help.github.com/articles/set-up-git">GitHub</a></li>
+</ul>
+</div>
+<div class="section" id="checking-out-the-code">
+<h2>Checking out the code<a class="headerlink" href="#checking-out-the-code" title="Permalink to this headline">¶</a></h2>
+<p>We need to check out the code and get it on your machine locally.  Make sure you keep track of where you check out the code so that you can make changes to it.</p>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>If you are on Windows, I would recommend [GitHub for Windows](<a class="reference external" href="http://windows.github.com/">http://windows.github.com/</a>)</p>
+</div>
+<div class="section" id="os-x">
+<h2>OS X<a class="headerlink" href="#os-x" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>git clone git@github.com:mpdavis/vinz.git</pre>
+</div>
+</div>
+<div class="section" id="starting-vm">
+<h2>Starting VM<a class="headerlink" href="#starting-vm" title="Permalink to this headline">¶</a></h2>
+<p>Our dev environment takes place inside of a VM thanks to Vagrant.  You don&#8217;t have to pay much attention to this, because the code on your system is automatically synced to the right place in the VM.  However, you do need to get the VM up and going before working.</p>
+<p>The first thing we need to do is pull down the base box image to your machine.  This is a VM image that vagrant can use in order to make VMs from.:</p>
+<div class="highlight-python"><pre>vagrant box add base http://files.vagrantup.com/precise64.box</pre>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>Windows<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>On Windows, simply double-click <cite>run_vagrant.bat</cite></p>
+<p>This will take about a minute and a half depending on your machine and network connection.  This creates the VM and installs everything needed in order to get it in a state that lets it run our code.</p>
+</div>
+<div class="section" id="id3">
+<h2>OS X<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>.run_vagrant.sh</pre>
+</div>
+</div>
+<div class="section" id="developing-on-vinz">
+<h2>Developing on Vinz<a class="headerlink" href="#developing-on-vinz" title="Permalink to this headline">¶</a></h2>
+<p>At this point, the VM should be up and running.  It already has a private network connection to your machine. You can see our application in a browser by going to <cite>http://10.13.37.2</cite>
+The dev console will begin spitting out information related to the requests coming in.</p>
+<p>If you edit the source code on the host machine, you can reload the webpage and see your changes.</p>
+</div>
+<div class="section" id="problems">
+<h2>Problems?<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h2>
+<p>This is simply written from memory.  When (not if) you run into problems, let Michael know and he will update the README.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development Environment</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#checking-out-the-code">Checking out the code</a></li>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+<li><a class="reference internal" href="#os-x">OS X</a></li>
+<li><a class="reference internal" href="#starting-vm">Starting VM</a></li>
+<li><a class="reference internal" href="#id2">Windows</a></li>
+<li><a class="reference internal" href="#id3">OS X</a></li>
+<li><a class="reference internal" href="#developing-on-vinz">Developing on Vinz</a></li>
+<li><a class="reference internal" href="#problems">Problems?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/devenv.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">Vinz 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Michael Davis, Max Peterson, Jacob Hummel, Zach Heilman, Eric Feldman, Ario Xiao Gin.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
