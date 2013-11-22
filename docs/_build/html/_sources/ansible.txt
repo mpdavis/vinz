@@ -1,0 +1,18 @@
+ansible Package
+===============
+
+:mod:`ansible` Package
+----------------------
+
+.. automodule:: ansible_api.__init__
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    ansible.api
+
