@@ -2,14 +2,6 @@
 Getting Started
 ===============
 
-Ansible API
------------
-
-.. toctree::
-   :maxdepth: 2
-
-   ansible_api.api
-
 
 Development
 -----------
@@ -19,6 +11,14 @@ Development
 
    devenv
 
+
+Ansible API
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   modules
 
 
 Indices and tables
