@@ -1,0 +1,29 @@
+{
+  "name": "vinz",
+  "version": "0.0.0",
+  "description": "SSH Key Management software",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mpdavis/vinz.git"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/grunt build-app"
+  },
+  "author": "",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "almond": "~0.2.6",
+    "bower": "~1.2.7",
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.10",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-less": "~0.8.1",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-recess": "~0.4.0",
+    "grunt-shell": "~0.5.0"
+  }
+}
