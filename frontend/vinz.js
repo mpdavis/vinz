@@ -15,7 +15,7 @@ var vinz = angular.module('vinz',
         'pk-routing',
     ]);
 
-// PARAKEE CONFIG
+// VINZ CONFIG
 function vinzSetup(Restangular) {
     Restangular.setBaseUrl('/api/');
 }
