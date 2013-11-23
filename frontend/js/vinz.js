@@ -11,7 +11,7 @@ var angular = require('angular'),
 var vinz = angular.module('vinz',
     [
         'restangular',
-        'vinz-routing',
+        'vinz-routing'
     ]);
 
 // VINZ CONFIG
