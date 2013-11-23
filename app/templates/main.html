@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block nav %}
 
     <div ng-app="VinzApp">
         <nav id="navbar-main" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -16,9 +16,14 @@
                 </div>
             </div>
         </nav>
-        <div ng-view></div>
     </div>
 
     <script src="/static/js/vinz.js"></script>
+
+{% endblock nav %}
+
+{% block content %}
+
+    <div ng-view></div>
 
 {% endblock content %}
