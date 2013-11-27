@@ -4,8 +4,7 @@ var angular = require('angular'),
     restangular = require('restangular'),
 
     // VINZ COMPONENTS
-    filters = require('filters/init.js'),
-    routing = require('routing/init.js')
+    routing = require('routing/init.js');
 
 // VINZ ANGULAR MODULE
 var vinz = angular.module('vinz',
