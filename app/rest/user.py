@@ -1,9 +1,6 @@
 """
 .. module:: rest.user
    :synopsis: REST Resource definitions relating to users
-
-.. moduleauthor:: Max Peterson <maxwell.peterson@webfilings.com>
-
 """
 from flask.ext.restful import Resource
 from flask.ext.restful import fields
