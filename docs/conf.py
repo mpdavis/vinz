@@ -14,9 +14,8 @@
 import sys
 import os
 
-sys.path.append('/Users/mikedavis/workspace/vinz/app')
-sys.path.append('/Users/mikedavis/workspace/vinz/app/ansible_api')
-sys.path.append('/Users/mikedavis/workspace/vinz')
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../app'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '../app/ansible_api'))
 
 # If extensions (or modules to document with autodoc) are in another directory,
