@@ -8,6 +8,9 @@
 from app.rest.server import ServerResource
 from app.rest.server import ServerResourceList
 
+from app.rest.user import UserResource
+from app.rest.user import UserResourceList
+
 
 BASE_API_PATH = '/api%s'
 
@@ -27,3 +30,6 @@ def initialize_routes(api):
     # List Routes here
     add_resource(BASE_API_PATH % '/servers/', ServerResourceList, endpoint='servers')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource, endpoint='server')
+
+    add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
+    add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')

@@ -24,7 +24,7 @@ user_fields = {
 
 user_parser = reqparse.RequestParser()
 user_parser.add_argument("first_name", type=str, location='json')
-user_parser.add_argument("last_name)", type=str, location='json')
+user_parser.add_argument("last_name", type=str, location='json')
 user_parser.add_argument('email', type=str, location='json')
 
 
@@ -57,5 +57,7 @@ class UserResourceList(Resource):
 
     def post(self):
         args = user_parser.parse_args()
+        import logging
+        logging.warn(args)
         user = user_api.create_user(**args)
         return marshal(user , user_fields), HTTP_STATUS.CREATED
