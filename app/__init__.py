@@ -31,7 +31,7 @@ routes.initialize_routes(rest_api)
 # Serve up the main "single" page, containing the angular frontend application
 @app.route('/')
 def index():
-    return render_template('main.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
