@@ -11,7 +11,7 @@ def create_user(first_name, last_name, email, **kwargs):
     Create a new user in the database with the given values.
     """
     # TODO Auditable stuff
-    user = User(first_name=first_name, last_name=last_name,email=email)
+    user = User(first_name=first_name, last_name=last_name, email=email)
     user.save()
     return user
 

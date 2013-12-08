@@ -57,7 +57,5 @@ class UserResourceList(Resource):
 
     def post(self):
         args = user_parser.parse_args()
-        import logging
-        logging.warn(args)
         user = user_api.create_user(**args)
         return marshal(user , user_fields), HTTP_STATUS.CREATED
