@@ -16,7 +16,7 @@ describe('Controller: TestCtrl', function () {
     });
   }));
 
-  it('should attach a list of gateKeepers to the scope', function () {
+  it('should attach a list of awesomeThings to the scope', function () {
     expect(scope.gateKeepers.length).toBe(6);
   });
 });

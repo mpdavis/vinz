@@ -1,0 +1,41 @@
+.serverHeader {
+	margin-bottom: 15px;
+	line-height: 35px;
+}
+
+.serverSelected {
+	float: right;
+}
+
+.serverSearchBox {
+
+}
+
+.serverTable {
+
+}
+
+.serverTable .col-left {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.serverTable th {
+	text-align: center;
+	font-weight: bold;
+}
+
+.serverTable td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.serverInspectIcon {
+	/*background-color: #0066cc !important;*/
+	/*border-color: #005cb8 !important;*/
+}
+
+.serverInspectIcon:hover {
+	background-color: #005cb8 !important;
+	border-color: #0052a4 !important;
+}

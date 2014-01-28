@@ -9,71 +9,11 @@ body {
 }
 
 /* CSS DROPDOWN NAV */
-nav .navbar-container .navbar-main ul ul {
-  display: none;
+.navbar {
+  /*background-color: #0066ff !important;*/
+  /*color: white;*/
 }
 
-nav .navbar-container .navbar-main ul li:hover > ul {
-  display: block;
-}
-
-nav .navbar-container .navbar-main ul {
-  list-style: none;
-  position: relative;
-  display: inline-table;
-  line-height: 50px;
-  margin: 0;
-  padding: 0;
-}
-nav .navbar-container .navbar-main ul:after {
-  content: ""; clear: both; display: block;
-}
-
-nav .navbar-container .navbar-main ul li {
-  line-height: 50px;
-  margin: 0;
-  padding: 0;
-}
-
-nav .navbar-container .navbar-main ul li:hover {
-  
-}
-
-nav .navbar-container .navbar-main ul li:hover a {
-  
-}
-
-nav .navbar-container .navbar-main ul li a {
-  display: block;
-  text-decoration: none;
-}
-
-nav .navbar-container .navbar-main ul ul {
-  background: #222222;
-  padding: 10px;
-  position: absolute; 
-  top: 100%;
-  color: white;
-  width: 350px;
-}
-nav .navbar-container .navbar-main ul ul li {
-  float: none;
-  border-top: 1px solid #080808; 
-  position: relative;
-}
-nav .navbar-container .navbar-main ul ul li a {
-  padding: 15px 40px;
-  color: #fff;
-} 
-nav .navbar-container .navbar-main ul ul li a:hover {
-  background: black;
-}
-
-nav .navbar-container .navbar-main ul ul ul {
-  position: absolute; 
-  left: 100%; 
-  top:0;
-}
 /* END CSS DROPDOWN NAV */
 
 /* Navbar */

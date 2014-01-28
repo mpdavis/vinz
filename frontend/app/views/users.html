@@ -6,13 +6,9 @@
 
       <div class="navbar-main">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#/">Servers</a></li>
+            <li><a href="#/">Servers</a></li>
+            <li class="active"><a href="#/users">Users</a></li>
             <li><a href="#/notifications">Notifications</a>
-              <ul>
-                <li ng-repeat="n in notifications">
-                  {{n.admin}}&nbsp{{n.message}}&nbsp{{n.server}}
-                </li>
-              </ul>
             </li>
             <li><a href="#/test">Settings</a></li>
         </ul>
@@ -29,27 +25,32 @@
 </nav>
 
 <div class="container">
-  
-    <table class="table table-hover table-bordered">
+    <h2 class="serverHeader">
+      Users
+      <div class="serverSelected">
+      </div>
+    </h2>
+
+    <div class="serverSearchBox">
+      <div class="form-group">
+        <input type="text" class="form-control"  ng-model="serverSearch" placeholder="Filter Users">
+      </div>
+    </div>
+    <table class="serverTable table table-hover table-striped table-bordered">
       <thead>
-        <h2>Servers</h2>
         <tr>
-          <th>ID</th>
           <th>Name</th>
-          <th>Hostname</th>
-          <th>Permission</th>
-          <th>Remove</th>
+          <th>Privelege</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="server in servers">
-          <td>{{server.id}}</td>
-          <td>{{server.name}}</td>
-          <td>{{server.hostname}}</td>
-          <td>{{server.permission}}</td>
+        <tr ng-repeat="user in users | filter:serverSearch">
+          <td class="col-left">{{user.name}}</td>
+          <td>{{user.privelege}}</td>
           <td>
-            <div class="btn btn-default">
-              <i class="glyphicon glyphicon-remove"></i>
+            <div class="serverInspectIcon btn btn-primary">
+              <i class="fa fa-2x fa-user"></i>
             </div>
           </td>
         </tr>
