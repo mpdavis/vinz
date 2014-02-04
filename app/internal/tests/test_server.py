@@ -1,6 +1,6 @@
 
-from app.models.server import Server
-from app import internal
+from models.server import Server
+import internal
 
 
 class TestInternalServer:
