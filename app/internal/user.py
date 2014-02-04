@@ -3,7 +3,7 @@
 .. module:: internal.user
    :synopsis: Location for internal API functions relating to user resources
 """
-from app.models.auth import User
+from models.auth import User
 
 
 def create_user(first_name, last_name, email, **kwargs):

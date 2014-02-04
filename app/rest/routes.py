@@ -5,11 +5,11 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
-from app.rest.server import ServerResource
-from app.rest.server import ServerResourceList
+from rest.server import ServerResource
+from rest.server import ServerResourceList
 
-from app.rest.user import UserResource
-from app.rest.user import UserResourceList
+from rest.user import UserResource
+from rest.user import UserResourceList
 
 
 BASE_API_PATH = '/api%s'

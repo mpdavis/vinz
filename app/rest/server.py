@@ -11,9 +11,9 @@ from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
 from flask.ext.restful import reqparse
 
-from app.constants import HTTP_STATUS
+from constants import HTTP_STATUS
 
-from app.internal import server as server_api
+from internal import server as server_api
 
 
 server_fields = {
