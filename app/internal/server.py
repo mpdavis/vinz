@@ -5,7 +5,7 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
-from app.models.server import Server
+from models.server import Server
 
 
 def create_server(name, hostname, **kwargs):

@@ -5,27 +5,31 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
-from app import db
+from mongoengine import DateTimeField
+from mongoengine import Document
+from mongoengine import ListField
+from mongoengine import ReferenceField
+from mongoengine import StringField
 
-from app.models.audit import AuditableMixin
+from models.audit import AuditableMixin
 
 
-class User(db.Document, AuditableMixin):
-    first_name = db.StringField(required=True)
-    last_name = db.StringField(required=True)
-    email = db.StringField(required=True)
-    key_list = db.ListField()
+class User(Document, AuditableMixin):
+    first_name = StringField(required=True)
+    last_name = StringField(required=True)
+    email = StringField(required=True)
+    key_list = ListField()
 
     def get_display_name(self):
         return "%s %s" % (self.first_name, self.last_name)
 
 
-class UserGroup(db.Document, AuditableMixin):
-    name = db.StringField(required=True)
-    user_list = db.ListField(db.ReferenceField(User))
+class UserGroup(Document, AuditableMixin):
+    name = StringField(required=True)
+    user_list = ListField(ReferenceField(User))
 
 
-class PublicKey(db.Document, AuditableMixin):
-    owner = db.ReferenceField(User)
-    value = db.StringField(required=True)
-    expire_date = db.DateTimeField()
+class PublicKey(Document, AuditableMixin):
+    owner = ReferenceField(User)
+    value = StringField(required=True)
+    expire_date = DateTimeField()
