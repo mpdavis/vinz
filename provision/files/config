@@ -1,0 +1,9 @@
+Host debian
+    HostName vinz-debian.student.iastate.edu
+    User vinz
+    IdentityFile ~/.ssh/id_rsa
+
+Host ubuntu
+    HostName vinz-ubuntu.student.iastate.edu
+    User vinz
+    IdentityFile ~/.ssh/id_rsa
