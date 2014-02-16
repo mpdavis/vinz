@@ -14,7 +14,7 @@ class VinzRunner(Runner):
     def __init__(self,
                  hosts,
                  module_name=None,
-                 module_cmds=None,
+                 module_args=None,
                  ):
 
         if not isinstance(hosts, list):
@@ -30,8 +30,8 @@ class VinzRunner(Runner):
             'private_key_file': self.private_key
         }
 
-        if module_cmds:
-            arguments['module_cmds'] = module_cmds
+        if module_args:
+            arguments['module_args'] = module_args
 
         return super(VinzRunner, self).__init__(**arguments)
 
