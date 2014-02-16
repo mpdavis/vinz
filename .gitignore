@@ -10,3 +10,4 @@ app/bower_components
 server/static
 bower_components
 *.log
+provision/files/id_rsa
