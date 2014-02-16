@@ -1,0 +1,57 @@
+.serverTitle {
+	font-size: 24px;
+}
+
+.serverHeader {
+	margin-bottom: 15px;
+	line-height: 35px;
+}
+
+.serverActions {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.serverNewButton {
+	margin-right: 10px;
+	float: right;
+}
+
+.serverActions .btn-group {
+	float: right;
+}
+
+.serverSearchBox {
+
+}
+
+.serverTable {
+	background-color: white;
+}
+
+.serverInfoBtn {
+  width: 100%;
+}
+
+.serverTable .col-left {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.serverTable th {
+	text-align: center;
+	font-weight: bold;
+}
+
+.serverTable td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.serverInspectIcon {
+
+}
+
+.serverInspectIcon:hover {
+	
+}

@@ -10,3 +10,4 @@ app/bower_components
 app/static
 bower_components
 *.log
+frontend/bower_components

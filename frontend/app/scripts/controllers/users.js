@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('SettingsCtrl', function ($scope) {
+  .controller('UsersCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
