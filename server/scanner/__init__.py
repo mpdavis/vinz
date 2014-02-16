@@ -31,7 +31,7 @@ class VinzRunner(Runner):
         }
 
         if module_args:
-            arguments['module_cmds'] = module_args
+            arguments['module_args'] = module_args
 
         return super(VinzRunner, self).__init__(**arguments)
 
