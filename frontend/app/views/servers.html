@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="sectionBanner">
+      <div class="sectionTitle">
+        SERVERS
+      </div>
+      <div class="sectionButtons">
+        <div class="input-group" style="width:300px;">
+          <div class="btn btn-default"><i class="fa fa-plus"></i>&nbspADD</div>
+          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
+        </div>
+    </div>
+  </div>
+
+    <table class="serverTable table table-hover table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hostname</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="server in servers | filter:serverSearch">
+          <td>{{server.name}}</td>
+          <td>{{server.hostname}}</td>
+          <td><div class="btn btn-default serverInfoBtn"><i class="fa fa-sign-in"></i></div></td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $(".navbar-nav li").removeClass("active");
+  $("#servers-nav").addClass("active");
+});
+</script>

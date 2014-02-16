@@ -1,22 +1,22 @@
 'use strict';
 
-describe('Controller: LoginCtrl', function () {
+describe('Controller: UsersCtrl', function () {
 
   // load the controller's module
   beforeEach(module('vinzApp'));
 
-  var LoginCtrl,
+  var UsersCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    LoginCtrl = $controller('LoginCtrl', {
+    UsersCtrl = $controller('UsersCtrl', {
       $scope: scope
     });
   }));
 
-  // it('does nothing right now', function () {
-    
-  // });
+  it('should attach a list of awesomeThings to the scope', function () {
+    expect(scope.awesomeThings.length).toBe(3);
+  });
 });
