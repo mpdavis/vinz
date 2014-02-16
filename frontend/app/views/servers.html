@@ -4,13 +4,17 @@
         SERVERS
       </div>
       <div class="sectionButtons">
-        <div class="input-group" style="width:300px;">
-          <div class="btn btn-default"><i class="fa fa-plus"></i>&nbspADD</div>
-          <span class="input-group-addon"><i class="fa fa-search"></i></span>
-          <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
-        </div>
+          <div class="btn btn-default">
+            NEW SERVER
+          </div>
+          <div class="right-inner-addon">
+              <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
+              <i class="fa fa-search"></i>
+          </div>
+      </div>
     </div>
-  </div>
+
+    <p>{{urlTest}}</p>
 
     <table class="serverTable table table-hover table-striped table-bordered">
       <thead>
