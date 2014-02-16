@@ -10,4 +10,6 @@ app/bower_components
 app/static
 bower_components
 *.log
+
+provision/files/id_rsa
 frontend/bower_components
