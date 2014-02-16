@@ -17,7 +17,7 @@ def initialize_view_urls(app):
 
 
 def index():
-    return render_template('index.html')
+    return send_from_directory(current_app.static_folder, 'index.html')
 
 
 def login():

@@ -7,7 +7,7 @@ dist
 .sass-cache
 app/bower_components
 .build
-app/static
+server/static
 bower_components
 *.log
-frontend/bower_components
+provision/files/id_rsa
