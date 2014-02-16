@@ -5,46 +5,29 @@ angular.module('vinzApp')
 
     $scope.servers = [
         {
-            id: '123456',
-            name: 'vinz_dev',
-            hostname: '10.1.1.30',
-            permission: 'admin'
-        },
-        {
-            id: '123458',
-            name: 'vinz_prod',
-            hostname: '10.1.1.32',
-            permission: 'user'
-        },
-        {
-            id: '123457',
-            name: 'vinz_qa',
-            hostname: '10.1.1.50',
-            permission: 'user'
-        },
-        {
             id: '123459',
             name: 'webfilings 1',
-            hostname: '10.1.1.32',
-            permission: 'user'
+            hostname: '173.30.18.93',
+            access: 'yes'
         },
         {
             id: '123460',
             name: 'webfilings 2',
-            hostname: '10.1.1.50',
-            permission: 'user'
+            hostname: '173.30.18.94',
+            access: 'yes'
         },
         {
             id: '123461',
             name: 'isu ',
-            hostname: '10.1.1.32',
-            permission: 'user'
+            hostname: '173.30.18.95',
+            access: 'yes'
         },
         {
             id: '123462',
-            name: 'vinz_qa',
-            hostname: '10.1.1.50',
-            permission: 'user'
+            name: 'vinz',
+            hostname: '173.30.18.96',
+            access: 'yes'
         }
         ];
   });
+

@@ -1,9 +1,23 @@
+.serverTitle {
+	font-size: 24px;
+}
+
 .serverHeader {
 	margin-bottom: 15px;
 	line-height: 35px;
 }
 
-.serverSelected {
+.serverActions {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.serverNewButton {
+	margin-right: 10px;
+	float: right;
+}
+
+.serverActions .btn-group {
 	float: right;
 }
 
@@ -12,7 +26,11 @@
 }
 
 .serverTable {
+	background-color: white;
+}
 
+.serverInfoBtn {
+  width: 100%;
 }
 
 .serverTable .col-left {
@@ -31,11 +49,9 @@
 }
 
 .serverInspectIcon {
-	/*background-color: #0066cc !important;*/
-	/*border-color: #005cb8 !important;*/
+
 }
 
 .serverInspectIcon:hover {
-	background-color: #005cb8 !important;
-	border-color: #0052a4 !important;
+	
 }

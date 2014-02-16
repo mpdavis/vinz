@@ -1,67 +1,38 @@
-<nav id="navbar-main" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="navbar-container">
-      <div class="navbar-header">
-          <a class="navbar-brand" href="#/">Vinz</a>
-      </div>
-
-      <div class="navbar-main">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#/">Servers</a></li>
-            <li><a href="#/users">Users</a></li>
-            <li><a href="#/notifications">Notifications</a>
-            </li>
-            <li><a href="#/test">Settings</a></li>
-        </ul>
-      </div>
-        <ul class="nav navbar-nav pull-right">
-          <li>
-            <a href="#/login">
-              jhummel@iastate.edu
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-</nav>
-
 <div class="container">
-    <h2 class="serverHeader">
-      Servers
-      <div class="serverSelected">
-        <div class="btn btn-default active">
-          Have Access
-        </div>
-        <div class="btn btn-default">
-          No Access
-        </div>
+    <div class="sectionBanner">
+      <div class="sectionTitle">
+        SERVERS
       </div>
-    </h2>
-
-    <div class="serverSearchBox">
-      <div class="form-group">
-        <input type="text" class="form-control"  ng-model="serverSearch" placeholder="Filter Servers">
-      </div>
+      <div class="sectionButtons">
+        <div class="input-group" style="width:300px;">
+          <div class="btn btn-default"><i class="fa fa-plus"></i>&nbspADD</div>
+          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
+        </div>
     </div>
+  </div>
+
     <table class="serverTable table table-hover table-striped table-bordered">
       <thead>
         <tr>
           <th>Name</th>
           <th>Hostname</th>
-          <th>Permission</th>
-          <th>Manage</th>
+          <th>Details</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="server in servers | filter:serverSearch">
-          <td class="col-left">{{server.name}}</td>
+          <td>{{server.name}}</td>
           <td>{{server.hostname}}</td>
-          <td>{{server.permission}}</td>
-          <td>
-            <div class="serverInspectIcon btn btn-primary">
-              <i class="fa fa-2x fa-laptop"></i>
-            </div>
-          </td>
+          <td><div class="btn btn-default serverInfoBtn"><i class="fa fa-sign-in"></i></div></td>
         </tr>
     </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+$(function() {
+  $(".navbar-nav li").removeClass("active");
+  $("#servers-nav").addClass("active");
+});
+</script>

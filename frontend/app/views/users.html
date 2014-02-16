@@ -1,59 +1,10 @@
-<nav id="navbar-main" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="navbar-container">
-      <div class="navbar-header">
-          <a class="navbar-brand" href="#/">Vinz</a>
-      </div>
 
-      <div class="navbar-main">
-        <ul class="nav navbar-nav">
-            <li><a href="#/">Servers</a></li>
-            <li class="active"><a href="#/users">Users</a></li>
-            <li><a href="#/notifications">Notifications</a>
-            </li>
-            <li><a href="#/test">Settings</a></li>
-        </ul>
-      </div>
-        <ul class="nav navbar-nav pull-right">
-          <li>
-            <a href="#/login">
-              jhummel@iastate.edu
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-</nav>
 
-<div class="container">
-    <h2 class="serverHeader">
-      Users
-      <div class="serverSelected">
-      </div>
-    </h2>
+<p>This is the users view.</p>
 
-    <div class="serverSearchBox">
-      <div class="form-group">
-        <input type="text" class="form-control"  ng-model="serverSearch" placeholder="Filter Users">
-      </div>
-    </div>
-    <table class="serverTable table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Privelege</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="user in users | filter:serverSearch">
-          <td class="col-left">{{user.name}}</td>
-          <td>{{user.privelege}}</td>
-          <td>
-            <div class="serverInspectIcon btn btn-primary">
-              <i class="fa fa-2x fa-user"></i>
-            </div>
-          </td>
-        </tr>
-    </tbody>
-    </table>
-</div>
+<script type="text/javascript">
+$(function() {
+	$(".navbar-nav li").removeClass("active");
+    $("#users-nav").addClass("active");
+});
+</script>
