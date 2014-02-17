@@ -9,15 +9,15 @@ angular.module('vinzApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/servers.html',
+        templateUrl: 'static/views/servers.html',
         controller: 'ServersCtrl'
       })
       .when('/servers', {
-        templateUrl: 'views/servers.html',
+        templateUrl: 'static/views/servers.html',
         controller: 'ServersCtrl'
       })
       .when('/users', {
-        templateUrl: 'views/users.html',
+        templateUrl: 'static/views/users.html',
         controller: 'UsersCtrl'
       })
       .otherwise({
