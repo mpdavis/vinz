@@ -9,7 +9,7 @@ class VinzRunner(Runner):
     boilerplate code.
     """
 
-    private_key = '/Users/mikedavis/.ssh/id_vinz'
+    private_key = '/vagrant/provision/files/id_rsa'
 
     def __init__(self,
                  hosts,
