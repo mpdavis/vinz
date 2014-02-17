@@ -25,7 +25,7 @@ angular.module('vinzApp')
         {
             id: '123462',
             name: 'vinz',
-            hostname: '173.30.18.96',
+            hostname: '173.30.18.98',
             access: 'yes'
         }
         ];

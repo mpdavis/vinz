@@ -7,4 +7,5 @@ angular.module('vinzApp')
       'AngularJS',
       'Karma'
     ];
+
   });
