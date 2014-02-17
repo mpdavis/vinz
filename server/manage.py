@@ -30,8 +30,16 @@ def setup_cron():
 
 
 @manager.command
-def scan():
-    pass
+def add_user(username):
+    from scanner.api import user
+    user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
+
+
+@manager.command
+def remove_user(username):
+    from scanner.api import user
+    user.remove_user(username, ['vinz-ubuntu.student.iastate.edu'])
+
 
 if __name__ == "__main__":
     manager.run()
