@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     var frontendSrc = 'app/';
     var globs = {
         'frontend': {
-            'js': frontendSrc + 'js/**/*.js',
+            'js': frontendSrc + 'scripts/**/*.js',
             'css': frontendSrc + 'css/**/*.css',
             'templates': frontendSrc + '**/*.html',
             'views': frontendSrc + 'views/**/*.html'
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
             'js': buildBase + 'js/'
         },
         'frontend': {
-            'js': frontendBase + 'js/',
+            'js': frontendBase + 'scripts/',
             'css': frontendBase + 'css/',
             'img': frontendBase + 'images/',
             'views': frontendBase + 'views/'
