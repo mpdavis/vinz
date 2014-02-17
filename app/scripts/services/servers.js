@@ -14,7 +14,7 @@ angular.module('vinzApp')
         return meaningOfLife;
       },
       getServers: function() {
-      	var serversArray = [
+        var serversArray = [
         {
             id: '123459',
             name: 'webfilings 1',
@@ -41,14 +41,17 @@ angular.module('vinzApp')
         }
         ];
 
-      	return serversArray;
+        return serversArray;
       },
       canGetRealServers: function() {
-      	$http.get(local + serversAPI).success(function(data) {
-	        return "boom";
-	    }).error(function(data) {
-	        return "nah";
-	    });  
+        $http.get(local + serversAPI)
+          .success(function(data) {
+            return "boom";
+        })
+          .error(function(data) {
+            return "nah";
+        });  
       }
-  	};
+    };
   });
+
