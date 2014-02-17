@@ -9,7 +9,8 @@ module.exports = function(grunt) {
         'frontend': {
             'js': frontendSrc + 'js/**/*.js',
             'css': frontendSrc + 'css/**/*.css',
-            'templates': frontendSrc + '**/*.html'
+            'templates': frontendSrc + '**/*.html',
+            'views': frontendSrc + 'views/**/*.html'
         },
         'node': ['Gruntfile.js']
     };
@@ -151,7 +152,7 @@ module.exports = function(grunt) {
 
         'watch': {
             'app': {
-                'files': [globs.frontend.js, globs.frontend.css, globs.frontend.templates],
+                'files': [globs.frontend.js, globs.frontend.css, globs.frontend.views],
                 'tasks': ['dev-app']
             }
         },
