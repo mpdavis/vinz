@@ -144,7 +144,8 @@ module.exports = function(grunt) {
                     directories.bower.angularSanitize + 'angular-sanitize.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/servers.js',
-                    directories.frontend.js + 'controllers/users.js'
+                    directories.frontend.js + 'controllers/users.js',
+                    directories.frontend.js + 'services/servers.js'
                 ],
                 dest: directories.static.js + 'app.js'
             }
