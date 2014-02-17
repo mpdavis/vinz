@@ -5,4 +5,3 @@ angular.module('vinzApp')
     $scope.servers = servers.getServers();
     $scope.urlTest = servers.canGetRealServers();
   }]);
-
