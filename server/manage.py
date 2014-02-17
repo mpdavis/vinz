@@ -15,6 +15,7 @@ VINZ_COMMENT = 'vinz'
 SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 
+@manager.command
 def setup_dev():
     from internal import server
     from internal import user
