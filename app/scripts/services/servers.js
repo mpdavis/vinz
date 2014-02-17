@@ -4,7 +4,6 @@ angular.module('vinzApp')
   .factory('servers', function ($http) {
     // Service logic
     // ...
-    var local = "http://10.13.37.2";
     var serversAPI = "/api/servers/";
     var meaningOfLife = 42;
 
@@ -44,7 +43,7 @@ angular.module('vinzApp')
         return serversArray;
       },
       canGetRealServers: function() {
-        $http.get(local + serversAPI)
+        $http.get(serversAPI)
           .success(function(data) {
             return "boom";
         })

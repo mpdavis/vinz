@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     var frontendSrc = 'app/';
     var globs = {
         'frontend': {
-            'js': frontendSrc + 'js/**/*.js',
+            'js': frontendSrc + 'scripts/**/*.js',
             'css': frontendSrc + 'css/**/*.css',
             'templates': frontendSrc + '**/*.html',
             'views': frontendSrc + 'views/**/*.html'
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
             'js': buildBase + 'js/'
         },
         'frontend': {
-            'js': frontendBase + 'js/',
+            'js': frontendBase + 'scripts/',
             'css': frontendBase + 'css/',
             'img': frontendBase + 'images/',
             'views': frontendBase + 'views/'
@@ -144,7 +144,8 @@ module.exports = function(grunt) {
                     directories.bower.angularSanitize + 'angular-sanitize.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/servers.js',
-                    directories.frontend.js + 'controllers/users.js'
+                    directories.frontend.js + 'controllers/users.js',
+                    directories.frontend.js + 'services/servers.js'
                 ],
                 dest: directories.static.js + 'app.js'
             }
