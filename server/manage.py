@@ -41,5 +41,10 @@ def remove_user(username):
     user.remove_user(username, ['vinz-ubuntu.student.iastate.edu'])
 
 
+@manager.command
+def scan():
+    pass
+
+
 if __name__ == "__main__":
     manager.run()
