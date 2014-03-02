@@ -19,6 +19,7 @@ user_fields = {
     'first_name': fields.String(),
     'last_name': fields.String(),
     'email': fields.String(),
+    'username': fields.String(),
     'key_list': fields.List(fields.String)
 }
 
@@ -26,6 +27,7 @@ user_parser = reqparse.RequestParser()
 user_parser.add_argument("first_name", type=str, location='json')
 user_parser.add_argument("last_name", type=str, location='json')
 user_parser.add_argument('email', type=str, location='json')
+user_parser.add_argument('username', type=str, location='json')
 
 
 class UserResource(Resource):
