@@ -23,7 +23,7 @@ def setup_dev():
     server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
     server.create_server('debian', 'vinz-debian.student.iastate.edu')
 
-    user.create_user('Test', 'Tester', 'test@test.com')
+    user.create_user('Test', 'Tester', 'test@test.com', 'tester')
 
 
 @manager.command
