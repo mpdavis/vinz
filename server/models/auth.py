@@ -32,5 +32,7 @@ class UserGroup(Document, AuditableMixin):
 
 class PublicKey(Document, AuditableMixin):
     owner = ReferenceField(User)
+    key_name = StringField(required=True)
+    username = StringField(required=False)
     value = StringField(required=True)
     expire_date = DateTimeField()
