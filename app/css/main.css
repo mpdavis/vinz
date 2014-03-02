@@ -97,6 +97,21 @@ body {
 
 .sectionButtons {
   float: right;
-  /*line-height: 38px;*/
+  width: 320px;
+  margin-top: 2px;
+}
 
+.right-inner-addon {
+    position: relative;
+    float: right;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    padding: 0px 11px;
+    pointer-events: none;
 }

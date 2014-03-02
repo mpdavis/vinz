@@ -16,6 +16,17 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 
 @manager.command
+def setup_dev():
+    from internal import server
+    from internal import user
+
+    server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
+    server.create_server('debian', 'vinz-debian.student.iastate.edu')
+
+    user.create_user('Test', 'Tester', 'test@test.com')
+
+
+@manager.command
 def setup_cron():
     """
     Sets up a cron job in the user's crontab in order to run the scan every minute.
@@ -30,8 +41,21 @@ def setup_cron():
 
 
 @manager.command
+def add_user(username):
+    from scanner.api import user
+    user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
+
+
+@manager.command
+def remove_user(username):
+    from scanner.api import user
+    user.remove_user(username, ['vinz-ubuntu.student.iastate.edu'])
+
+
+@manager.command
 def scan():
     pass
+
 
 if __name__ == "__main__":
     manager.run()
