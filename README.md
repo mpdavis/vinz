@@ -32,11 +32,7 @@ If you are on Windows, I would recommend [GitHub for Windows](http://windows.git
 
 ### Starting VM
 
-Our dev environment takes place inside of a VM thanks to Vagrant.  You don't have to pay much attention to this, because the code on your system is automatically synced to the right place in the VM.  However, you do need to get the VM up and going before working. 
-
-The first thing we need to do is pull down the base box image to your machine.  This is a VM image that vagrant can use in order to make VMs from.
-
-    vagrant box add base http://files.vagrantup.com/precise64.box
+Our dev environment takes place inside of a VM thanks to Vagrant.  You don't have to pay much attention to this, because the code on your system is automatically synced to the right place in the VM.  However, you do need to get the VM up and going before working.
     
 #### Windows
 
@@ -46,7 +42,7 @@ This will take about a minute and a half depending on your machine and network c
 
 #### OS X
 
-    .run_vagrant.sh
+    ./run_vagrant.sh
 
 ### Developing on Vinz
 

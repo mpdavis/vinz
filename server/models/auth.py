@@ -18,6 +18,7 @@ class User(Document, AuditableMixin):
     first_name = StringField(required=True)
     last_name = StringField(required=True)
     email = StringField(required=True)
+    username = StringField(required=True)
     key_list = ListField()
 
     def get_display_name(self):
