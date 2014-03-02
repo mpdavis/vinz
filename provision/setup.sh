@@ -28,6 +28,7 @@ chown -R vagrant:vagrant /home/vagrant/.ssh
 echo "Installing Javascript deps"
 cd /vagrant
 sudo npm install -g grunt-cli
+sudo npm install --save-dev grunt-shell 
 sudo npm install -g bower
 sudo npm install -g yo
 grunt build-app
