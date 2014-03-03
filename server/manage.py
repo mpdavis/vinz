@@ -4,6 +4,9 @@ from crontab import CronTab
 from flask.ext.script import Manager
 from flask.ext.script import Server
 
+from custom_exceptions import ServerAlreadyExistsError
+from custom_exceptions import UserAlreadyExistsError
+
 from main import app
 
 manager = Manager(app)
@@ -20,10 +23,25 @@ def setup_dev():
     from internal import server
     from internal import user
 
-    server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
-    server.create_server('debian', 'vinz-debian.student.iastate.edu')
+    try:
+        server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
+    except ServerAlreadyExistsError:
+        pass
 
-    user.create_user('Test', 'Tester', 'test@test.com')
+    try:
+        server.create_server('debian', 'vinz-debian.student.iastate.edu')
+    except ServerAlreadyExistsError:
+        pass
+
+    try:
+        user.create_user('Test', 'Tester', 'test@test.com', 'test', 'testpassword')
+    except UserAlreadyExistsError:
+        pass
+
+    try:
+        user.create_user('Max', 'Peterson', 'maxpete@iastate.edu', 'maxpete', 'vinz')
+    except UserAlreadyExistsError:
+        pass
 
 
 @manager.command
