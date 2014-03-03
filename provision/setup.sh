@@ -23,6 +23,7 @@ cp /vagrant/provision/files/known_hosts /home/vagrant/.ssh/known_hosts
 cp /vagrant/provision/files/config /home/vagrant/.ssh/config
 
 chown -R vagrant:vagrant /home/vagrant/.ssh
+chmod 600 /home/vagrant/.ssh/id_rsa
 
 
 echo "Installing Javascript deps"

@@ -1,5 +1,5 @@
 
-from scanner import VinzRunner
+from scanner.runner import VinzRunner
 
 
 def add_user(username, hosts):
