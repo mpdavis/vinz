@@ -6,4 +6,4 @@ MONGODB_DB = {
     'PASSWORD': None
 }
 
-MAX_IS_BAD_AT_PYTHON = True
+SECRET_KEY = 'default_key_change_me'

@@ -6,7 +6,9 @@
     <title>Vinz</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/css/styles.css">
     <style>
         body {
           padding-top: 100px;
@@ -63,15 +65,23 @@
 
     <div class="container">
 
-        <form class="form-signin" role="form">
+        <form class="form-signin" role="form" method="POST">
             <h2 class="form-signin-heading">Please sign in</h2>
-            <input type="email" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            {% if g.incorrect %}
+                <div class="alert alert-danger">Incorrect username and/or password.</div>
+            {% endif %}
+            {% if g.email %}
+            <input type="email" class="form-control" name="email" placeholder="Email address" required value="{{ g.email }}">
+            <input type="password" class="form-control" name="password" placeholder="Password" autofocus required>
+            {% else %}
+            <input type="email" class="form-control" name="email" placeholder="Email address" required autofocus>
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+            {% endif %}
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In" />
         </form>
 
     </div> <!-- /container -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
 </body>
 </html>
