@@ -2,8 +2,8 @@ from flask.ext.restful import Api
 
 from constants import HTTP_STATUS
 
-from custom_exceptions import ServerAlreadyExistsError
-from custom_exceptions import UserAlreadyExistsError
+from internal.exceptions import ServerAlreadyExistsError
+from internal.exceptions import UserAlreadyExistsError
 
 
 class VinzApi(Api):

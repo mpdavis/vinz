@@ -5,7 +5,7 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
-from custom_exceptions import ServerAlreadyExistsError
+from internal.exceptions import ServerAlreadyExistsError
 
 from models.server import Server
 

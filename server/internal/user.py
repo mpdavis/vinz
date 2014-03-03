@@ -3,9 +3,9 @@
 .. module:: internal.user
    :synopsis: Location for internal API functions relating to user resources
 """
-from custom_exceptions import UserAlreadyExistsError
-
 from internal.auth.utils import maybe_get_user_by_email
+
+from internal.exceptions import UserAlreadyExistsError
 
 from models.auth import User
 
