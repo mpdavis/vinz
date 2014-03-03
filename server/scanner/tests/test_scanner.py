@@ -32,7 +32,7 @@ class ScannerTestCase(TestCase):
     @patch('scanner.api.user.remove_user')
     def test_unblock_remove(self, remove_user):
         scanner = Scanner(servers=self.servers, remove_users=True)
-        scanner.add_user('mike', 'test')
+        scanner.remove_user('mike', 'test')
         remove_user.assert_called_once_with('mike', 'test')
 
 
