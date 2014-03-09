@@ -2,6 +2,6 @@
 
 angular.module('vinzApp')
   .controller('ServersCtrl', ['$scope', 'servers', function ($scope, servers) {
-    $scope.servers = servers.getServers();
-    $scope.urlTest = servers.canGetRealServers();
+    
+    $scope.myServers = servers.getServers();
   }]);

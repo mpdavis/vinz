@@ -1,40 +1,73 @@
 <div class="container">
-    <div class="sectionBanner">
-      <div class="sectionTitle">
-        SERVERS
+
+  <!-- Section Header -->
+  <div class="sectionBanner">
+    <div class="sectionTitle">
+      SERVERS
+    </div>
+    <div class="sectionButtons">
+      <div id="newServerButton" class="btn btn-default">
+        NEW SERVER
       </div>
-      <div class="sectionButtons">
-          <div class="btn btn-default">
-            NEW SERVER
-          </div>
-          <div class="right-inner-addon">
-              <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
-              <i class="fa fa-search"></i>
-          </div>
+      <div class="right-inner-addon">
+        <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search"></i>
       </div>
     </div>
+  </div>
 
-    <table class="serverTable table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Hostname</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="server in servers | filter:serverSearch">
-          <td>{{server.name}}</td>
-          <td>{{server.hostname}}</td>
-          <td><div class="btn btn-default serverInfoBtn"><i class="fa fa-sign-in"></i></div></td>
-        </tr>
+  <!-- Server Table -->
+  <table class="serverTable table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Hostname</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="server in myServers | filter:serverSearch">
+        <td>{{server.name}}</td>
+        <td>{{server.hostname}}</td>
+        <td><div class="btn btn-default serverInfoBtn"><i class="fa fa-sign-in"></i></div></td>
+      </tr>
     </tbody>
-    </table>
+  </table>
+
+  <!-- New Server Modal -->
+  <div id="newServerModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+          <h4 class="modal-title" id="newServerModalLabel">New Server</h4>
+        </div>
+        <div class="modal-body">
+          <div class="simple-form form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Awesome server name..."></input>
+
+            <label>Hostname</label>
+            <input type="text" class="form-control" placeholder="ex: '173.30.18.93' or 'http://server.mydomain.com'"></input>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
 $(function() {
   $(".navbar-nav li").removeClass("active");
   $("#servers-nav").addClass("active");
+  
+  $("#newServerButton").click(function() {
+    $("#newServerModal").modal('show');
+  });
 });
 </script>
+

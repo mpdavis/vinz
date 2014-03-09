@@ -115,3 +115,7 @@ body {
     padding: 0px 11px;
     pointer-events: none;
 }
+
+.form-group input {
+  margin-bottom: 5px;
+}
