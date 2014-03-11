@@ -58,6 +58,12 @@ def setup_cron():
 
 
 @manager.command
+def get_users():
+    from scanner.api import user
+    print user.get_users_on_host('vinz-ubuntu.student.iastate.edu')
+
+
+@manager.command
 def add_user(username):
     from scanner.api import user
     user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
