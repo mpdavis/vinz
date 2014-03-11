@@ -11,13 +11,15 @@ from mongoengine import ReferenceField
 from mongoengine import StringField
 
 from models.audit import AuditableMixin
-from models.auth import PublicKey
+from models.auth import User
+from models.auth import UserGroup
 
 
 class Server(Document, AuditableMixin):
     name = StringField(required=True)
     hostname = StringField(required=True)
-    key_list = ListField(ReferenceField(PublicKey))
+    user_list = ListField(ReferenceField(User))
+    group_list = ListField(ReferenceField(UserGroup))
 
 
 class ServerGroup(Document, AuditableMixin):

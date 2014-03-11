@@ -6,4 +6,30 @@ MONGODB_DB = {
     'PASSWORD': None
 }
 
-MAX_IS_BAD_AT_PYTHON = True
+SECRET_KEY = 'default_key_change_me'
+
+IGNORED_USERS = [
+    'daemon',
+    'bin',
+    'sys',
+    'sync',
+    'games',
+    'man',
+    'lp',
+    'mail',
+    'news',
+    'uucp',
+    'proxy',
+    'www-data',
+    'backup',
+    'list',
+    'irc',
+    'gnats',
+    'nobody',
+    'libuuid',
+    'syslog',
+    'messagebus',
+    'whoopsie',
+    'landscape',
+    'sshd',
+]

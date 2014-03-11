@@ -19,11 +19,28 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 def setup_dev():
     from internal import server
     from internal import user
+    from internal.exceptions import ServerAlreadyExistsError
+    from internal.exceptions import UserAlreadyExistsError
 
-    server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
-    server.create_server('debian', 'vinz-debian.student.iastate.edu')
+    try:
+        server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
+    except ServerAlreadyExistsError:
+        pass
 
-    user.create_user('Test', 'Tester', 'test@test.com', 'tester')
+    try:
+        server.create_server('debian', 'vinz-debian.student.iastate.edu')
+    except ServerAlreadyExistsError:
+        pass
+
+    try:
+        user.create_user('Test', 'Tester', 'test@test.com', 'test', 'testpassword')
+    except UserAlreadyExistsError:
+        pass
+
+    try:
+        user.create_user('Max', 'Peterson', 'maxpete@iastate.edu', 'maxpete', 'vinz')
+    except UserAlreadyExistsError:
+        pass
 
 
 @manager.command
@@ -41,6 +58,12 @@ def setup_cron():
 
 
 @manager.command
+def get_users():
+    from scanner.api import user
+    print user.get_users_on_host('vinz-ubuntu.student.iastate.edu')
+
+
+@manager.command
 def add_user(username):
     from scanner.api import user
     user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
@@ -54,7 +77,8 @@ def remove_user(username):
 
 @manager.command
 def scan():
-    pass
+    from scanner.scanner import scan
+    scan()
 
 
 if __name__ == "__main__":
