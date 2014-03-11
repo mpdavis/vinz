@@ -30,12 +30,12 @@ class Server(Document, AuditableMixin):
 
         # Getting users added directly to the server
         for user in self.user_list:
-            users.append(user)
+            users.add(user)
 
         # Getting users that are in groups on the server
         for group in self.group_list:
-            for user in group:
-                users.append(user)
+            for user in group.user_list:
+                users.add(user)
 
         return users
 
