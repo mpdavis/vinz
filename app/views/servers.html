@@ -69,6 +69,13 @@ $(function() {
     $("#newServerModal").modal('show');
   });
 
+  $("#newServerModal").on('hidden.bs.modal', function() {
+    $("#newServerModal .modal-body input").each(function(index) {
+      console.log($( this ).val());
+      $( this ).val("");
+    });
+  });
+
   $("#createServerButton").click(function() {
     $("#newServerModal").modal('hide');
   });
