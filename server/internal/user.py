@@ -7,6 +7,8 @@ from internal.auth.utils import maybe_get_user_by_email
 
 from internal.exceptions import UserAlreadyExistsError
 
+from internal.server import maybe_get_server_by_hostname
+
 from models.auth import User
 
 
@@ -37,3 +39,23 @@ def delete_user(user_id):
     #TODO Some kind of security checks?
     user = get_user(user_id)
     user.delete()
+
+
+def get_users_for_hostname(hostname):
+    server = maybe_get_server_by_hostname(hostname)
+    
+    if not server:
+        raise ValueError("No server found for hostname: %s" % hostname)
+
+    users = server.get_users()
+    return users
+
+
+def get_usernames_for_hostname(hostname):
+    server = maybe_get_server_by_hostname(hostname)
+    
+    if not server:
+        raise ValueError("No server found for hostname: %s" % hostname)
+
+    usernames = server.get_usernames()
+    return usernames
