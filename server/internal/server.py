@@ -6,6 +6,8 @@
 
 """
 from internal.exceptions import ServerAlreadyExistsError
+from internal.user import get_user
+from internal.user_group import get_user_group
 
 from models.server import Server
 
@@ -36,6 +38,45 @@ def maybe_get_server_by_hostname(hostname):
         return Server.objects.get(hostname=hostname)
     except Server.DoesNotExist:
         return None
+
+
+def update_server(server, **kwargs):
+
+    # Possibly add a user
+    if 'user_id' in kwargs and kwargs.get('user_id'):
+        user_id = kwargs.pop('user_id')
+        add_user_to_server(server, user_id, False)
+
+    # Possibly add a group
+    if 'group_id' in kwargs and kwargs.get('group_id'):
+        group_id = kwargs.pop('group_id')
+        add_user_to_server(server, group_id, False)
+
+    # Set other attributes on the server
+    for attr_name, value in kwargs.items():
+        # If the attribute wasn't supplied in the kwargs, or was None,
+        # we don't want to overwrite the existing value.
+        if value:
+            setattr(server, attr_name, value)
+
+    server.save()
+    return server
+
+
+def add_user_to_server(server, user_id, save_server=True):
+    user = get_user(user_id)
+    server.user_list.append(user)
+    if save_server:
+        server.save()
+    return server
+
+
+def add_group_to_server(server, group_id, save_server=True):
+    group = get_user_group(group_id)
+    server.group_list.append(group)
+    if save_server:
+        server.save()
+    return server
 
 
 def delete_server(server_id):
