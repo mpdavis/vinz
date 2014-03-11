@@ -6,6 +6,8 @@
 
 """
 from models.server import Server
+from models.auth import User
+from models.auth import PublicKey
 
 
 def create_server(name, hostname, **kwargs):
@@ -30,3 +32,18 @@ def delete_server(server_id):
     #TODO Some kind of security checks?
     server = get_server(server_id)
     server.delete()
+
+def get_user(user_id):
+    return User.objects.get(id=user_id)
+
+# Given a user get their public key
+def get_public_key(user_id):
+    public_key = PublicKey.objects.get(id = user_id)
+    return public_key
+
+
+#Given a server get all of the users that have access to that server
+def get_user_access(server_id):
+    server = get_server(server_id)
+
+    return server.key_list
