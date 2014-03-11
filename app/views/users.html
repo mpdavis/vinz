@@ -1,6 +1,36 @@
-
-
-<p>This is the users view.</p>
+<div class="container">
+  <div class="sectionBaner">
+    <div class="sectionTitle">
+      USERS
+    </div>
+    <div class="sectionButtons">
+      <div class="btn btn-default">
+        NEW USER
+      </div>
+      <div class="right-inner-addon">
+        <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search"></i>
+      </div>
+    </div>
+  </div>
+  
+  <table class="userTable table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users | filter:userSearch">
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+      </tr>
+    </tbody>
+    </table>
+</div>		
 
 <script type="text/javascript">
 $(function() {
