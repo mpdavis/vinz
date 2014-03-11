@@ -1,6 +1,35 @@
 
 from scanner.runner import VinzRunner
 
+import settings
+
+
+def get_users_on_host(hostname):
+    """
+    :param hostname: The hostname of the server to get a list of users from.
+    :return A list of usernames on the machine
+    """
+
+    runner = VinzRunner(hostname, module_name='command', module_args='cat /etc/passwd')
+    results = runner.run()
+
+    if not hostname in results['contacted']:
+        # Couldn't contact host
+        pass
+
+    output = results['contacted'][hostname]['stdout']
+
+    users = []
+    for line in iter(output.splitlines()):
+        try:
+            username = line.split(':')[0]
+            if not username in settings.IGNORED_USERS:
+                users.append(username)
+        except IndexError, e:
+            pass
+
+    return users
+
 
 def add_user(username, hosts):
     """
