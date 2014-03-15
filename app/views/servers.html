@@ -1,18 +1,20 @@
-<div class="container">
+<div class="container" ng-class="{animated: finish, bounceOutDown: finish}">
 
   <!-- Section Header -->
   <div class="sectionBanner">
     <div class="sectionTitle">
       SERVERS
     </div>
-    <div class="sectionButtons">
-      <div id="newServerButton" class="btn btn-default">
-        NEW SERVER
-      </div>
-      <div class="right-inner-addon">
-        <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
-        <i class="fa fa-search"></i>
-      </div>
+    <div class="sectionBody">
+      <span class="sectionBody-serverMain">
+        <div id="newServerButton" class="btn btn-default">
+          NEW SERVER
+        </div>
+        <div class="right-inner-addon">
+          <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
+          <i class="fa fa-search"></i>
+        </div>
+      </span>
     </div>
   </div>
 
@@ -22,14 +24,14 @@
       <tr>
         <th>Name</th>
         <th>Hostname</th>
-        <th>Details</th>
+        <th>More</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="server in myServers | filter:serverSearch">
         <td>{{server.name}}</td>
         <td>{{server.hostname}}</td>
-        <td><div class="btn btn-default serverInfoBtn"><i class="fa fa-sign-in"></i></div></td>
+        <td><div data-id="" ng-click="detail(server.id);" class="btn btn-default serverInfoBtn"><i class="fa fa-dashboard"></i></div></td>
       </tr>
     </tbody>
   </table>
@@ -64,20 +66,19 @@
 $(function() {
   $(".navbar-nav li").removeClass("active");
   $("#servers-nav").addClass("active");
-  
+
   $("#newServerButton").click(function() {
     $("#newServerModal").modal('show');
   });
 
-  $("#newServerModal").on('hidden.bs.modal', function() {
-    $("#newServerModal .modal-body input").each(function(index) {
-      console.log($( this ).val());
-      $( this ).val("");
-    });
-  });
-
   $("#createServerButton").click(function() {
     $("#newServerModal").modal('hide');
+  });
+
+  $("#newServerModal").on('hidden.bs.modal', function() {
+    $("#newServerModal .modal-body input").each(function() {
+      $( this ).val("");
+    });
   });
 });
 </script>

@@ -1,3 +1,4 @@
+
 /* Space out content a bit */
 body {
   padding-top: 80px;
@@ -95,7 +96,7 @@ body {
   float: left;
 }
 
-.sectionButtons {
+.sectionBody {
   float: right;
   width: 320px;
   margin-top: 2px;
@@ -118,4 +119,91 @@ body {
 
 .form-group input {
   margin-bottom: 5px;
+}
+
+/*
+==============================================
+slideLeft
+==============================================
+*/
+
+
+.slideLeft{
+  animation-name: slideLeft;
+  -webkit-animation-name: slideLeft;  
+
+  animation-duration: .5s; 
+  -webkit-animation-duration: .5s;
+
+  animation-timing-function: ease-in-out; 
+  -webkit-animation-timing-function: ease-in-out;   
+
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+   -moz-animation-fill-mode:forwards; /*FF 5+*/
+   -o-animation-fill-mode:forwards; /*Not implemented yet*/
+   -ms-animation-fill-mode:forwards; /*IE 10+*/
+   animation-fill-mode:forwards; /*when the spec is finished*/
+
+  visibility: visible !important; 
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-105%);
+  }
+}
+
+@-webkit-keyframes slideLeft {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(-105%);
+  }
+}
+
+/*
+==============================================
+slideRight
+==============================================
+*/
+
+.slideRight{
+  animation-name: slideRight;
+  -webkit-animation-name: slideRight; 
+
+  animation-duration: .5s; 
+  -webkit-animation-duration: .5s;
+
+  animation-timing-function: ease-in-out; 
+  -webkit-animation-timing-function: ease-in-out;
+
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+   -moz-animation-fill-mode:forwards; /*FF 5+*/
+   -o-animation-fill-mode:forwards; /*Not implemented yet*/
+   -ms-animation-fill-mode:forwards; /*IE 10+*/
+   animation-fill-mode:forwards; /*when the spec is finished*/
+
+  visibility: visible !important; 
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(105%);
+  }
+}
+
+@-webkit-keyframes slideRight {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  100% {
+    -webkit-transform: translateX(105%);
+  }
 }

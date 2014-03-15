@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vinzApp', [
+var app = angular.module('vinzApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -19,6 +19,10 @@ angular.module('vinzApp', [
       .when('/users', {
         templateUrl: 'static/views/users.html',
         controller: 'UsersCtrl'
+      })
+      .when('/servers/:id', {
+        templateUrl: 'static/views/server_detail.html',
+        controller: 'ServerDetailCtrl'
       })
       .otherwise({
         redirectTo: '/'
