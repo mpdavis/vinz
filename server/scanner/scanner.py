@@ -1,5 +1,6 @@
 
 from internal import server as internal_server
+from internal import user as internal_user
 
 from api import user as api_user
 
@@ -25,7 +26,7 @@ class Scanner():
 
         :param server: There server to get a list of users from
         """
-        return set(['root', 'steve', 'michael', 'john'])
+        return set(api_user.get_users_on_host(server.hostname))
 
     def get_users_from_vinz(self, server):
         """
@@ -33,7 +34,7 @@ class Scanner():
 
         :param server: The server to query
         """
-        return set(['root', 'steve', 'michael'])
+        return set(server.get_usernames())
 
     def add_user(self, user, server):
         """

@@ -77,8 +77,9 @@ def remove_user(username):
 
 @manager.command
 def scan():
-    from scanner.scanner import scan
-    scan()
+    from scanner.scanner import Scanner
+    s = Scanner()
+    s.scan()
 
 
 if __name__ == "__main__":
