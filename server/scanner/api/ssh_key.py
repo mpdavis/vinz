@@ -1,4 +1,46 @@
 
+from scanner.runner import VinzRunner
+
+
+def get_authorized_keys_for_host(host, usernames):
+    """
+    :param host: The hostname of the server to get authorized_keys files from
+    :param usernames: A list of usernames to get authorized_keys files for
+    :return A dictionary mapping usernames to all of their authorized_keys
+
+    {
+        "root": ['ssh-rsa AAAAkjfk...', 'ssh_rsa AAAfmfkdm'],
+        "vinz": ['ssh-rsa AAABdfdf...', 'ssh_rsa AAAfmfkdm'],
+    }
+    """
+
+    command_string = 'cat ~%s/.ssh/authorized_keys'
+
+    key_files = dict()
+    errors = dict()
+
+    for username in usernames:
+        runner = VinzRunner([host], module_name='command', module_args=command_string % username)
+        response = runner.run()
+
+        if not host in response['contacted']:
+            continue
+
+        std_out = response['contacted'][host]['stdout']
+        std_err = response['contacted'][host]['stderr']
+
+        if not std_out:
+            errors[username] = std_err
+            continue
+
+        key_files[username] = std_out
+
+    results = dict()
+    for username, keys in key_files.iteritems():
+        results[username] = keys.splitlines()
+
+    return results
+
 
 def check_user_ssh_key(username, inventory, vinz_private_key_path):
     """

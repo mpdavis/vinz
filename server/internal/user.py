@@ -43,7 +43,7 @@ def delete_user(user_id):
 
 def get_users_for_hostname(hostname):
     server = maybe_get_server_by_hostname(hostname)
-    
+
     if not server:
         raise ValueError("No server found for hostname: %s" % hostname)
 
@@ -53,7 +53,7 @@ def get_users_for_hostname(hostname):
 
 def get_usernames_for_hostname(hostname):
     server = maybe_get_server_by_hostname(hostname)
-    
+
     if not server:
         raise ValueError("No server found for hostname: %s" % hostname)
 

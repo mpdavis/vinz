@@ -76,9 +76,16 @@ def remove_user(username):
 
 
 @manager.command
+def get_keys():
+    from scanner.api import ssh_key
+    print ssh_key.get_authorized_keys_for_host('vinz-debian.student.iastate.edu', ['root', 'vinz', 'michael'])
+
+
+@manager.command
 def scan():
-    from scanner.scanner import scan
-    scan()
+    from scanner.scanner import Scanner
+    s = Scanner()
+    s.scan()
 
 
 if __name__ == "__main__":
