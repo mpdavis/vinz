@@ -1,10 +1,11 @@
 
 /* Space out content a bit */
 body {
+  font-family: 'Open Sans', sans-serif;
   padding-top: 80px;
   padding-bottom: 20px;
   font-weight: 400;
-  background-color: #f7f5f2;
+  background-color: #EBE7EB;
 }
 
 /* Customize container */
@@ -20,7 +21,7 @@ body {
 /* NAV */
 .navbar {
   border: 0 none;
-  background: rgba(255,255,255,0.98);
+  background: #cc0000;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
@@ -30,7 +31,7 @@ body {
 
 .navbar-default .navbar-nav > li > a {
   text-shadow: none;
-  color: #afafaf;
+  color: #EBE7EB;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
@@ -39,7 +40,7 @@ body {
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #45494d;
+  color: white;
   background-color: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -47,41 +48,51 @@ body {
 }
 
 .navbar-default .navbar-brand {
-  color: #afafaf;
+  font-family: 'Oleo Script Swash Caps', cursive;
+  color: white;
   font-size: 32px;
   line-height: 40px;
-  border: 1px solid #eeeff0;
+  border: 1px solid #b30000;
   border-width: 0 1px;
 }
 
 .navbar-default .navbar-brand:hover {
-  color: #45494d;
-  background-color: #f6f6f6;
+  color: #b30000;
+  background-color: white;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  color: #45494d;
-  background: rgba(255,255,255,0.98);
+  color: white;
+  background: #b30000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
 
 .navbar-dropdown {
-  border: 1px solid #eeeff0;
+  border: 1px solid #b30000;
   border-width: 0 1px;
 }
 
 .navbar-dropdown:hover {
-  background-color: #f6f6f6;
+  color: white;
+  background-color: #b30000;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #b30000;
+  background-color: white;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .sectionBanner {
   background: white;
-  border: 1px solid #e7e7e7;
+  border: 1px solid #dddddd;
   height: 40px;
   padding-left: 15px;
   padding-right: 15px;
@@ -107,7 +118,7 @@ body {
     float: right;
 }
 .right-inner-addon input {
-    padding-right: 30px;    
+    padding-right: 10px;    
 }
 .right-inner-addon i {
     position: absolute;
@@ -121,89 +132,15 @@ body {
   margin-bottom: 5px;
 }
 
-/*
-==============================================
-slideLeft
-==============================================
-*/
-
-
-.slideLeft{
-  animation-name: slideLeft;
-  -webkit-animation-name: slideLeft;  
-
-  animation-duration: .5s; 
-  -webkit-animation-duration: .5s;
-
-  animation-timing-function: ease-in-out; 
-  -webkit-animation-timing-function: ease-in-out;   
-
-  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
-   -moz-animation-fill-mode:forwards; /*FF 5+*/
-   -o-animation-fill-mode:forwards; /*Not implemented yet*/
-   -ms-animation-fill-mode:forwards; /*IE 10+*/
-   animation-fill-mode:forwards; /*when the spec is finished*/
-
-  visibility: visible !important; 
+.closeButton a {
+  margin-top: 3px;
+  float: right;
+  color: #afafaf;
 }
 
-@keyframes slideLeft {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-105%);
-  }
+.closeButton a:hover {
+  color: #45494d;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-@-webkit-keyframes slideLeft {
-  0% {
-    -webkit-transform: translateX(0%);
-  }
-  100% {
-    -webkit-transform: translateX(-105%);
-  }
-}
-
-/*
-==============================================
-slideRight
-==============================================
-*/
-
-.slideRight{
-  animation-name: slideRight;
-  -webkit-animation-name: slideRight; 
-
-  animation-duration: .5s; 
-  -webkit-animation-duration: .5s;
-
-  animation-timing-function: ease-in-out; 
-  -webkit-animation-timing-function: ease-in-out;
-
-  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
-   -moz-animation-fill-mode:forwards; /*FF 5+*/
-   -o-animation-fill-mode:forwards; /*Not implemented yet*/
-   -ms-animation-fill-mode:forwards; /*IE 10+*/
-   animation-fill-mode:forwards; /*when the spec is finished*/
-
-  visibility: visible !important; 
-}
-
-@keyframes slideRight {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(105%);
-  }
-}
-
-@-webkit-keyframes slideRight {
-  0% {
-    -webkit-transform: translateX(0%);
-  }
-  100% {
-    -webkit-transform: translateX(105%);
-  }
-}

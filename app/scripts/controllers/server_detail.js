@@ -8,5 +8,4 @@ function ($scope, servers, $routeParams) {
     
     var serverId = $routeParams.id;
   	$scope.server = servers.getServer(serverId);
-   
   }]);

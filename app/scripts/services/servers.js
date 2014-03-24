@@ -12,11 +12,12 @@ angular.module('vinzApp')
     return {
       getServers: function() {
         var servers = Server.query();
-        return servers; 
+        return servers;
       },
       getServer: function(serverId) {
         var server = Server.get({id: serverId});
-        return server; 
+        console.log(JSON.stringify(server));
+        return server;
       },
       createServer: function(newServer) {
         $http.post(serversURL, newServer);

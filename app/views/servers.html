@@ -1,14 +1,14 @@
-<div class="container" ng-class="{animated: finish, bounceOutDown: finish}">
+<div style="visibility" class="container animated" ng-class="{bounceIn: loaded, bounceOutDown: finish}">
 
   <!-- Section Header -->
   <div class="sectionBanner">
     <div class="sectionTitle">
-      SERVERS
+      Servers
     </div>
     <div class="sectionBody">
       <span class="sectionBody-serverMain">
         <div id="newServerButton" class="btn btn-default">
-          NEW SERVER
+          New Server
         </div>
         <div class="right-inner-addon">
           <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
@@ -22,16 +22,16 @@
   <table class="serverTable table table-hover table-striped table-bordered">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Hostname</th>
-        <th>More</th>
+        <th class="col-sm-5">Name</th>
+        <th class="col-sm-5">Hostname</th>
+        <th class="col-sm-2">Dashboard</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="server in myServers | filter:serverSearch">
-        <td>{{server.name}}</td>
-        <td>{{server.hostname}}</td>
-        <td><div data-id="" ng-click="detail(server.id);" class="btn btn-default serverInfoBtn"><i class="fa fa-dashboard"></i></div></td>
+        <td class="col-sm-5">{{server.name}}</td>
+        <td class="col-sm-5">{{server.hostname}}</td>
+        <td class="col-sm-2"><div ng-click="detail(server.id);" class="btn btn-default serverInfoBtn"><i class="fa fa-dashboard"></i></div></td>
       </tr>
     </tbody>
   </table>
@@ -64,6 +64,8 @@
 
 <script type="text/javascript">
 $(function() {
+  var scope = angular.element($("#vinzApp")).scope();
+
   $(".navbar-nav li").removeClass("active");
   $("#servers-nav").addClass("active");
 
@@ -76,8 +78,8 @@ $(function() {
   });
 
   $("#newServerModal").on('hidden.bs.modal', function() {
-    $("#newServerModal .modal-body input").each(function() {
-      $( this ).val("");
+    scope.$apply(function() {
+        scope.newServer = {name: "", hostname: ""};
     });
   });
 });

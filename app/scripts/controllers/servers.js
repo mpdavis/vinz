@@ -6,7 +6,7 @@ angular.module('vinzApp')
   								'$location', 
   								'$timeout', 
   function ($scope, servers, $location, $timeout) {
-    
+    $scope.newServer = {name: "", hostname: ""};
     $scope.myServers = servers.getServers();
     $scope.finish = false;
 
