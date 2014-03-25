@@ -16,7 +16,6 @@ angular.module('vinzApp')
       },
       getServer: function(serverId) {
         var server = Server.get({id: serverId});
-        console.log(JSON.stringify(server));
         return server;
       },
       createServer: function(newServer) {

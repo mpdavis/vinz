@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('ServersCtrl', ['$scope', 
-  								'servers', 
-  								'$location', 
-  								'$timeout', 
-  function ($scope, servers, $location, $timeout) {
+  .controller('ServersCtrl', ['$scope', 'servers', '$location', '$timeout', function ($scope, servers, $location, $timeout) {
     $scope.newServer = {name: "", hostname: ""};
     $scope.myServers = servers.getServers();
     $scope.finish = false;
