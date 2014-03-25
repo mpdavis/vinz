@@ -25,7 +25,7 @@ def get_users_on_host(hostname):
             username = line.split(':')[0]
             if not username in settings.IGNORED_USERS:
                 users.append(username)
-        except IndexError, e:
+        except IndexError:
             pass
 
     return users
