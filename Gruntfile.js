@@ -132,7 +132,7 @@ module.exports = function(grunt) {
 
         concat: {
             css: {
-                src: [directories.frontend.css + 'main.css', directories.frontend.css + 'servers.css'],
+                src: [directories.frontend.css + 'main.css', directories.frontend.css + 'servers.css' + directories.frontend.css + 'users.css'],
                 dest: directories.static.css + 'styles.css'
             },
             js: {
@@ -145,7 +145,8 @@ module.exports = function(grunt) {
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/servers.js',
                     directories.frontend.js + 'controllers/users.js',
-                    directories.frontend.js + 'services/servers.js'
+                    directories.frontend.js + 'services/servers.js',
+                    directories.frontend.js + 'services/users.js'
                 ],
                 dest: directories.static.js + 'app.js'
             }
