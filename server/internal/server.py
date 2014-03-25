@@ -83,3 +83,23 @@ def delete_server(server_id):
     #TODO Some kind of security checks?
     server = get_server(server_id)
     server.delete()
+
+
+def get_users_for_hostname(hostname):
+    server = maybe_get_server_by_hostname(hostname)
+
+    if not server:
+        raise ValueError("No server found for hostname: %s" % hostname)
+
+    users = server.get_users()
+    return users
+
+
+def get_usernames_for_hostname(hostname):
+    server = maybe_get_server_by_hostname(hostname)
+
+    if not server:
+        raise ValueError("No server found for hostname: %s" % hostname)
+
+    usernames = server.get_usernames()
+    return usernames
