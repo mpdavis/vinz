@@ -54,17 +54,7 @@ class UserGroup(Document, AuditableMixin):
     user_list = ListField(ReferenceField(User))
 
     def get_users(self):
-        """
-        Gets all of the servers on the server group
-        """
-        users = set()
-
-        for user in self.user_list:
-            users.add(user)
-
-        return user
-
-
+        return set(self.user_list)
 
 
 class PublicKey(Document, AuditableMixin):
