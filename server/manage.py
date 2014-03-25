@@ -58,6 +58,12 @@ def setup_cron():
 
 
 @manager.command
+def get_users():
+    from scanner.api import user
+    print user.get_users_on_host('vinz-ubuntu.student.iastate.edu')
+
+
+@manager.command
 def add_user(username):
     from scanner.api import user
     user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
@@ -70,9 +76,16 @@ def remove_user(username):
 
 
 @manager.command
+def get_keys():
+    from scanner.api import ssh_key
+    print ssh_key.get_authorized_keys_for_host('vinz-debian.student.iastate.edu', ['root', 'vinz', 'michael'])
+
+
+@manager.command
 def scan():
-    from scanner.scanner import scan
-    scan()
+    from scanner.scanner import Scanner
+    s = Scanner()
+    s.scan()
 
 
 if __name__ == "__main__":
