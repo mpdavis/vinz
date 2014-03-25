@@ -42,7 +42,7 @@ def delete_server_group(server_group_id):
     server_group.delete()
 
 
-def add_remove_check(server_hostname,server_group_name):
+def add_remove_check(server_hostname, server_group_name):
     """
     Check if the server is existed in a given server group
     """
@@ -58,7 +58,7 @@ def add_remove_check(server_hostname,server_group_name):
         return False
 
 
-def add_server_to_server_group(server_hostname,server_group_name):
+def add_server_to_server_group(server_hostname, server_group_name):
 
     server = maybe_get_server_by_hostname(server_hostname)
     if not server:
@@ -75,7 +75,7 @@ def add_server_to_server_group(server_hostname,server_group_name):
         print("The server: %s is already in the server group: %s" % (server_hostname, server_group_name))
 
 
-def remove_server_from_server_group(server_hostname,server_group_name):
+def remove_server_from_server_group(server_hostname, server_group_name):
     server = maybe_get_server_by_hostname(server_hostname)
     if not server:
         raise ValueError("No server found for hostname: %s" % server_hostname)
@@ -84,7 +84,7 @@ def remove_server_from_server_group(server_hostname,server_group_name):
     if not server_group:
         raise ValueError("No server group found for name: %s" % server_group_name)
 
-    if add_remove_check(server_hostname,server_group_name) == True:
+    if add_remove_check(server_hostname, server_group_name):
         #not sure if this is correct?
         server_group.server_list.remove(server)
     else:

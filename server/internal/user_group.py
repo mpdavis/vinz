@@ -41,7 +41,7 @@ def delete_user_group(user_id):
     user_group = get_user_group(user_id)
     user_group.delete()
 
-def add_remove_check(email,user_group_name):
+def add_remove_check(email, user_group_name):
     """
     Check if the user is existed in a given server group
     """
@@ -56,7 +56,7 @@ def add_remove_check(email,user_group_name):
         return False
 
 
-def add_user_to_user_group(email,user_group_name):
+def add_user_to_user_group(email, user_group_name):
 
     user = maybe_get_user_by_email(email)
     if not user:
@@ -66,14 +66,14 @@ def add_user_to_user_group(email,user_group_name):
     if not user_group:
         raise ValueError("No user group found for name: %s" % user_group_name)
 
-    if add_remove_check(email,user_group_name) == False:
+    if add_remove_check(email, user_group_name) == False:
         #not sure if this is correct?
         user_group.user_list.add(user)
     else:
          print("The user: %s is already in the user group: %s" % (email, user_group_name))
 
 
-def remove_user_from_user_group(email,user_group_name):
+def remove_user_from_user_group(email, user_group_name):
     user = maybe_get_user_by_email(email)
     if not user:
         raise ValueError("No user found for email: %s" % email)
@@ -82,8 +82,8 @@ def remove_user_from_user_group(email,user_group_name):
     if not user_group:
         raise ValueError("No user group found for name: %s" % user_group_name)
 
-    if add_remove_check(email,user_group_name) == True:
+    if add_remove_check(email, user_group_name):
         #not sure if this is correct?
         user_group.user_list.remove(user)
     else:
-         print("The user: %s is not found in the user group: %s" % (email, user_group_name))
+        print("The user: %s is not found in the user group: %s" % (email, user_group_name))
