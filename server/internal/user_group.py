@@ -70,7 +70,7 @@ def add_user_to_user_group(email, user_group_name):
         #not sure if this is correct?
         user_group.user_list.add(user)
     else:
-         print("The user: %s is already in the user group: %s" % (email, user_group_name))
+        print("The user: %s is already in the user group: %s" % (email, user_group_name))
 
 
 def remove_user_from_user_group(email, user_group_name):
