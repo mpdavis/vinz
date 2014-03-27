@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="static/css/bootstrap.css" />
 
     <link rel="stylesheet" href="static/css/font-awesome.min.css" />
+
+    <link href='http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps' rel='stylesheet' type='text/css'>
+    
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/servers.css">
@@ -28,16 +33,16 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">VINZ</a>
+          <a class="navbar-brand" href="#">Vinz</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li id="servers-nav"><a href="#">SERVERS</a></li>
-            <li id="users-nav"><a href="#/users">USERS</a></li>
+            <li id="servers-nav"><a href="#">Servers</a></li>
+            <li id="users-nav"><a href="#/users">Users</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown navbar-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">jhummel@iastate.edu <b class="caret"></b></a>
+              <a class="dropdown-toggle" data-toggle="dropdown">jhummel@iastate.edu <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Account</a></li>
                 <li><a href="#">Settings</a></li>
@@ -51,7 +56,7 @@
     </div>
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div id="vinzApp" class="container" ng-view=""></div>
 
 
     <script src="static/js/jquery.js"></script>

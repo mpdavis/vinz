@@ -15,6 +15,18 @@ VINZ_COMMENT = 'vinz'
 SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 
+DEV_SERVERS = {
+    'ubuntu': 'vinz-ubuntu.student.iastate.edu',
+    'debian': 'vinz-debian.student.iastate.edu',
+}
+
+DEV_USERS = {
+    'test@test.com': ['Test', 'Tester', 'test', 'testpassword'],
+    'maxpete@iastate.edu': ['Max', 'Peterson', 'maxpete', 'vinz'],
+    'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
+}
+
+
 @manager.command
 def setup_dev():
     from internal import server
@@ -22,25 +34,17 @@ def setup_dev():
     from internal.exceptions import ServerAlreadyExistsError
     from internal.exceptions import UserAlreadyExistsError
 
-    try:
-        server.create_server('ubuntu', 'vinz-ubuntu.student.iastate.edu')
-    except ServerAlreadyExistsError:
-        pass
+    for name, url in DEV_SERVERS.iteritems():
+        try:
+            server.create_server(name, url)
+        except ServerAlreadyExistsError:
+            pass
 
-    try:
-        server.create_server('debian', 'vinz-debian.student.iastate.edu')
-    except ServerAlreadyExistsError:
-        pass
-
-    try:
-        user.create_user('Test', 'Tester', 'test@test.com', 'test', 'testpassword')
-    except UserAlreadyExistsError:
-        pass
-
-    try:
-        user.create_user('Max', 'Peterson', 'maxpete@iastate.edu', 'maxpete', 'vinz')
-    except UserAlreadyExistsError:
-        pass
+    for email, data in DEV_USERS.iteritems():
+        try:
+            user.create_user(data[0], data[1], email, data[2], data[3])
+        except UserAlreadyExistsError:
+            pass
 
 
 @manager.command

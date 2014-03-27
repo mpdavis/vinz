@@ -50,3 +50,9 @@ class Server(Document, AuditableMixin):
 class ServerGroup(Document, AuditableMixin):
     name = StringField(required=True)
     server_list = ListField(ReferenceField(Server))
+
+    def get_servers(self):
+        return set(self.server_list)
+
+
+
