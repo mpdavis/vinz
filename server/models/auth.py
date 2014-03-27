@@ -53,6 +53,9 @@ class UserGroup(Document, AuditableMixin):
     name = StringField(required=True)
     user_list = ListField(ReferenceField(User))
 
+    def get_users(self):
+        return set(self.user_list)
+
 
 class PublicKey(Document, AuditableMixin):
     owner = ReferenceField(User)
