@@ -8,7 +8,7 @@ MarkupSafe==0.18
 PyYAML==3.10
 WTForms==1.0.5
 Werkzeug==0.9.4
-ansible==1.2.3
+ansible==1.5.3
 crontab==0.18
 flask-mongoengine==0.7.0
 itsdangerous==0.23
