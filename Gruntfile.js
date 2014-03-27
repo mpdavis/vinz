@@ -70,8 +70,7 @@ module.exports = function(grunt) {
             'bootstrap': {
                 'command': [
                     'cd ' + directories.bower.bootstrap,
-                    'npm install',
-                    'grunt'
+                    'npm install'
                 ].join(' && ')
             }
         },
