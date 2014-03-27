@@ -8,6 +8,9 @@ angular.module('vinzApp')
     var serversAPI = serversURL + ":id";
     var Server = $resource(serversAPI, {id:'@id'});
 
+    var serverUsersAPI = serversAPI + '/users/';
+    var ServerUser = $resource(serverUsersAPI, {id:'@id'});
+
     //Servers API
     return {
       getServers: function() {
@@ -20,6 +23,10 @@ angular.module('vinzApp')
       },
       createServer: function(newServer) {
         $http.post(serversURL, newServer);
+      },
+      getServerUsers: function(serverId) {
+        var users = ServerUser.query({id: serverId});
+        return users;
       }
     };
   });

@@ -41,10 +41,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Example User</td>
-        <td>3/23/2014</td>
-        <td><button class="btn btn-danger">Revoke</button></td>
+      <tr ng-repeat="user in serverUsers">
+        <td class="col-sm-5">{{user.first_name}}</td>
+        <td class="col-sm-5">{{user.id}}</td>
+        <td class="col-sm-2">Revoke</td>
       </tr>
     </tbody>
   </table>
