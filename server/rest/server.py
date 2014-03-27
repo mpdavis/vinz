@@ -82,4 +82,4 @@ class ServerUserResourceList(Resource):
     @marshal_with(user_fields)
     def get(self, server_id):
         server = server_api.get_server(server_id)
-        return server.get_usernames()
+        return server.get_users()
