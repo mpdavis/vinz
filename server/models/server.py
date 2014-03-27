@@ -37,7 +37,7 @@ class Server(Document, AuditableMixin):
             for user in group.user_list:
                 users.add(user)
 
-        return users
+        return list(users)
 
     def get_usernames(self):
         """

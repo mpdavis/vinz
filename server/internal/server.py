@@ -64,11 +64,20 @@ def update_server(server, **kwargs):
 
 
 def add_user_to_server(server, user_id, save_server=True):
+    """
+    Add a single user to a single server.
+    :param server: Server object to add user to
+    :param user_id: Id of User object to add to server
+    :param save_server: Whether or not to call .save() on the server
+    :return True if user was added, otherwise False
+    """
     user = get_user(user_id)
-    server.user_list.append(user)
-    if save_server:
-        server.save()
-    return server
+    if user not in server.user_list:
+        server.user_list.append(user)
+        if save_server:
+            server.save()
+        return True
+    return False
 
 
 def add_group_to_server(server, group_id, save_server=True):
