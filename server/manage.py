@@ -29,22 +29,35 @@ DEV_USERS = {
 
 @manager.command
 def setup_dev():
-    from internal import server
-    from internal import user
+    from internal import server as internal_server
+    from internal import user as internal_user
     from internal.exceptions import ServerAlreadyExistsError
     from internal.exceptions import UserAlreadyExistsError
 
+    servers = []
     for name, url in DEV_SERVERS.iteritems():
         try:
-            server.create_server(name, url)
+            server = internal_server.create_server(name, url)
+            servers.append(server)
+            print "Created server %s: %s" % (name, url)
         except ServerAlreadyExistsError:
-            pass
+            print "Server %s already exists" % name
+            server = internal_server.get_server_by_hostname(url)
+            servers.append(server)
 
     for email, data in DEV_USERS.iteritems():
+        user = None
         try:
-            user.create_user(data[0], data[1], email, data[2], data[3])
+            user = internal_user.create_user(data[0], data[1], email, data[2], data[3])
+            print "Created user %s: %s" % (data[2], email)
         except UserAlreadyExistsError:
-            pass
+            user = internal_user.get_user_by_email(email)
+            print "User %s already exists" % (data[2])
+
+        if user:
+            for server in servers:
+                print "Adding %s to %s" % (user.username, server.hostname)
+                internal_server.add_user_to_server(server, user.id)
 
 
 @manager.command
