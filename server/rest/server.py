@@ -21,12 +21,19 @@ server_fields = {
     'id': fields.String(),
     'name': fields.String(),
     'hostname': fields.String(),
-    'key_list': fields.List(fields.String)
+    'user_list': fields.List(fields.String),
+    'group_list': fields.List(fields.String),
 }
 
 server_parser = reqparse.RequestParser()
 server_parser.add_argument('name', type=str, location='json')
 server_parser.add_argument('hostname', type=str, location='json')
+
+server_update_parser = reqparse.RequestParser()
+server_update_parser.add_argument('name', type=str, location='json', required=False)
+server_update_parser.add_argument('hostname', type=str, location='json', required=False)
+server_update_parser.add_argument('user_id', type=str, location='json', required=False)
+server_update_parser.add_argument('group_id', type=str, location='json', required=False)
 
 
 class ServerResource(Resource):
@@ -38,9 +45,12 @@ class ServerResource(Resource):
     def get(self, server_id):
         return server_api.get_server(server_id)
 
+    @marshal_with(server_fields)
     def put(self, server_id):
-        #TODO
-        return
+        server = server_api.get_server(server_id)
+        args = server_update_parser.parse_args()
+        updated_server = server_api.update_server(server, **args)
+        return updated_server
 
     def delete(self, server_id):
         server_api.delete_server(server_id)

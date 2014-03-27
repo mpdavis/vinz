@@ -1,4 +1,3 @@
-
 """
 .. module:: internal.user
    :synopsis: Location for internal API functions relating to user resources
@@ -87,3 +86,4 @@ def remove_user_from_user_group(email, user_group_name):
         user_group.user_list.remove(user)
     else:
         print("The user: %s is not found in the user group: %s" % (email, user_group_name))
+
