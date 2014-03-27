@@ -1,4 +1,6 @@
 
+import pprint
+
 from crontab import CronTab
 
 from flask.ext.script import Manager
@@ -22,6 +24,7 @@ DEV_SERVERS = {
 
 DEV_USERS = {
     'test@test.com': ['Test', 'Tester', 'test', 'testpassword'],
+    'vinz@test.com': ['Vinz', 'Vinzer', 'vinz', 'vinz'],
     'maxpete@iastate.edu': ['Max', 'Peterson', 'maxpete', 'vinz'],
     'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
 }
@@ -102,7 +105,9 @@ def get_keys():
 def scan():
     from scanner.scanner import Scanner
     s = Scanner()
-    s.scan()
+    results = s.scan()
+    pp = pprint.PrettyPrinter()
+    pp.pprint(results)
 
 
 if __name__ == "__main__":

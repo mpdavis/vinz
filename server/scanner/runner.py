@@ -18,6 +18,7 @@ class VinzRunner(Runner):
                  hosts,
                  module_name=None,
                  module_args=None,
+                 remote_port=None,
                  ):
 
         if not isinstance(hosts, list):
@@ -29,6 +30,7 @@ class VinzRunner(Runner):
             'pattern': '*',
             'inventory': inventory,
             'remote_user': 'root',
+            'remote_port': remote_port,
             'module_name': module_name,
             'private_key_file': self.private_key
         }
