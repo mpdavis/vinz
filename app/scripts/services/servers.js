@@ -4,7 +4,7 @@ angular.module('vinzApp')
   .factory('servers', function ($http, $resource) {
     // Service logic
     // ...
-    var serversURL = "/api/servers/"
+    var serversURL = "/api/servers/";
     var serversAPI = serversURL + ":id";
     var Server = $resource(serversAPI, {id:'@id'});
 

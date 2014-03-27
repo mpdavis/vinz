@@ -15,6 +15,8 @@ from constants import HTTP_STATUS
 
 from internal import server as server_api
 
+from rest import user_fields
+
 
 server_fields = {
     #'uri': fields.Url(endpoint='server'),  #TODO: Figure this out
@@ -70,3 +72,14 @@ class ServerResourceList(Resource):
         args = server_parser.parse_args()
         server = server_api.create_server(**args)
         return marshal(server, server_fields), HTTP_STATUS.CREATED
+
+
+class ServerUserResourceList(Resource):
+    """
+    REST endpoint to serve up a list of users for a given server
+    """
+
+    @marshal_with(user_fields)
+    def get(self, server_id):
+        server = server_api.get_server(server_id)
+        return server.get_users()
