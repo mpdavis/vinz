@@ -7,6 +7,7 @@
 """
 from rest.server import ServerResource
 from rest.server import ServerResourceList
+from rest.server import ServerUserResourceList
 
 from rest.user import UserResource
 from rest.user import UserResourceList
@@ -30,6 +31,7 @@ def initialize_routes(api):
     # List Routes here
     add_resource(BASE_API_PATH % '/servers/', ServerResourceList, endpoint='servers')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource, endpoint='server')
+    add_resource(BASE_API_PATH % '/servers/<string:server_id>/users/', ServerUserResourceList, endpoint='server-users')
 
     add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
     add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')
