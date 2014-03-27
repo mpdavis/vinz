@@ -33,6 +33,10 @@ def get_server(server_id):
     return Server.objects.get(id=server_id)
 
 
+def get_server_by_hostname(hostname):
+    return Server.objects.get(hostname=hostname)
+
+
 def maybe_get_server_by_hostname(hostname):
     try:
         return Server.objects.get(hostname=hostname)
