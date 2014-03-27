@@ -28,6 +28,10 @@ def get_user(user_id):
     return User.objects.get(id=user_id)
 
 
+def get_user_by_username(username):
+    return User.objects.get(username=username)
+
+
 def get_users():
     # fails if requesting user is not admin
     return list(User.objects.all())
