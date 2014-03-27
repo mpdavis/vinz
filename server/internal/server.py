@@ -69,7 +69,7 @@ def add_user_to_server(server, user_id, save_server=True):
     :param server: Server object to add user to
     :param user_id: Id of User object to add to server
     :param save_server: Whether or not to call .save() on the server
-    :return True is user was added, otherwise False
+    :return True if user was added, otherwise False
     """
     user = get_user(user_id)
     if user not in server.user_list:
