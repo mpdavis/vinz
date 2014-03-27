@@ -12,16 +12,8 @@ from constants import HTTP_STATUS
 
 from internal import user as user_api
 
+from rest import user_fields
 
-user_fields = {
-    #'uri': fields.Url(endpoint='user'),  #TODO: Figure this out
-    'id': fields.String(),
-    'first_name': fields.String(),
-    'last_name': fields.String(),
-    'email': fields.String(),
-    'username': fields.String(),
-    'key_list': fields.List(fields.String)
-}
 
 user_parser = reqparse.RequestParser()
 user_parser.add_argument("first_name", type=str, location='json')
