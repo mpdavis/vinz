@@ -7,20 +7,10 @@
 	line-height: 35px;
 }
 
-.serverActions {
-	margin-top: 20px;
-	margin-bottom: 10px;
-}
-
 .serverNewButton {
 	margin-right: 10px;
 	float: right;
 }
-
-.serverActions .btn-group {
-	float: right;
-}
-
 .serverSearchBox {
 
 }
@@ -30,7 +20,7 @@
 }
 
 .serverInfoBtn {
-  width: 100%;
+  	width: 100%;
 }
 
 .serverTable .col-left {
