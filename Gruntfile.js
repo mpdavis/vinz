@@ -132,7 +132,11 @@ module.exports = function(grunt) {
 
         concat: {
             css: {
-                src: [directories.frontend.css + 'main.css', directories.frontend.css + 'servers.css'],
+                src: [
+                    directories.frontend.css + 'main.css', 
+                    directories.frontend.css + 'servers.css',
+                    directories.frontend.css + 'animate.css'
+                    ],
                 dest: directories.static.css + 'styles.css'
             },
             js: {
@@ -145,6 +149,7 @@ module.exports = function(grunt) {
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/servers.js',
                     directories.frontend.js + 'controllers/users.js',
+                    directories.frontend.js + 'controllers/server_detail.js',
                     directories.frontend.js + 'services/servers.js'
                 ],
                 dest: directories.static.js + 'app.js'
@@ -161,6 +166,17 @@ module.exports = function(grunt) {
         'clean': {
             'all': [staticBase, bowerBase, npmBase],
             'static': [staticBase]
+        },
+
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [globs.frontend.js, globs.frontend.css, globs.frontend.views]
+                }
+            },
+            options: {
+                watchTask: true
+            }
         }
     });
 
@@ -174,6 +190,7 @@ module.exports = function(grunt) {
     grunt.task.loadNpmTasks('grunt-shell');
     grunt.task.loadNpmTasks('grunt-contrib-uglify');
     grunt.task.loadNpmTasks('grunt-contrib-watch');
+    grunt.task.loadNpmTasks('grunt-browser-sync');
 
 
     // TASK ALIASES
@@ -206,8 +223,6 @@ module.exports = function(grunt) {
         'clean:all'
     ]);
 
-    grunt.task.registerTask('default', [
-
-    ]);
+    grunt.registerTask('default', ['browserSync', 'watch'])
 
 };

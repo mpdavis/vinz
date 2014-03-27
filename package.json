@@ -2,7 +2,8 @@
   "name": "vinz",
   "version": "0.0.0",
   "dependencies": {
-    "generator-angular": "~0.7.1"
+    "generator-angular": "~0.7.1",
+    "grunt-browser-sync": "~0.7.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
