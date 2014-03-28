@@ -59,19 +59,61 @@ def check_user_ssh_key(username, inventory, vinz_private_key_path):
     """
 
 
-def set_user_ssh_key(username, inventory, user_public_key, vinz_private_key_path):
+def add_user_public_key(username, hosts, user_public_key):
     """
     :param username: The username of the user on the remote machines
-    :param inventory: A list of servers to add the public key to
-    :param user_public_key: A string represnetation of the user's public key
-    :param vinz_private_key_path: The path to the private key needed to access the remote machines
+    :param hosts: A list of servers to add the public key to
+    :param user_public_key: A string representation of the user's public key
+    :return: A dict of whether operation succeeded on each host
     """
+    module_args = 'state=present user=%s key=\"%s\"' % (username, user_public_key)
+    runner = VinzRunner(hosts=hosts, module_name='authorized_key', module_args=module_args)
+    response = runner.run()
+    results = {}
+    for host in hosts:
+        host_result = {}
+        if not host in response['contacted']:
+            #host is dark
+            host_result['success'] = False
+            host_result['error'] = "Could not contact host %s" % (host)
+        else:
+            result = response['contacted'][host]
+            if 'failed' in result:
+                #something went wrong
+                host_result['success'] = False
+                host_result['error'] = result['msg'] or ""
+            else:
+                host_result['success'] = True
+        results[host] = host_result
+
+    return results
 
 
-def remove_user_ssh_key(username, inventory, user_public_key, vinz_private_key_path):
+def remove_user_public_key(username, hosts, user_public_key):
     """
     :param username: The username of the user on the remote machines
-    :param inventory: A list of servers to remove the user's public ssh key from
+    :param hosts: A list of servers to remove the user's public ssh key from
     :param user_public_key: The key to remove
-    :param vinz_private_key_path: The path to the private key needed to access the remote machines
+    :return: A dict of whether operation succeeded on each host
     """
+    module_args = 'state=absent user=%s key=\"%s\"' % (username, user_public_key)
+    runner = VinzRunner(hosts=hosts, module_name='authorized_key', module_args=module_args)
+    response = runner.run()
+    results = {}
+    for host in hosts:
+        host_result = {}
+        if not host in response['contacted']:
+            #host is dark
+            host_result['success'] = False
+            host_result['error'] = "Could not contact host %s" % (host)
+        else:
+            result = response['contacted'][host]
+            if 'failed' in result:
+                #something went wrong
+                host_result['success'] = False
+                host_result['error'] = result['msg'] or ""
+            else:
+                host_result['success'] = True
+        results[host] = host_result
+
+    return results
