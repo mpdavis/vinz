@@ -64,11 +64,26 @@ def add_user_public_key(username, hosts, user_public_key):
     :param username: The username of the user on the remote machines
     :param hosts: A list of servers to add the public key to
     :param user_public_key: A string representation of the user's public key
+    :return: A dict of whether operation succeeded on each host
     """
     module_args = 'state=present user=%s key=\"%s\"' % (username, user_public_key)
     runner = VinzRunner(hosts=hosts, module_name='authorized_key', module_args=module_args)
     response = runner.run()
-    return response
+    results = {}
+    for host in hosts:
+        if not host in response['contacted']:
+            #host is dark
+            results[host] = False
+        result = response['contacted'][host]
+        if 'failed' in result:
+            #something went wrong
+            results[host] = False
+        else:
+            results[host] = True
+
+    return results
+
+
 
 
 def remove_user_public_key(username, hosts, user_public_key):
@@ -76,8 +91,21 @@ def remove_user_public_key(username, hosts, user_public_key):
     :param username: The username of the user on the remote machines
     :param hosts: A list of servers to remove the user's public ssh key from
     :param user_public_key: The key to remove
+    :return: A dict of whether operation succeeded on each host
     """
     module_args = 'state=absent user=%s key=\"%s\"' % (username, user_public_key)
     runner = VinzRunner(hosts=hosts, module_name='authorized_key', module_args=module_args)
     response = runner.run()
-    return response
+    results = {}
+    for host in hosts:
+        if not host in response['contacted']:
+            #host is dark
+            results[host] = False
+        result = response['contacted'][host]
+        if 'failed' in result:
+            #something went wrong
+            results[host] = False
+        else:
+            results[host] = True
+
+    return results

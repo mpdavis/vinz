@@ -102,6 +102,30 @@ def get_keys():
 
 
 @manager.command
+def add_public_key(username, filename):
+    from scanner.api import ssh_key
+    host = 'vinz-ubuntu.student.iastate.edu'
+    with open(filename) as f:
+        result = ssh_key.add_user_public_key(username, [host], f.read())
+    if result[host]:
+        print 'Success!'
+    else:
+        print 'Fail'
+
+
+@manager.command
+def remove_public_key(username, filename):
+    from scanner.api import ssh_key
+    host = 'vinz-ubuntu.student.iastate.edu'
+    with open(filename) as f:
+        result = ssh_key.remove_user_public_key(username, [host], f.read())
+    if result[host]:
+        print 'Success!'
+    else:
+        print 'Fail'
+
+
+@manager.command
 def scan():
     from scanner.scanner import Scanner
     s = Scanner()
