@@ -1,5 +1,4 @@
 
-import pprint
 
 from internal import server as internal_server
 from internal import user as internal_user
@@ -22,17 +21,13 @@ class ServerScanner():
 
     def get_users_from_server(self):
         """
-        Gets a list of the users that are currently on the server
-
-        :param server: The server entity to get a list of users from
+        Gets a list of the users that are actually on the server
         """
         return set(api_user.get_users_on_host(self.server.hostname))
 
     def get_users_from_vinz(self):
         """
         Gets a list of usernames that should be on the box according to vinz
-
-        :param server: The server to query
         """
         return set(self.server.get_usernames())
 
@@ -54,19 +49,10 @@ class ServerScanner():
         if self.remove_users:
             api_user.remove_user(user, self.server)
 
-    def get_authorized_key_files(self):
+    def scan_users(self):
         """
-        Gets all of the authorized_key files for users on the server.
+        Handles scanning the users
         """
-        if not self.server_users:
-            self.server_users = self.get_users_from_server()
-
-        self.authorized_keys = api_ssh_key.get_authorized_keys_for_host(self.server.hostname,
-                                                                        self.server_users)
-
-    def scan(self):
-        if not self.server:
-            raise ValueError('There must be a server to scan.')
 
         server_users = self.get_users_from_server()
         vinz_users = self.get_users_from_vinz()
@@ -81,7 +67,34 @@ class ServerScanner():
             for user in remove_users:
                 self.remove_user(user)
 
+    def get_authorized_key_files(self):
+        """
+        Gets all of the authorized_key files for users on the server.
+        """
+        if not self.server_users:
+            self.server_users = self.get_users_from_server()
+
+        self.authorized_keys = api_ssh_key.get_authorized_keys_for_host(self.server.hostname,
+                                                                        self.server_users)
+
+    def parse_authorized_keys(self):
+        for user, keys in self.authorized_keys.iteritems():
+            pass
+
+    def scan_authorized_keys(self):
+        """
+        Handles the authorized_key files for this scanner
+        """
         self.get_authorized_key_files()
+        self.parse_authorized_keys()
+
+    def scan(self):
+        if not self.server:
+            raise ValueError('There must be a server to scan.')
+
+        self.scan_users()
+        self.scan_authorized_keys()
+
         return self.authorized_keys
 
 
@@ -112,5 +125,5 @@ class Scanner():
                                            remove_users=self.remove_users)
 
             self.scan_state[server.hostname] = server_scanner.scan()
-        pp = pprint.PrettyPrinter()
-        pp.pprint(self.scan_state)
+
+        return self.scan_state
