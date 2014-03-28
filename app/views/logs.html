@@ -1,0 +1,29 @@
+<div class="container animated" ng-class="{bounceIn: loaded, bounceOutDown: finish}">
+
+  <!-- Section Header -->
+  <div class="sectionBanner">
+    <div class="sectionTitle">
+      Activity Logs
+    </div>
+    <div class="sectionBody">
+    </div>
+  </div>
+
+  <!-- Activity Logs Table -->
+  <table class="serverTable table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="col-sm-2">Time</th>
+        <th class="col-sm-3">Acting User</th>
+        <th class="col-sm-7">Event</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="log in activityLogs">
+        <td class="col-sm-2">{{log.timestamp}}</td>
+        <td class="col-sm-3">{{log.actor.first_name}} {{log.actor.last_name}}</td>
+        <td class="col-sm-7">{{log.event_message}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -51,7 +51,7 @@ class ServerResource(Resource):
     def put(self, server_id):
         server = server_api.get_server(server_id)
         args = server_update_parser.parse_args()
-        updated_server = server_api.update_server(server, **args)
+        updated_server = server_api.update_server(None, server, **args)  # TODO add user
         return updated_server
 
     def delete(self, server_id):
@@ -70,7 +70,7 @@ class ServerResourceList(Resource):
 
     def post(self):
         args = server_parser.parse_args()
-        server = server_api.create_server(**args)
+        server = server_api.create_server(None, **args)  # TODO add user
         return marshal(server, server_fields), HTTP_STATUS.CREATED
 
 
