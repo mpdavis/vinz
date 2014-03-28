@@ -7,20 +7,10 @@
 	line-height: 35px;
 }
 
-.userActions {
-	margin-top: 20px;
-	margin-bottom: 10px;
-}
-
 .userNewButton {
 	margin-right: 10px;
 	float: right;
 }
-
-.userActions .btn-group {
-	float: right;
-}
-
 .userSearchBox {
 
 }
@@ -30,7 +20,7 @@
 }
 
 .userInfoBtn {
-  width: 100%;
+  	width: 100%;
 }
 
 .userTable .col-left {
