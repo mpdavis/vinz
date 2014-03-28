@@ -40,7 +40,7 @@ def setup_dev():
     servers = []
     for name, url in DEV_SERVERS.iteritems():
         try:
-            server = internal_server.create_server(name, url)
+            server = internal_server.create_server(None, name, url)
             servers.append(server)
             print "Created server %s: %s" % (name, url)
         except ServerAlreadyExistsError:
@@ -60,7 +60,7 @@ def setup_dev():
         if user:
             for server in servers:
                 print "Adding %s to %s" % (user.username, server.hostname)
-                internal_server.add_user_to_server(server, user.id)
+                internal_server.add_user_to_server(None, server, user.id)
 
 
 @manager.command

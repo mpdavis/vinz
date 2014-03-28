@@ -24,6 +24,10 @@ var app = angular.module('vinzApp', [
         templateUrl: 'static/views/server_detail.html',
         controller: 'ServerDetailCtrl'
       })
+      .when('/logs', {
+        templateUrl: 'static/views/logs.html',
+        controller: 'LogsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
