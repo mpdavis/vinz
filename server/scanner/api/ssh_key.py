@@ -71,19 +71,22 @@ def add_user_public_key(username, hosts, user_public_key):
     response = runner.run()
     results = {}
     for host in hosts:
+        host_result = {}
         if not host in response['contacted']:
             #host is dark
-            results[host] = False
-        result = response['contacted'][host]
-        if 'failed' in result:
-            #something went wrong
-            results[host] = False
+            host_result['success'] = False
+            host_result['error'] = "Could not contact host %s" % (host)
         else:
-            results[host] = True
+            result = response['contacted'][host]
+            if 'failed' in result:
+                #something went wrong
+                host_result['success'] = False
+                host_result['error'] = result['msg'] or ""
+            else:
+                host_result['success'] = True
+        results[host] = host_result
 
     return results
-
-
 
 
 def remove_user_public_key(username, hosts, user_public_key):
@@ -98,14 +101,19 @@ def remove_user_public_key(username, hosts, user_public_key):
     response = runner.run()
     results = {}
     for host in hosts:
+        host_result = {}
         if not host in response['contacted']:
             #host is dark
-            results[host] = False
-        result = response['contacted'][host]
-        if 'failed' in result:
-            #something went wrong
-            results[host] = False
+            host_result['success'] = False
+            host_result['error'] = "Could not contact host %s" % (host)
         else:
-            results[host] = True
+            result = response['contacted'][host]
+            if 'failed' in result:
+                #something went wrong
+                host_result['success'] = False
+                host_result['error'] = result['msg'] or ""
+            else:
+                host_result['success'] = True
+        results[host] = host_result
 
     return results
