@@ -78,6 +78,9 @@ class ServerScanner():
                                                                         self.server_users)
 
     def parse_authorized_keys(self):
+        """
+        Parses the authorized_keys files for all of the users on the server
+        """
         for user, keys in self.authorized_keys.iteritems():
             pass
 
