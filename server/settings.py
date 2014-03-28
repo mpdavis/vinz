@@ -32,4 +32,6 @@ IGNORED_USERS = [
     'whoopsie',
     'landscape',
     'sshd',
+    'statd',
+    'Debian-exim',  
 ]

@@ -80,7 +80,7 @@ def setup_cron():
 @manager.command
 def get_users():
     from scanner.api import user
-    print user.get_users_on_host('vinz-ubuntu.student.iastate.edu')
+    print user.get_users_on_host('vinz-debian.student.iastate.edu')
 
 
 @manager.command
