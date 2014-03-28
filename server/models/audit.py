@@ -9,6 +9,9 @@ import datetime
 
 from mongoengine import DateTimeField
 from mongoengine import Document
+from mongoengine import GenericReferenceField
+from mongoengine import IntField
+from mongoengine import ListField
 from mongoengine import ReferenceField
 from mongoengine import StringField
 
@@ -31,7 +34,26 @@ class AuditableMixin(object):
 
 
 class ActivityLog(Document):
-    actor = ReferenceField('User', required=True)
+    """
+    Keep track of user activities
+    Example: Matthew added a user "max" to server "host1"
+    Example: User "max" uploaded a new public key
+    """
+    actor = ReferenceField('User')
     timestamp = DateTimeField(default=datetime.datetime.now)
-    obj = ReferenceField(Document)  # Not sure on this yet
+    obj = GenericReferenceField()  # Not sure on this yet
+    secondary_obj = GenericReferenceField(required=False)
     action = StringField()  # TODO: Define possible values for this
+
+
+class ScanLog(Document):
+    """
+    Keep record of every scan that happens for every server
+    """
+    server = ReferenceField('Server', required=True)
+    timestamp = DateTimeField(default=datetime.datetime.now)
+    status = IntField()
+
+    users_expected = ListField(StringField)
+    actual_users = ListField(StringField)
+    unexpected_users = ListField(StringField)
