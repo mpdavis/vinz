@@ -1,0 +1,47 @@
+.userTitle {
+	font-size: 24px;
+}
+
+.userHeader {
+	margin-bottom: 15px;
+	line-height: 35px;
+}
+
+.userNewButton {
+	margin-right: 10px;
+	float: right;
+}
+.userSearchBox {
+
+}
+
+.userTable {
+	background-color: white;
+}
+
+.userInfoBtn {
+  	width: 100%;
+}
+
+.userTable .col-left {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.userTable th {
+	text-align: center;
+	font-weight: bold;
+}
+
+.userTable td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.userInspectIcon {
+
+}
+
+.userInspectIcon:hover {
+	
+}
