@@ -17,7 +17,7 @@ def initialize_view_urls(app):
     app.add_url_rule('/logout/', view_func=logout)
 
 
-#@login_required
+@login_required
 def index():
     return render_template('index.html')
 

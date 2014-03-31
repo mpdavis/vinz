@@ -1,5 +1,9 @@
+from flask.ext import login as flask_login
+from flask.ext.login import login_required
+
 from flask.ext.restful import Api
 from flask.ext.restful import fields
+from flask.ext.restful import Resource
 
 from constants import HTTP_STATUS
 
@@ -33,3 +37,17 @@ class VinzApi(Api):
             return self.make_response(data, HTTP_STATUS.BAD_REQUEST)
         else:
             return super(VinzApi, self).handle_error(e)
+
+
+class AuthenticatedResource(Resource):
+    """
+    Base resource class used to required a valid authenticated session.
+    """
+    method_decorators = [login_required]
+
+    @property
+    def user(self):
+        if not flask_login.current_user.is_anonymous():
+            return flask_login.current_user._get_current_object()
+        else:
+            return None
