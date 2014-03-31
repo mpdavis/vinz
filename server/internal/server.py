@@ -5,14 +5,17 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
+from internal import activity_log
+
 from internal.exceptions import ServerAlreadyExistsError
+
 from internal.user import get_user
 from internal.user_group import get_user_group
 
 from models.server import Server
 
 
-def create_server(name, hostname, **kwargs):
+def create_server(operator, name, hostname, **kwargs):
     """
     Create a server in the database with the given values.
     """
@@ -22,6 +25,7 @@ def create_server(name, hostname, **kwargs):
         raise ServerAlreadyExistsError("A server with this hostname already exists.")
     server = Server(name=name, hostname=hostname)
     server.save()
+    activity_log.log_server_created(server, operator)
     return server
 
 
@@ -33,6 +37,10 @@ def get_server(server_id):
     return Server.objects.get(id=server_id)
 
 
+def get_server_by_hostname(hostname):
+    return Server.objects.get(hostname=hostname)
+
+
 def maybe_get_server_by_hostname(hostname):
     try:
         return Server.objects.get(hostname=hostname)
@@ -40,17 +48,17 @@ def maybe_get_server_by_hostname(hostname):
         return None
 
 
-def update_server(server, **kwargs):
+def update_server(operator, server, **kwargs):
 
     # Possibly add a user
     if 'user_id' in kwargs and kwargs.get('user_id'):
         user_id = kwargs.pop('user_id')
-        add_user_to_server(server, user_id, False)
+        add_user_to_server(operator, server, user_id, False)
 
     # Possibly add a group
     if 'group_id' in kwargs and kwargs.get('group_id'):
         group_id = kwargs.pop('group_id')
-        add_user_to_server(server, group_id, False)
+        add_group_to_server(operator, server, group_id, False)
 
     # Set other attributes on the server
     for attr_name, value in kwargs.items():
@@ -63,7 +71,7 @@ def update_server(server, **kwargs):
     return server
 
 
-def add_user_to_server(server, user_id, save_server=True):
+def add_user_to_server(operator, server, user_id, save_server=True):
     """
     Add a single user to a single server.
     :param server: Server object to add user to
@@ -74,18 +82,29 @@ def add_user_to_server(server, user_id, save_server=True):
     user = get_user(user_id)
     if user not in server.user_list:
         server.user_list.append(user)
+        activity_log.log_user_added_to_server(server, user, operator)
         if save_server:
             server.save()
         return True
     return False
 
 
-def add_group_to_server(server, group_id, save_server=True):
+def add_group_to_server(operator, server, group_id, save_server=True):
+    """
+    Add a single user group to a server
+    :param server: Server object to add group to
+    :param group_id: Id of UserGroup to add to server
+    :param save_server: Whether or not to call .save() on the server
+    :return: True if group was added, otherwise False
+    """
     group = get_user_group(group_id)
-    server.group_list.append(group)
-    if save_server:
-        server.save()
-    return server
+    if group not in server.group_list:
+        server.group_list.append(group)
+        # TODO add activity log
+        if save_server:
+            server.save()
+        return True
+    return False
 
 
 def delete_server(server_id):

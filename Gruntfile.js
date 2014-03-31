@@ -134,8 +134,9 @@ module.exports = function(grunt) {
                 src: [
                     directories.frontend.css + 'main.css', 
                     directories.frontend.css + 'servers.css',
-                    directories.frontend.css + 'animate.css'
-                    ],
+                    directories.frontend.css + 'animate.css',
+                    directories.frontend.css + 'users.css'
+                   ],
                 dest: directories.static.css + 'styles.css'
             },
             js: {
@@ -146,9 +147,12 @@ module.exports = function(grunt) {
                     directories.bower.angularCookies + 'angular-cookies.js',
                     directories.bower.angularSanitize + 'angular-sanitize.js',
                     directories.frontend.js + 'app.js',
+                    directories.frontend.js + 'controllers/logs.js',
                     directories.frontend.js + 'controllers/servers.js',
                     directories.frontend.js + 'controllers/users.js',
+                    directories.frontend.js + 'services/users.js',
                     directories.frontend.js + 'controllers/server_detail.js',
+                    directories.frontend.js + 'services/logs.js',
                     directories.frontend.js + 'services/servers.js'
                 ],
                 dest: directories.static.js + 'app.js'

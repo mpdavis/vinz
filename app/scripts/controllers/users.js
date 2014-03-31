@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('UsersCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('UsersCtrl', ['$scope', 'users', '$location', '$timeout', function ($scope, users, $location, $timeout) {
+    $scope.newUser = {first_name: "", last_name: "", email: ""};
+    $scope.myUsers = users.getUsers();
+    $scope.finish = false;
 
-  });
+    $scope.createUser = function(newUser) {
+    	users.createUser(newUser);
+    	$scope.myUsers = users.getUsers();
+    }
+  }]);

@@ -1,10 +1,96 @@
+<div style="visibility" class="container animated" ng-class="{bounceIn: loaded, bounceOutDown: finish}">
 
+  <!-- Section Header -->
+  <div class="sectionBanner">
+    <div class="sectionTitle">
+      Users
+    </div>
+    <div class="sectionBody">
+      <span class="sectionBody-UserMain">
+        <div id="newUserButton" class="btn btn-default">
+          New User
+        </div>
+        <div class="right-inner-addon">
+          <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
+          <i class="fa fa-search"></i>
+        </div>
+      </span>
+    </div>
+  </div>
 
-<p>This is the users view.</p>
+  <!-- User Table -->
+  <table class="userTable table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in myUsers | filter:userSearch">
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- New User Modal -->
+  <div id="newUserModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+          <h4 class="modal-title" id="newUserModalLabel">New User</h4>
+        </div>
+        <div class="modal-body">
+          <div class="simple-form form-group">
+			<label>Username</label>
+            <input type="text" ng-model="newUser.username" class="form-control" placeholder="Enter username"></input>
+            
+            <label>Password</label>
+            <input type="password" ng-model="newUser.password" class="form-control" placeholder="Enter a password"></input>
+            
+            <label>First Name</label>
+            <input type="text" ng-model="newUser.first_name" class="form-control" placeholder="Enter your first name"></input>
+
+            <label>Last Name</label>
+            <input type="text" ng-model="newUser.last_name" class="form-control" placeholder="Enter your last name"></input>
+            
+            <label>Email</label>
+            <input type="email" ng-model="newUser.email" class="form-control" placeholder="Enter your email address"></input>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="createUserButton" type="button" class="btn btn-primary" ng-click="createUser(newUser)">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
 $(function() {
-	$(".navbar-nav li").removeClass("active");
-    $("#users-nav").addClass("active");
+  var scope = angular.element($("#vinzApp")).scope();
+
+  $(".navbar-nav li").removeClass("active");
+  $("#users-nav").addClass("active");
+
+  $("#newUserButton").click(function() {
+    $("#newUserModal").modal('show');
+  });
+
+  $("#createUserButton").click(function() {
+    $("#newUserModal").modal('hide');
+  });
+
+  $("#newUserModal").on('hidden.bs.modal', function() {
+    scope.$apply(function() {
+        scope.newUser = {username: "", password: "", first_name: "", last_name: "", email: ""};
+    });
+  });
 });
 </script>
+

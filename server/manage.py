@@ -1,4 +1,6 @@
 
+import pprint
+
 from crontab import CronTab
 
 from flask.ext.script import Manager
@@ -22,6 +24,7 @@ DEV_SERVERS = {
 
 DEV_USERS = {
     'test@test.com': ['Test', 'Tester', 'test', 'testpassword'],
+    'vinz@test.com': ['Vinz', 'Vinzer', 'vinz', 'vinz'],
     'maxpete@iastate.edu': ['Max', 'Peterson', 'maxpete', 'vinz'],
     'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
     'jhummel@iastate.edu': ['Jake', 'Hummel', 'jhummel', 'vinz'],
@@ -38,7 +41,7 @@ def setup_dev():
     servers = []
     for name, url in DEV_SERVERS.iteritems():
         try:
-            server = internal_server.create_server(name, url)
+            server = internal_server.create_server(None, name, url)
             servers.append(server)
             print "Created server %s: %s" % (name, url)
         except ServerAlreadyExistsError:
@@ -58,7 +61,7 @@ def setup_dev():
         if user:
             for server in servers:
                 print "Adding %s to %s" % (user.username, server.hostname)
-                internal_server.add_user_to_server(server, user.id)
+                internal_server.add_user_to_server(None, server, user.id)
 
 
 @manager.command
@@ -103,7 +106,9 @@ def get_keys():
 def scan():
     from scanner.scanner import Scanner
     s = Scanner()
-    s.scan()
+    results = s.scan()
+    pp = pprint.PrettyPrinter()
+    pp.pprint(results)
 
 
 if __name__ == "__main__":

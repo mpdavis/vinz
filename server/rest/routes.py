@@ -5,6 +5,8 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
+from rest.activity_log import ActivityLogResourceList
+
 from rest.server import ServerResource
 from rest.server import ServerResourceList
 from rest.server import ServerUserResourceList
@@ -29,6 +31,8 @@ def initialize_routes(api):
         api.add_resource(resource, path, *args, **kwargs)
 
     # List Routes here
+    add_resource(BASE_API_PATH % '/logs/', ActivityLogResourceList, endpoint='logs')
+
     add_resource(BASE_API_PATH % '/servers/', ServerResourceList, endpoint='servers')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource, endpoint='server')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>/users/', ServerUserResourceList, endpoint='server-users')
