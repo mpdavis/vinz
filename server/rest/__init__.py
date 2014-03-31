@@ -7,6 +7,8 @@ from flask.ext.restful import Resource
 
 from constants import HTTP_STATUS
 
+from internal.auth import get_current_user
+
 from internal.exceptions import ServerAlreadyExistsError
 from internal.exceptions import UserAlreadyExistsError
 
@@ -47,7 +49,4 @@ class AuthenticatedResource(Resource):
 
     @property
     def user(self):
-        if not flask_login.current_user.is_anonymous():
-            return flask_login.current_user._get_current_object()
-        else:
-            return None
+        return get_current_user()

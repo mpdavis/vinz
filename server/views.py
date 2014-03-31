@@ -6,9 +6,12 @@ from flask import url_for
 
 from flask.ext.login import login_required
 
+from internal.auth import get_current_user
 from internal.auth import login_user
 from internal.auth import logout_user
 from internal.auth import utils as auth_utils
+
+import urllib
 
 
 def initialize_view_urls(app):
@@ -19,6 +22,7 @@ def initialize_view_urls(app):
 
 @login_required
 def index():
+    g.user = get_current_user()
     return render_template('index.html')
 
 
@@ -34,6 +38,10 @@ def login():
             if authenticated:
                 # User is legit, give them a session.
                 login_user(user)
+
+                redirect_location = request.args.get('redirect')
+                if redirect_location:
+                    return redirect(urllib.unquote(redirect_location))
                 return redirect(url_for('index'))
 
         # In case any of the conditionals fail, show the error on the login page.
