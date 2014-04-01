@@ -1,8 +1,8 @@
-<div class="container animated bounceIn" >
+<div class="container animated bounceInDown" >
 	<!-- Section Header -->
 	<div class="sectionBanner">
 		<div class="sectionTitle">
-			Server Dashboard
+			Server Information
 		</div>
 		<div class="sectionBody">
 	        <div class="closeButton">
@@ -15,10 +15,6 @@
 	<table class="serverTable table table-hover table-bordered">
 		<tbody>
 			<tr>
-			  	<th>Id</th>
-			  	<td>{{server.id}}</td>
-			</tr>
-			<tr>
 				<th>Name</th>
 				<td>{{server.name}}</td>
 			</tr>
@@ -29,22 +25,38 @@
 		</tbody>
 	</table>
 
-	<h4>Users with access</h4>
+	<!-- Section Header -->
+  <div class="sectionBanner">
+    <div class="sectionTitle">
+      Users
+    </div>
+    <div class="sectionBody">
+      <span class="sectionBody-serverMain">
+        <div id="newServerButton" class="btn btn-default">
+          Add User
+        </div>
+        <div class="right-inner-addon">
+          <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
+          <i class="fa fa-search"></i>
+        </div>
+      </span>
+    </div>
+  </div>
 
 	<!-- Server Users -->
 	<table class="serverTable table table-hover table-striped table-bordered">
     <thead>
       <tr>
-        <th>User</th>
-        <th>Access Since</th>
+        <th>Username</th>
+        <th>Email</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Example User</td>
-        <td>3/23/2014</td>
-        <td><button class="btn btn-danger">Revoke</button></td>
+      <tr ng-repeat="user in serverUsers | filter:userSearch">
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td class="col-sm-2"><div ng-click="revoke(user.id);" class="btn btn-danger serverInfoBtn">Revoke</div></td>
       </tr>
     </tbody>
   </table>

@@ -9,8 +9,8 @@ var app = angular.module('vinzApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'static/views/servers.html',
-        controller: 'ServersCtrl'
+        templateUrl: 'static/views/logs.html',
+        controller: 'LogsCtrl'
       })
       .when('/servers', {
         templateUrl: 'static/views/servers.html',

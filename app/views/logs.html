@@ -6,6 +6,10 @@
       Activity Logs
     </div>
     <div class="sectionBody">
+      <div class="right-inner-addon">
+        <input ng-model="logSearch" type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search"></i>
+      </div>
     </div>
   </div>
 
@@ -13,17 +17,24 @@
   <table class="serverTable table table-hover table-striped table-bordered">
     <thead>
       <tr>
-        <th class="col-sm-2">Time</th>
-        <th class="col-sm-3">Acting User</th>
-        <th class="col-sm-7">Event</th>
+        <th>Time</th>
+        <th>Acting User</th>
+        <th>Event</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="log in activityLogs">
-        <td class="col-sm-2">{{log.timestamp}}</td>
-        <td class="col-sm-3">{{log.actor.first_name}} {{log.actor.last_name}}</td>
-        <td class="col-sm-7">{{log.event_message}}</td>
+      <tr ng-repeat="log in activityLogs | filter:logSearch" ng-init="log.timestamp = ( log.timestamp | date:'medium' )">
+        <td>{{log.timestamp}}</td>
+        <td>{{log.actor.first_name}} {{log.actor.last_name}}</td>
+        <td>{{log.event_message}}</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<script type="text/javascript">
+$(function() {
+  $(".navbar-nav li").removeClass("active");
+  $("#logs-nav").addClass("active");
+});
+</script>

@@ -10,8 +10,18 @@ angular.module('vinzApp')
 
     //Servers API
     return {
-      getActivityLogs: function() {
-        return Log.query();
+      getActivityLogs: function(callback) {
+        var logs = Log.query(function() {
+          for (key in logs) {
+              if (logs.hasOwnProperty(key)) {
+                  logs[key].timestamp = Date.parse(logs[key].timestamp); 
+              }
+          }
+
+          callback(logs);
+        });
+
+        return logs;
       }
     };
   });

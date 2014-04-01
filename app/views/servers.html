@@ -1,4 +1,4 @@
-<div style="visibility" class="container animated" ng-class="{bounceIn: loaded, bounceOutDown: finish}">
+<div style="visibility" class="container animated" ng-class="{bounceInUp: loaded, bounceOutDown: finish}">
 
   <!-- Section Header -->
   <div class="sectionBanner">
@@ -22,15 +22,15 @@
   <table class="serverTable table table-hover table-striped table-bordered">
     <thead>
       <tr>
-        <th class="col-sm-5">Name</th>
-        <th class="col-sm-5">Hostname</th>
+        <th>Name</th>
+        <th>Hostname</th>
         <th class="col-sm-2">Dashboard</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="server in myServers | filter:serverSearch">
-        <td class="col-sm-5">{{server.name}}</td>
-        <td class="col-sm-5">{{server.hostname}}</td>
+        <td>{{server.name}}</td>
+        <td>{{server.hostname}}</td>
         <td class="col-sm-2"><div ng-click="detail(server.id);" class="btn btn-default serverInfoBtn"><i class="fa fa-dashboard"></i></div></td>
       </tr>
     </tbody>
