@@ -9,10 +9,16 @@ from rest.activity_log import ActivityLogResourceList
 
 from rest.server import ServerResource
 from rest.server import ServerResourceList
+from rest.server import ServerUserGroupResource
+from rest.server import ServerUserGroupResourceList
+from rest.server import ServerUserResource
 from rest.server import ServerUserResourceList
 
 from rest.user import UserResource
 from rest.user import UserResourceList
+
+from rest.user_group import UserGroupResource
+from rest.user_group import UserGroupResourceList
 
 
 BASE_API_PATH = '/api%s'
@@ -36,6 +42,12 @@ def initialize_routes(api):
     add_resource(BASE_API_PATH % '/servers/', ServerResourceList, endpoint='servers')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource, endpoint='server')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>/users/', ServerUserResourceList, endpoint='server-users')
+    add_resource(BASE_API_PATH % '/servers/<string:server_id>/users/<string:user_id>', ServerUserResource, endpoint='server-user')
+    add_resource(BASE_API_PATH % '/servers/<string:server_id>/usergroups/', ServerUserGroupResourceList, endpoint='server-user-groups')
+    add_resource(BASE_API_PATH % '/servers/<string:server_id>/usergroups/<string:user_group_id>', ServerUserGroupResource, endpoint='server-user-group')
 
     add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
     add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')
+
+    add_resource(BASE_API_PATH % '/usergroups/', UserGroupResourceList, endpoint='user-groups')
+    add_resource(BASE_API_PATH % '/usergroups/<string:user_group_id>', UserGroupResource, endpoint='user-group')

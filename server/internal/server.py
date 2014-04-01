@@ -49,17 +49,6 @@ def maybe_get_server_by_hostname(hostname):
 
 
 def update_server(operator, server, **kwargs):
-
-    # Possibly add a user
-    if 'user_id' in kwargs and kwargs.get('user_id'):
-        user_id = kwargs.pop('user_id')
-        add_user_to_server(operator, server, user_id, False)
-
-    # Possibly add a group
-    if 'group_id' in kwargs and kwargs.get('group_id'):
-        group_id = kwargs.pop('group_id')
-        add_group_to_server(operator, server, group_id, False)
-
     # Set other attributes on the server
     for attr_name, value in kwargs.items():
         # If the attribute wasn't supplied in the kwargs, or was None,
@@ -74,6 +63,7 @@ def update_server(operator, server, **kwargs):
 def add_user_to_server(operator, server, user_id, save_server=True):
     """
     Add a single user to a single server.
+    :param operator: User performing this action
     :param server: Server object to add user to
     :param user_id: Id of User object to add to server
     :param save_server: Whether or not to call .save() on the server
@@ -100,6 +90,44 @@ def add_group_to_server(operator, server, group_id, save_server=True):
     group = get_user_group(group_id)
     if group not in server.group_list:
         server.group_list.append(group)
+        # TODO add activity log
+        if save_server:
+            server.save()
+        return True
+    return False
+
+
+def remove_user_from_server(operator, server, user_id, save_server=True):
+    """
+    Remove a single user's access from a single server
+    :param operator: User performing this action
+    :param server: Sever object to remove user from
+    :param user_id: User to remove
+    :param save_server: Whether or not to call .save() on the server
+    :return: True if user was removed, otherwise False
+    """
+    user = get_user(user_id)
+    if user in server.user_list:
+        server.user_list.remove(user)
+        activity_log.log_user_removed_from_server(server, user, operator)
+        if save_server:
+            server.save()
+        return True
+    return False
+
+
+def remove_group_from_server(operator, server, group_id, save_server=True):
+    """
+    Remove a single UserGroup's access from a single server
+    :param operator: User performing this action
+    :param server: Sever object to remove user from
+    :param group_id: Id of UserGroup to remove
+    :param save_server: Whether or not to call .save() on the server
+    :return: True if user was removed, otherwise False
+    """
+    group = get_user_group(group_id)
+    if group in server.group_list:
+        server.group_list.remove(group)
         # TODO add activity log
         if save_server:
             server.save()

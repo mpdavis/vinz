@@ -12,14 +12,8 @@ from constants import HTTP_STATUS
 from internal import server_group as server_group_api
 
 from rest import AuthenticatedResource
+from rest import server_group_fields
 
-
-server_group_fields = {
-    #'uri': fields.Url(endpoint='server_group'),  #TODO: Figure this out
-    'id': fields.String(),
-    'name': fields.String(),
-    'server_list': fields.List(fields.String)
-}
 
 server_group_parser = reqparse.RequestParser()
 server_group_parser.add_argument('name', type=str, location='json')
