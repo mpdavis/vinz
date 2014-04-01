@@ -2,7 +2,6 @@
 .. module:: rest.public_key
    :synopsis: REST Resource definitions relating to Public Keys
 """
-from flask.ext.restful import Resource
 from flask.ext.restful import fields
 from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
@@ -11,6 +10,8 @@ from flask.ext.restful import reqparse
 from constants import HTTP_STATUS
 
 from internal import public_key as pub_key_api
+
+from rest import AuthenticatedResource
 
 
 pub_key_fields = {
@@ -28,7 +29,7 @@ pub_key_parser.add_argument("key_name", type=str, location='json')
 pub_key_parser.add_argument("value", type=str, location='json')
 
 
-class PublicKeyResource(Resource):
+class PublicKeyResource(AuthenticatedResource):
     """
     REST endpoint to serve up details of a specific Public Key from the database.
     """
@@ -42,7 +43,7 @@ class PublicKeyResource(Resource):
         return '', HTTP_STATUS.DELETED
 
 
-class PublicKeyResourceList(Resource):
+class PublicKeyResourceList(AuthenticatedResource):
     """
     REST endpoint to handle creation of Public Keys
     """

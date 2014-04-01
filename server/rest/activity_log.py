@@ -5,17 +5,15 @@
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 
 """
-from flask.ext.restful import Resource
 from flask.ext.restful import fields
 from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
 from flask.ext.restful import reqparse
 
-from constants import HTTP_STATUS
-
 from internal.activity_log import get_activity_log_text
 from internal.activity_log import get_all_activity_logs
 
+from rest import AuthenticatedResource
 from rest import user_fields
 
 
@@ -33,7 +31,7 @@ activity_log_fields = {
 }
 
 
-class ActivityLogResourceList(Resource):
+class ActivityLogResourceList(AuthenticatedResource):
     """
     REST endpoint to serve up a list of activity logs
     """
