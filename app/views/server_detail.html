@@ -53,10 +53,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in serverUsers | filter:userSearch">
+      <tr ng-repeat="user in allUsers | filter:hasAccess">
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
-        <td class="col-sm-2"><div ng-click="revoke(user.id);" class="btn btn-danger serverInfoBtn">Revoke</div></td>
+        <td class="col-sm-2"><div ng-click="toggleAccess(user.id);" class="btn btn-danger serverInfoBtn">Revoke</div></td>
       </tr>
     </tbody>
   </table>

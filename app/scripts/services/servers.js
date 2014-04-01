@@ -24,12 +24,17 @@ angular.module('vinzApp')
       createServer: function(newServer) {
         $http.post(serversURL, newServer);
       },
-      getServerUsers: function(serverId) {
-        var users = ServerUser.query({id: serverId});
+      getServerUsers: function(serverId, callback) {
+        var users = ServerUser.query({id: serverId}, function() {
+          callback(users);
+        });
         return users;
       },
       revokeAccess: function(serverId, userId) {
         ServerUser.remove({id: serverId, user_id: userId});
+      },
+      grantAccess: function(serverId, userId) {
+        $http.post(serverUsersAPI, {id: serverId, user_id: userId});
       }
     };
   });
