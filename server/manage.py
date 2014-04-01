@@ -28,6 +28,7 @@ DEV_USERS = {
     'maxpete@iastate.edu': ['Max', 'Peterson', 'maxpete', 'vinz'],
     'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
     'jhummel@iastate.edu': ['Jake', 'Hummel', 'jhummel', 'vinz'],
+    'zheilman@iastate.edu':['Zach','Heilman','zheilman','vinz'],
 }
 
 
