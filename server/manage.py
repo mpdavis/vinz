@@ -1,4 +1,3 @@
-
 import pprint
 
 from crontab import CronTab
@@ -28,13 +27,17 @@ DEV_USERS = {
     'maxpete@iastate.edu': ['Max', 'Peterson', 'maxpete', 'vinz'],
     'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
     'jhummel@iastate.edu': ['Jake', 'Hummel', 'jhummel', 'vinz'],
+    'zheilman@iastate.edu':['Zach', 'Heilman', 'zheilman', 'vinz'],
 }
+
+VINZ_PUBLIC_KEY = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrFNYehGLTslKj+YBUv4Uo2Gb2QB2IvnkTUY6JbEpl0USrObi8q+kWuV5Yhk+eUszxqu4vIIkFw1B3UK8CH76W5Fu3pcFXhBpui0h/IvDHLePmddFfx/kptdZ0qCs0VxrZgltpjCD8PtWx5nde10xYLI6V/j6yFLao/flB0qt0SJxoIbUdI0Zk99TzOmR4A5yGdW158Nvcsd+bwXshHfmjn3uafksjdSnlcqyNClo1oR3pUJKX9dQuyLA6hlGzF5/f2Sf+eggOkpLcvY7/yStfQMFF6uLZq9DHQAlXsEVnFOmHBGqoFcRKNmV2I7kcJL9QMVxWJrNIkLjBmyxACCsf example@getvinz.com'
 
 
 @manager.command
 def setup_dev():
     from internal import server as internal_server
     from internal import user as internal_user
+    from internal import public_key as internal_public_key
     from internal.exceptions import ServerAlreadyExistsError
     from internal.exceptions import UserAlreadyExistsError
 
@@ -63,6 +66,10 @@ def setup_dev():
                 print "Adding %s to %s" % (user.username, server.hostname)
                 internal_server.add_user_to_server(None, server, user.id)
 
+            if not user.key_list:
+                print "Adding public key for %s" % user.username
+                key = internal_public_key.create_public_key(user, 'test key', VINZ_PUBLIC_KEY)
+
 
 @manager.command
 def setup_cron():
@@ -81,7 +88,7 @@ def setup_cron():
 @manager.command
 def get_users():
     from scanner.api import user
-    print user.get_users_on_host('vinz-ubuntu.student.iastate.edu')
+    print user.get_users_on_host('vinz-debian.student.iastate.edu')
 
 
 @manager.command
