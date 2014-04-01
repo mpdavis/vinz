@@ -30,6 +30,9 @@ angular.module('vinzApp')
         });
         return users;
       },
+      getNonServerUsers: function(serverId, callback) {
+
+      },
       revokeAccess: function(serverId, userId) {
         ServerUser.remove({id: serverId, user_id: userId});
       },

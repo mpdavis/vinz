@@ -10,10 +10,8 @@ angular.module('vinzApp')
 
     //Users API
     return {
-      getUsers: function(callback) {
-        var users = User.query(function() {
-          callback(users);
-        });
+      getUsers: function() {
+        var users = User.query();
         return users;
       },
       getUser: function(userId) {

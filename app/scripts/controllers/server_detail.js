@@ -1,17 +1,15 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('ServerDetailCtrl', ['$scope', 'servers', 'users', '$routeParams', function ($scope, servers, users, $routeParams) {
+  .controller('ServerDetailCtrl', ['$scope', 'servers', 'users', '$routeParams', function ($scope, servers, $routeParams) {
     
     var serverId = $routeParams.id;
   	$scope.server = servers.getServer(serverId);
 
-  	var accessDictionary = {};
-
-  	$scope.allUsers = users.getUsers(function(users) {
-  		for (var i=0; i<users.length; i++) {
-  			var user = users[i];
-  			if (!accessDictionary[user.id]) {
+	$scope.nonServerUsers = servers.getServerNonUsers(function(nonServerUsers) {
+  		for (var i=0; i<nonServerUsers.length; i++) {
+  			var user = nonServerUsers[i];
+  			if (!hasAccess(user.id])) {
   				accessDictionary[user.id] = false;
   			}
   		}
@@ -24,8 +22,16 @@ angular.module('vinzApp')
   		}
   	});
 
+  	$scope.showHasAccessUsers = function(access) {
+  		if (access) {
+  			$scope.usersToDisplayUnderServer = $scope.serverUsers;
+  		} else {
+  			$scope.usersToDisplayUnderServer = $scope.nonServerUsers;
+  		}
+  	}
+
   	$scope.toggleAccess = function(userId) {
-  		if ($scope.hasAccess(userId)) {
+  		if (hasAccess(userId)) {
   			servers.revokeAccess(serverId, userId);
   			accessDictionary[userId] = false;
   		} else {
@@ -34,7 +40,7 @@ angular.module('vinzApp')
   		}
     }
 
-    $scope.hasAccess = function(user) {
+    function hasAccess = function(user) {
     	var userId = user.id;
     	if (accessDictionary[userId]) {
     		return true;
