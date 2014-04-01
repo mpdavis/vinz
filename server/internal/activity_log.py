@@ -72,3 +72,21 @@ def log_user_added_to_server(server, user, actor):
     )
     log.save()
     return log
+
+
+def log_user_removed_from_server(server, user, actor):
+    """
+    Log when a user is removed from a server
+    :param server: Server that a user is being removed from
+    :param user: User being removed
+    :param actor: User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user,
+        secondary_obj=server,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_ACCESS_REMOVED,
+    )
+    log.save()
+    return log
