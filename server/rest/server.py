@@ -5,6 +5,8 @@
 .. moduleauthor:: Max Peterson <maxwell.peterson@webfilings.com>
 
 """
+from flask import request
+
 from flask.ext.restful import fields
 from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
@@ -12,7 +14,9 @@ from flask.ext.restful import reqparse
 
 from constants import HTTP_STATUS
 
+from internal import user_group as user_group_api
 from internal import server as server_api
+from internal import user as user_api
 
 from rest import AuthenticatedResource
 from rest import server_group_fields
@@ -85,6 +89,11 @@ class ServerUserResourceList(AuthenticatedResource):
     @marshal_with(user_fields)
     def get(self, server_id):
         server = server_api.get_server(server_id)
+        no_access = request.args.get('no_access')
+        if no_access:
+            access = set(server.get_users())
+            all_users = set(user_api.get_users())
+            return list(all_users.difference(access))
         return server.get_users()
 
     def post(self, server_id):
@@ -124,6 +133,11 @@ class ServerUserGroupResourceList(AuthenticatedResource):
     @marshal_with(server_group_fields)
     def get(self, server_id):
         server = server_api.get_server(server_id)
+        no_access = request.args.get('no_access')
+        if no_access:
+            access = set(server.get_groups())
+            all_user_groups = set(user_group_api.get_user_groups())
+            return list(all_user_groups.difference(access))
         return server.get_groups()
 
     def post(self, server_id):
