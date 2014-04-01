@@ -1,7 +1,13 @@
+from flask.ext import login as flask_login
+from flask.ext.login import login_required
+
 from flask.ext.restful import Api
 from flask.ext.restful import fields
+from flask.ext.restful import Resource
 
 from constants import HTTP_STATUS
+
+from internal.auth import get_current_user
 
 from internal.exceptions import ServerAlreadyExistsError
 from internal.exceptions import UserAlreadyExistsError
@@ -33,3 +39,14 @@ class VinzApi(Api):
             return self.make_response(data, HTTP_STATUS.BAD_REQUEST)
         else:
             return super(VinzApi, self).handle_error(e)
+
+
+class AuthenticatedResource(Resource):
+    """
+    Base resource class used to required a valid authenticated session.
+    """
+    method_decorators = [login_required]
+
+    @property
+    def user(self):
+        return get_current_user()

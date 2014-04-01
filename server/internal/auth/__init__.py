@@ -37,3 +37,8 @@ def login_user(user):
 
 def logout_user():
     return flask_login.logout_user()
+
+
+def get_current_user():
+    if not flask_login.current_user.is_anonymous():
+        return flask_login.current_user._get_current_object()

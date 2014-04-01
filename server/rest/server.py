@@ -5,7 +5,6 @@
 .. moduleauthor:: Max Peterson <maxwell.peterson@webfilings.com>
 
 """
-from flask.ext.restful import Resource
 from flask.ext.restful import fields
 from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
@@ -15,6 +14,7 @@ from constants import HTTP_STATUS
 
 from internal import server as server_api
 
+from rest import AuthenticatedResource
 from rest import user_fields
 
 
@@ -38,7 +38,7 @@ server_update_parser.add_argument('user_id', type=str, location='json', required
 server_update_parser.add_argument('group_id', type=str, location='json', required=False)
 
 
-class ServerResource(Resource):
+class ServerResource(AuthenticatedResource):
     """
     REST endpoint to serve up details of a specific Server from the database.
     """
@@ -59,7 +59,7 @@ class ServerResource(Resource):
         return '', HTTP_STATUS.DELETED
 
 
-class ServerResourceList(Resource):
+class ServerResourceList(AuthenticatedResource):
     """
     REST endpoint to serve up a list of Server resources from the database.
     """
@@ -74,7 +74,7 @@ class ServerResourceList(Resource):
         return marshal(server, server_fields), HTTP_STATUS.CREATED
 
 
-class ServerUserResourceList(Resource):
+class ServerUserResourceList(AuthenticatedResource):
     """
     REST endpoint to serve up a list of users for a given server
     """

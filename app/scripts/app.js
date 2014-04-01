@@ -32,3 +32,25 @@ var app = angular.module('vinzApp', [
         redirectTo: '/'
       });
   });
+
+app.config(['$httpProvider', function($httpProvider){
+  var interceptor = ['$rootScope', '$q', function (scope, $q) {
+    function success(response) {
+        return response;
+    }
+    function error(response) {
+        // Handle 401 errors by redirecting to the login page
+        var status = response.status;
+        if (status == 401) {
+            window.location = "/login/?redirect=" + encodeURIComponent(document.URL);
+            return;
+        }
+        // otherwise
+        return $q.reject(response);
+    }
+    return function (promise) {
+        return promise.then(success, error);
+    }
+  }];
+  $httpProvider.responseInterceptors.push(interceptor);
+}]);

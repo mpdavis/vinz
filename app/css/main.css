@@ -90,6 +90,10 @@ body {
   box-shadow: none;
 }
 
+.dropdown-toggle {
+    cursor: pointer;
+}
+
 .sectionBanner {
   background: white;
   border: 1px solid #dddddd;
