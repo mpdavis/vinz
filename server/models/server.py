@@ -21,6 +21,12 @@ class Server(Document, AuditableMixin):
     user_list = ListField(ReferenceField(User))
     group_list = ListField(ReferenceField(UserGroup))
 
+    def get_groups(self):
+        """
+        Gets all of the groups that have access to the machine.
+        """
+        return list(self.group_list)
+
     def get_users(self):
         """
         Gets all of the users that have access to the machine.
