@@ -22,6 +22,8 @@ def create_public_key(user, key_name, value, **kwargs):
         expire_date=datetime.datetime.now() + datetime.timedelta(days=90)
     )
     public_key.save()
+    user.key_list.append(public_key)
+    user.save()
     return public_key
 
 
