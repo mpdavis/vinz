@@ -112,21 +112,18 @@ body {
 }
 
 .sectionBody {
-  float: right;
-  width: 320px;
   margin-top: 2px;
 }
 
 .right-inner-addon {
     position: relative;
-    float: right;
 }
 .right-inner-addon input {
-    padding-right: 10px;    
+    padding-right: 15px;    
 }
 .right-inner-addon i {
     position: absolute;
-    right: 0px;
+    right: 15px;
     top: 10px;
     padding: 0px 11px;
     pointer-events: none;
