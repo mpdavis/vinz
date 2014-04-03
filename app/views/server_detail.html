@@ -1,15 +1,15 @@
 <div class="container animated bounceInDown" >
-	<!-- Section Header -->
-	<div class="sectionBanner">
-		<div class="sectionTitle">
-			Server Information
-		</div>
-		<div class="sectionBody">
-	        <div class="closeButton">
-	        	<a class="fa fa-2x fa-times" href="#/servers/"></a>
-	    	</div>
-		</div>
-	</div>
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-sm-4 sectionTitle">
+      Server Dashboard
+    </div>
+    <div class="sectionBody col-sm-offset-6 col-sm-2">
+      <div class="closeButton pull-right">
+        <a class="fa fa-2x fa-times" href="#/servers/"></a>
+      </div>
+    </div>
+  </div>
 
 	<!-- Server Overview -->
 	<table class="serverTable table table-hover table-bordered">
@@ -25,23 +25,23 @@
 		</tbody>
 	</table>
 
-	<!-- Section Header -->
-  <div class="sectionBanner row">
-    <h4 class="col-sm-2">Users</h4>
-    <div class="col-sm-8 col-sm-offset-2 row">
-      <div class="sectionBody pull-right">
-        <div class="btn-group col-sm-6" data-toggle="buttons">
-          <label class="btn btn-default active">
-            <input id="showAccess" type="radio" name="access" checked="checked"> Access
-          </label>
-          <label class="btn btn-default">
-            <input type="radio" name="access"> No Access
-          </label>
-        </div>
-        <div class="right-inner-addon col-sm-6 pull-right" style="margin-top: -34px;">
-          <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
-          <i class="fa fa-search"></i>
-        </div>
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-sm-2 sectionTitle">
+      Users
+    </div>
+    <div class="row sectionBody col-sm-offset-2 col-sm-8">
+      <div class="btn-group col-sm-4" data-toggle="buttons">
+        <label class="btn btn-default active">
+          <input id="showAccess" type="radio" name="access" checked="checked"> Access
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="access"> No Access
+        </label>
+      </div>
+      <div class="col-sm-8 right-inner-addon">
+        <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search"></i>
       </div>
     </div>
   </div>
