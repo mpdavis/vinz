@@ -1,5 +1,6 @@
 
 
+from internal import public_key as internal_public_key
 from internal import server as internal_server
 from internal import user as internal_user
 
@@ -67,15 +68,6 @@ class ServerScanner():
             for user in remove_users:
                 self.remove_user(user)
 
-    def get_keys_from_server(self):
-        """
-        Gets all of the authorized_key files for users on the server.
-        """
-        if not self.server_users:
-            self.server_users = self.get_users_from_server()
-
-        self.keys_from_server = api_ssh_key.get_authorized_keys_for_host(self.server.hostname, self.server_users)
-
     def parse_keys(self):
         """
         Parses the authorized_keys files for all of the users on the server
@@ -104,13 +96,23 @@ class ServerScanner():
         """
         Handles the authorized_key files for this scanner
         """
+        if not self.server_users:
+            self.server_users = self.get_users_from_server()
 
-        self.keys_from_db = {
-            'vinz': ['ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrFNYehGLTslKj+YBUv4Uo2Gb2QB2IvnkTUY6JbEpl0USrObi8q+kWuV5Yhk+eUszxqu4vIIkFw1B3UK8CH76W5Fu3pcFXhBpui0h/IvDHLePmddFfx/kptdZ0qCs0VxrZgltpjCD8PtWx5nde10xYLI6V/j6yFLao/flB0qt0SJxoIbUdI0Zk99TzOmR4A5yGdW158Nvcsd+bwXshHfmjn3uafksjdSnlcqyNClo1oR3pUJKX9dQuyLA6hlGzF5/f2Sf+eggOkpLcvY7/yStfQMFF6uLZq9DHQAlXsEVnFOmHBGqoFcRKNmV2I7kcJL9QMVxWJrNIkLjBmyxACCsf example@getvinz.com']
-        }
-
-        self.get_keys_from_server()
+        self.keys_from_server = api_ssh_key.get_authorized_keys_for_host(self.server.hostname, self.server_users)
+        self.keys_from_db = internal_public_key.get_user_keys_for_server(self.server)
         self.parse_keys()
+
+        for user, keys in self.keys_to_add.iteritems():
+            for key in keys:
+                # TODO: Log that this key is getting added
+                api_ssh_key.add_user_public_key(user, [self.server.hostname], key)
+
+        for user, keys in self.keys_to_remove.iteritems():
+            for key in keys:
+                # TODO: Log that this key doesn't belong
+                if self.remove_keys:
+                    api_ssh_key.remove_user_public_key(user, [self.server.hostname], key)
 
     def scan(self):
         if not self.server:
