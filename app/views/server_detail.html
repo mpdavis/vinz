@@ -26,20 +26,23 @@
 	</table>
 
 	<!-- Section Header -->
-  <div class="sectionBanner">
-    <div class="sectionTitle">
-      Users
-    </div>
-    <div class="sectionBody">
-      <span class="sectionBody-serverMain">
-        <div id="newServerButton" class="btn btn-default">
-          Add User
+  <div class="sectionBanner row">
+    <h4 class="col-sm-2">Users</h4>
+    <div class="col-sm-8 col-sm-offset-2 row">
+      <div class="sectionBody pull-right">
+        <div class="btn-group col-sm-6" data-toggle="buttons">
+          <label class="btn btn-default active">
+            <input id="showAccess" type="radio" name="access" checked="checked"> Access
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="access"> No Access
+          </label>
         </div>
-        <div class="right-inner-addon">
+        <div class="right-inner-addon col-sm-6 pull-right" style="margin-top: -34px;">
           <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
           <i class="fa fa-search"></i>
         </div>
-      </span>
+      </div>
     </div>
   </div>
 
@@ -49,20 +52,36 @@
       <tr>
         <th>Username</th>
         <th>Email</th>
-        <th>Action</th>
+        <th>Access</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in serverUsers">
+      <tr ng-repeat="user in usersToDisplayUnderServer | filter:userSearch">
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
-        <td class="col-sm-2"><div ng-click="toggleAccess(user.id);" class="btn btn-danger serverInfoBtn">Revoke</div></td>
+        <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success':  !access.has }">{{access.message}}</div></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-
-
 <script type="text/javascript">
+$(function() {
+  var scope = angular.element($("#vinzApp")).scope();
+  var $showAccess = $("#showAccess");
+
+  $(".navbar-nav li").removeClass("active");
+  $("#servers-nav").addClass("active");
+
+  //This should be doable with angular, but I couldn't get it to.
+  $('input:radio[name="access"]').change(function() {
+    scope.$apply(function() {
+        if ($showAccess.is(':checked')) {
+          scope.showHasAccess(true);
+        } else {
+          scope.showHasAccess(false);
+        }
+    });
+  });
+});
 </script>
