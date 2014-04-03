@@ -28,6 +28,10 @@ var app = angular.module('vinzApp', [
         templateUrl: 'static/views/logs.html',
         controller: 'LogsCtrl'
       })
+      .when('/public_key', {
+        templateUrl: 'static/views/public_key.html',
+        controller: 'PublicKeyCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
