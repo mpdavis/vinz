@@ -94,7 +94,7 @@ class ServerUserResourceList(AuthenticatedResource):
             access = set(server.get_users())
             all_users = set(user_api.get_users())
             return list(all_users.difference(access))
-        return server.get_users()
+        return server.get_all_users()
 
     def post(self, server_id):
         """
@@ -104,7 +104,7 @@ class ServerUserResourceList(AuthenticatedResource):
         server = server_api.get_server(server_id)
         args = server_user_parser.parse_args()
         server_api.add_user_to_server(None, server, args.get('user_id'))  # TODO add operator
-        return marshal(server.get_users(), user_fields), HTTP_STATUS.CREATED
+        return marshal(server.get_all_users(), user_fields), HTTP_STATUS.CREATED
 
 
 class ServerUserResource(AuthenticatedResource):
