@@ -24,7 +24,7 @@ class User(Document, AuditableMixin):
     password = StringField(required=True)
     username = StringField(required=True)
     active = BooleanField(required=True, default=True)
-    key_list = ListField()
+    key_list = ListField(ReferenceField('PublicKey'))
 
     def get_display_name(self):
         return "%s %s" % (self.first_name, self.last_name)

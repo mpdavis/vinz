@@ -22,6 +22,8 @@ def create_public_key(user, key_name, value, **kwargs):
         expire_date=datetime.datetime.now() + datetime.timedelta(days=90)
     )
     public_key.save()
+    user.key_list.append(public_key)
+    user.save()
     return public_key
 
 
@@ -33,3 +35,20 @@ def delete_public_key(pub_key_id):
     #TODO Some kind of security checks?
     public_key = get_public_key(pub_key_id)
     public_key.delete()
+
+
+def get_user_keys_for_server(server):
+    """
+    Get a dict of user:public_key_value for a server
+    :param server: The Server object
+    :return: dict
+    """
+    access_dict = {}
+    users = server.get_all_users()
+    for user in users:
+        key_value_list = []
+        for key in user.key_list:
+            key_value_list.append(key.value)
+        access_dict[user.username] = key_value_list
+
+    return access_dict

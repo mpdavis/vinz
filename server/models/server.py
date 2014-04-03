@@ -29,6 +29,12 @@ class Server(Document, AuditableMixin):
 
     def get_users(self):
         """
+        Gets the users who have access directly to the machine.
+        """
+        return list(self.user_list)
+
+    def get_all_users(self):
+        """
         Gets all of the users that have access to the machine.
         This includes users added directly and through groups.
         """
@@ -49,7 +55,7 @@ class Server(Document, AuditableMixin):
         """
         Gets all of the usernames for the users on the server.
         """
-        users = self.get_users()
+        users = self.get_all_users()
         return [user.username for user in users]
 
 

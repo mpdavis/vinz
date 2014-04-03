@@ -1,15 +1,15 @@
 <div class="container animated bounceInDown" >
-	<!-- Section Header -->
-	<div class="sectionBanner">
-		<div class="sectionTitle">
-			Server Information
-		</div>
-		<div class="sectionBody">
-	        <div class="closeButton">
-	        	<a class="fa fa-2x fa-times" href="#/servers/"></a>
-	    	</div>
-		</div>
-	</div>
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-sm-4 sectionTitle">
+      Server Dashboard
+    </div>
+    <div class="sectionBody col-sm-offset-6 col-sm-2">
+      <div class="closeButton pull-right">
+        <a class="fa fa-2x fa-times" href="#/servers/"></a>
+      </div>
+    </div>
+  </div>
 
 	<!-- Server Overview -->
 	<table class="serverTable table table-hover table-bordered">
@@ -25,21 +25,24 @@
 		</tbody>
 	</table>
 
-	<!-- Section Header -->
-  <div class="sectionBanner">
-    <div class="sectionTitle">
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-sm-2 sectionTitle">
       Users
     </div>
-    <div class="sectionBody">
-      <span class="sectionBody-serverMain">
-        <div id="newServerButton" class="btn btn-default">
-          Add User
-        </div>
-        <div class="right-inner-addon">
-          <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
-          <i class="fa fa-search"></i>
-        </div>
-      </span>
+    <div class="row sectionBody col-sm-offset-2 col-sm-8">
+      <div class="btn-group col-sm-4" data-toggle="buttons">
+        <label class="btn btn-default active">
+          <input id="showAccess" type="radio" name="access" checked="checked"> Access
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="access"> No Access
+        </label>
+      </div>
+      <div class="col-sm-8 right-inner-addon">
+        <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search"></i>
+      </div>
     </div>
   </div>
 
@@ -49,20 +52,36 @@
       <tr>
         <th>Username</th>
         <th>Email</th>
-        <th>Action</th>
+        <th>Access</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in serverUsers | filter:userSearch">
+      <tr ng-repeat="user in usersToDisplayUnderServer | filter:userSearch">
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
-        <td class="col-sm-2"><div ng-click="revoke(user.id);" class="btn btn-danger serverInfoBtn">Revoke</div></td>
+        <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success':  !access.has }">{{access.message}}</div></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-
-
 <script type="text/javascript">
+$(function() {
+  var scope = angular.element($("#vinzApp")).scope();
+  var $showAccess = $("#showAccess");
+
+  $(".navbar-nav li").removeClass("active");
+  $("#servers-nav").addClass("active");
+
+  //This should be doable with angular, but I couldn't get it to.
+  $('input:radio[name="access"]').change(function() {
+    scope.$apply(function() {
+        if ($showAccess.is(':checked')) {
+          scope.showHasAccess(true);
+        } else {
+          scope.showHasAccess(false);
+        }
+    });
+  });
+});
 </script>
