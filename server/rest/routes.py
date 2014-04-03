@@ -7,6 +7,9 @@
 """
 from rest.activity_log import ActivityLogResourceList
 
+from rest.public_key import PublicKeyResource
+from rest.public_key import PublicKeyResourceList
+
 from rest.server import ServerResource
 from rest.server import ServerResourceList
 from rest.server import ServerUserGroupResource
@@ -38,6 +41,9 @@ def initialize_routes(api):
 
     # List Routes here
     add_resource(BASE_API_PATH % '/logs/', ActivityLogResourceList, endpoint='logs')
+
+    add_resource(BASE_API_PATH % '/keys/', PublicKeyResourceList, endpoint='keys')
+    add_resource(BASE_API_PATH % '/keys/<string:pub_key_id>', PublicKeyResource, endpoint='key')
 
     add_resource(BASE_API_PATH % '/servers/', ServerResourceList, endpoint='servers')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>', ServerResource, endpoint='server')
