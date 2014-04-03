@@ -37,11 +37,9 @@ angular.module('vinzApp')
         return users;
       },
       revokeAccess: function(serverId, userId) {
-        console.log('revoking from ' + userId);
         ServerUser.remove({id: serverId, user_id: userId});
       },
       grantAccess: function(serverId, userId) {
-        console.log('granting to ' + userId);
         var serverUsersAPI = serversURL + serverId + '/users/';
         $http.post(serverUsersAPI, {user_id: userId});
       }

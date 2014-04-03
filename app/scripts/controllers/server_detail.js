@@ -13,15 +13,13 @@ angular.module('vinzApp')
   		for (var i=0; i<nonServerUsers.length; i++) {
   			var user = nonServerUsers[i];
   			accessDictionary[user.id] = false;
-        console.log(user.id + ': ' + accessDictionary[user.id]); 
   		}
   	});
 
   	$scope.serverUsers = servers.getServerUsers(serverId, function(serverUsers) {
   		for (var i=0; i<serverUsers.length; i++) {
   			var user = serverUsers[i];
-  			accessDictionary[user.id] = true;
-        console.log(user.id + ': ' + accessDictionary[user.id]); 
+  			accessDictionary[user.id] = true; 
   		}
   	});
 
