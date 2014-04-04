@@ -19,6 +19,9 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 DEV_SERVERS = {
     'ubuntu': 'vinz-ubuntu.student.iastate.edu',
     'debian': 'vinz-debian.student.iastate.edu',
+    'fedora': 'vinz-fedora.student.iastate.edu',
+    'opensuse': 'vinz-opensuse.student.iastate.edu',
+    'centos': 'vinz-centos.student.iastate.edu',
 }
 
 DEV_USERS = {
@@ -89,6 +92,9 @@ def setup_cron():
 def get_users():
     from scanner.api import user
     print user.get_users_on_host('vinz-debian.student.iastate.edu')
+    print user.get_users_on_host('vinz-fedora.student.iastate.edu')
+    print user.get_users_on_host('vinz-opensuse.student.iastate.edu')
+    print user.get_users_on_host('vinz-centos.student.iastate.edu')
 
 
 @manager.command
