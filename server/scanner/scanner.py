@@ -2,7 +2,6 @@
 
 from internal import public_key as internal_public_key
 from internal import server as internal_server
-from internal import user as internal_user
 
 from api import ssh_key as api_ssh_key
 from api import user as api_user
