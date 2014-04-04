@@ -48,6 +48,10 @@ class PublicKeyResourceList(AuthenticatedResource):
     REST endpoint to handle creation of Public Keys
     """
 
+    @marshal_with(pub_key_fields)
+    def get(self):
+        return pub_key_api.get_user_keys(self.user)
+
     def post(self):
         args = pub_key_parser.parse_args()
         public_key = pub_key_api.create_public_key(self.user, **args)
