@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('PublicKeyCtrl', ['$scope', 'publicKey', function ($scope, keys) {
-    $scope.newKey = {name: "", hostname: ""};
+  .controller('PublicKeyCtrl', ['$scope', 'publicKey', function ($scope, publicKey) {
+    $scope.newKey = {name: "", value: ""};
     $scope.myKeys = publicKey.getKeys();
 
     $scope.createKey = function(newKey) {
@@ -14,4 +14,4 @@ angular.module('vinzApp')
     	publicKey.removeKey(keyId);
     	$scope.myKeys = publicKey.getKeys();
     }
-  });
+  }]);

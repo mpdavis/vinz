@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('vinzApp')
-  .factory('publicKey', function () {
+  .factory('publicKey', function ($http, $resource) {
     // Service logic
     // ...
     var keysURL = "/api/keys/";
