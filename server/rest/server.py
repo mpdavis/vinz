@@ -30,6 +30,8 @@ server_fields = {
     'hostname': fields.String(),
     'user_list': fields.List(fields.String),
     'group_list': fields.List(fields.String),
+    'creation_date': fields.DateTime(),
+    'modified_date': fields.DateTime(),
 }
 
 server_parser = reqparse.RequestParser()
