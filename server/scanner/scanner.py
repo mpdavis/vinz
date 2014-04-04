@@ -15,10 +15,19 @@ class ServerScanner():
     server_users = None
     vinz_users = None
 
-    def __init__(self, server, add_users=False, remove_users=False):
+    def __init__(
+            self,
+            server,
+            add_users=False,
+            remove_users=False,
+            add_keys=False,
+            remove_keys=False):
+
         self.server = server
         self.add_users = add_users
         self.remove_users = remove_users
+        self.add_keys = add_keys
+        self.remove_keys = remove_keys
 
     def get_users_from_server(self):
         """
@@ -157,7 +166,9 @@ class Scanner():
         for server in self.servers:
             server_scanner = ServerScanner(server,
                                            add_users=self.add_users,
-                                           remove_users=self.remove_users)
+                                           remove_users=self.remove_users,
+                                           add_keys=self.add_keys,
+                                           remove_keys=self.remove_keys)
 
             self.scan_state[server.hostname] = server_scanner.scan()
 
