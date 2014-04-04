@@ -1,5 +1,6 @@
 
 
+from internal import public_key as internal_public_key
 from internal import server as internal_server
 from internal import user as internal_user
 
@@ -14,10 +15,19 @@ class ServerScanner():
     server_users = None
     vinz_users = None
 
-    def __init__(self, server, add_users=False, remove_users=False):
+    def __init__(
+            self,
+            server,
+            add_users=False,
+            remove_users=False,
+            add_keys=False,
+            remove_keys=False):
+
         self.server = server
         self.add_users = add_users
         self.remove_users = remove_users
+        self.add_keys = add_keys
+        self.remove_keys = remove_keys
 
     def get_users_from_server(self):
         """
@@ -67,50 +77,81 @@ class ServerScanner():
             for user in remove_users:
                 self.remove_user(user)
 
-    def get_authorized_key_files(self):
+    def parse_keys(self):
         """
-        Gets all of the authorized_key files for users on the server.
+        Parses the authorized_keys files for all of the users on the server
+        """
+
+        keys_to_remove = dict()
+        keys_to_add = dict()
+
+        for user, keys in self.keys_from_server.iteritems():
+
+            # converting both key lists to sets
+            server_key_set = set(keys)
+            db_key_set = set(self.keys_from_db.get(user, []))
+
+            if not server_key_set.symmetric_difference(db_key_set):
+                # Server and DB agree.  Nothing to do
+                continue
+
+            keys_to_add[user] = db_key_set.difference(server_key_set)
+            keys_to_remove[user] = server_key_set.difference(db_key_set)
+
+        self.keys_to_add = keys_to_add
+        self.keys_to_remove = keys_to_remove
+
+    def scan_keys(self):
+        """
+        Handles the authorized_key files for this scanner
         """
         if not self.server_users:
             self.server_users = self.get_users_from_server()
 
-        self.authorized_keys = api_ssh_key.get_authorized_keys_for_host(self.server.hostname,
-                                                                        self.server_users)
+        self.keys_from_server = api_ssh_key.get_authorized_keys_for_host(self.server.hostname, self.server_users)
+        self.keys_from_db = internal_public_key.get_user_keys_for_server(self.server)
+        self.parse_keys()
 
-    def parse_authorized_keys(self):
-        """
-        Parses the authorized_keys files for all of the users on the server
-        """
-        for user, keys in self.authorized_keys.iteritems():
-            pass
+        for user, keys in self.keys_to_add.iteritems():
+            for key in keys:
+                # TODO: Log that this key is getting added
+                api_ssh_key.add_user_public_key(user, [self.server.hostname], key)
 
-    def scan_authorized_keys(self):
-        """
-        Handles the authorized_key files for this scanner
-        """
-        self.get_authorized_key_files()
-        self.parse_authorized_keys()
+        for user, keys in self.keys_to_remove.iteritems():
+            for key in keys:
+                # TODO: Log that this key doesn't belong
+                if self.remove_keys:
+                    api_ssh_key.remove_user_public_key(user, [self.server.hostname], key)
 
     def scan(self):
         if not self.server:
             raise ValueError('There must be a server to scan.')
 
         self.scan_users()
-        self.scan_authorized_keys()
+        self.scan_keys()
 
-        return self.authorized_keys
+        return self.keys_from_db
 
 
 class Scanner():
 
     scan_state = dict()
 
-    def __init__(self, servers=None, add_users=False, remove_users=False):
+    def __init__(
+            self,
+            servers=None,
+            add_users=False,
+            remove_users=False,
+            add_keys=False,
+            remove_keys=False):
+
         if not servers:
             servers = self.get_servers()
         self.servers = servers
         self.add_users = add_users
         self.remove_users = remove_users
+        self.add_keys = add_keys
+        self.remove_keys = remove_keys
 
     def get_servers(self):
         """
@@ -125,7 +166,9 @@ class Scanner():
         for server in self.servers:
             server_scanner = ServerScanner(server,
                                            add_users=self.add_users,
-                                           remove_users=self.remove_users)
+                                           remove_users=self.remove_users,
+                                           add_keys=self.add_keys,
+                                           remove_keys=self.remove_keys)
 
             self.scan_state[server.hostname] = server_scanner.scan()
 
