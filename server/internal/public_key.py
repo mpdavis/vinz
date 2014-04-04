@@ -35,9 +35,11 @@ def get_user_keys(user):
     return list(user.key_list)
 
 
-def delete_public_key(pub_key_id):
+def delete_public_key(user, pub_key_id):
     #TODO Some kind of security checks?
     public_key = get_public_key(pub_key_id)
+    user.key_list.remove(public_key)
+    user.save()
     public_key.delete()
 
 
