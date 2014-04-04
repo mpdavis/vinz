@@ -22,6 +22,8 @@ pub_key_fields = {
     'expire_date': fields.String(),
     'username': fields.String(),
     'key_name': fields.String(),
+    'creation_date': fields.DateTime(),
+    'modified_date': fields.DateTime(),
 }
 
 pub_key_parser = reqparse.RequestParser()
@@ -39,7 +41,7 @@ class PublicKeyResource(AuthenticatedResource):
         return pub_key_api.get_public_key(pub_key_id)
 
     def delete(self, pub_key_id):
-        pub_key_api.delete_public_key(pub_key_id)
+        pub_key_api.delete_public_key(self.user, pub_key_id)
         return '', HTTP_STATUS.DELETED
 
 
