@@ -22,6 +22,8 @@ pub_key_fields = {
     'expire_date': fields.String(),
     'username': fields.String(),
     'key_name': fields.String(),
+    'creation_date': fields.DateTime(),
+    'modified_date': fields.DateTime(),
 }
 
 pub_key_parser = reqparse.RequestParser()
