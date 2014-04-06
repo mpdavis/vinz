@@ -1,14 +1,12 @@
 <div class="container animated bounceInDown" >
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-sm-4 sectionTitle">
+    <div class="col-sm-12 sectionTitle sectionBannerTitle">
       Server Dashboard
     </div>
-    <div class="sectionBody col-sm-offset-6 col-sm-2">
-      <div class="closeButton pull-right">
-        <a class="fa fa-2x fa-times" href="#/servers/"></a>
-      </div>
-    </div>
+    <a class="btn btn-default backButton" href="#/servers/">
+      <i class="fa fa-chevron-left"></i> All Servers
+    </a>
   </div>
 
 	<!-- Server Overview -->
@@ -27,11 +25,11 @@
 
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-sm-2 sectionTitle">
+    <div class="col-xs-2 sectionTitle">
       Users
     </div>
-    <div class="row sectionBody col-sm-offset-2 col-sm-8">
-      <div class="btn-group col-sm-6" data-toggle="buttons">
+    <div class="row sectionBody col-xs-offset-2 col-xs-8">
+      <div class="btn-group col-xs-6" data-toggle="buttons">
         <label class="btn btn-default active">
           <input id="showAccess" type="radio" name="access" checked="checked"> Access
         </label>
@@ -39,7 +37,7 @@
           <input type="radio" name="access"> No Access
         </label>
       </div>
-      <div class="col-sm-6 right-inner-addon">
+      <div class="col-xs-6 right-inner-addon">
         <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
         <i class="fa fa-search"></i>
       </div>
