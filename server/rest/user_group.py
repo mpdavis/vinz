@@ -41,7 +41,7 @@ class UserGroupResource(AuthenticatedResource):
         return
 
     def delete(self, user_group_id):
-        user_group_api.delete_user_group(user_group_id)
+        user_group_api.delete_user_group(self.user, user_group_id)
         return '', HTTP_STATUS.DELETED
 
 
@@ -57,5 +57,5 @@ class UserGroupResourceList(AuthenticatedResource):
 
     def post(self):
         args = user_group_parser.parse_args()
-        user_group = user_group_api.create_user_group(**args)
+        user_group = user_group_api.create_user_group(self.user, **args)
         return marshal(user_group , user_group_fields), HTTP_STATUS.CREATED

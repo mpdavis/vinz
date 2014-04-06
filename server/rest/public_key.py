@@ -41,7 +41,7 @@ class PublicKeyResource(AuthenticatedResource):
         return pub_key_api.get_public_key(pub_key_id)
 
     def delete(self, pub_key_id):
-        pub_key_api.delete_public_key(self.user, pub_key_id)
+        pub_key_api.delete_public_key(self.user, self.user, pub_key_id)
         return '', HTTP_STATUS.DELETED
 
 
@@ -56,5 +56,5 @@ class PublicKeyResourceList(AuthenticatedResource):
 
     def post(self):
         args = pub_key_parser.parse_args()
-        public_key = pub_key_api.create_public_key(self.user, **args)
+        public_key = pub_key_api.create_public_key(self.user, self.user, **args)
         return marshal(public_key, pub_key_fields), HTTP_STATUS.CREATED

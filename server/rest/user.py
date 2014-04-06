@@ -36,7 +36,7 @@ class UserResource(AuthenticatedResource):
         return
 
     def delete(self, user_id):
-        user_api.delete_user(user_id)
+        user_api.delete_user(self.user, user_id)
         return '', HTTP_STATUS.DELETED
 
 
@@ -52,5 +52,5 @@ class UserResourceList(AuthenticatedResource):
 
     def post(self):
         args = user_parser.parse_args()
-        user = user_api.create_user(**args)
+        user = user_api.create_user(self.user, **args)
         return marshal(user, user_fields), HTTP_STATUS.CREATED
