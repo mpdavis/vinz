@@ -89,7 +89,7 @@ def add_group_to_server(operator, server, group_id, save_server=True):
     group = get_user_group(group_id)
     if group not in server.group_list:
         server.group_list.append(group)
-        # TODO add activity log
+        activity_log.log_user_group_added_to_server(group, server, operator)
         if save_server:
             server.save()
         return True
@@ -127,7 +127,7 @@ def remove_group_from_server(operator, server, group_id, save_server=True):
     group = get_user_group(group_id)
     if group in server.group_list:
         server.group_list.remove(group)
-        # TODO add activity log
+        activity_log.log_user_group_removed_from_server(group, server, operator)
         if save_server:
             server.save()
         return True

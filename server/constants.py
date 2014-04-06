@@ -39,6 +39,11 @@ class AUDIT_ACTIONS(object):
     # When a user is removed from a user group
     USER_REMOVED_FROM_GROUP = 'user_removed_from_group'
 
+    # When a user group is added to a server
+    USER_GROUP_ACCESS_ADDED = 'user_group_access_added'
+    # When a user group is removed from a server
+    USER_GROUP_ACCESS_REMOVED = 'user_group_access_removed'
+
     # When a server is added to the vinz system
     SERVER_CREATED = 'server_created'
     # When a server is deleted from vinz
@@ -80,6 +85,8 @@ ACTIVITY_LOG_MESSAGES = {
     AUDIT_ACTIONS.SERVER_REMOVED_FROM_GROUP: 'Server "%(obj1_name)s" was removed from server-group "%(obj2_name)s".',
     AUDIT_ACTIONS.USER_GROUP_CREATED: 'User-group "%(obj1_name)s" was created.',
     AUDIT_ACTIONS.USER_GROUP_DELETED: 'User-group "%(obj1_name)s" was deleted.',
+    AUDIT_ACTIONS.USER_GROUP_ACCESS_ADDED: 'User-group "%(obj1_name)s" now has access to the server "%(obj2_name)s".',
+    AUDIT_ACTIONS.USER_GROUP_ACCESS_REMOVED: 'User-group "%(obj1_name)s" no longer has access to the server "%(obj2_name)s".',
 }
 
 
