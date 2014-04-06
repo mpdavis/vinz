@@ -18,7 +18,7 @@ class ServerScanner():
     def __init__(
             self,
             queue,
-            server,
+            server=None,
             add_users=False,
             remove_users=False,
             add_keys=False,
