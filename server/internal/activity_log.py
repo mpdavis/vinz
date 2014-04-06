@@ -10,25 +10,14 @@ from constants import ACTIVITY_LOG_MESSAGES
 
 from models.audit import ActivityLog
 
-from models.auth import User
-
-from models.server import Server
-from models.server import ServerGroup
-
 
 def get_activity_log_text(log):
     ctx = {}
     if log.obj:
-        if isinstance(log.obj, User):
-            ctx['obj1_name'] = getattr(log.obj, 'username')
-        else:
-            ctx['obj1_name'] = getattr(log.obj, 'name')
+        ctx['obj1_name'] = getattr(log.obj, 'name')
 
     if log.secondary_obj:
-        if isinstance(log.secondary_obj, User):
-            ctx['obj2_name'] = getattr(log.secondary_obj, 'username')
-        else:
-            ctx['obj2_name'] = getattr(log.secondary_obj, 'name')
+        ctx['obj2_name'] = getattr(log.secondary_obj, 'name')
     return ACTIVITY_LOG_MESSAGES[log.action] % ctx
 
 

@@ -64,8 +64,8 @@ class AUDIT_ACTIONS(object):
 
 
 ACTIVITY_LOG_MESSAGES = {
-    AUDIT_ACTIONS.USER_ACCESS_ADDED: 'User "%(obj1_name)s now has access to the server "%(obj2_name)s".',
-    AUDIT_ACTIONS.USER_ACCESS_REMOVED: 'User "%(obj1_name)s no longer has access to the server "%(obj2_name)s".',
+    AUDIT_ACTIONS.USER_ACCESS_ADDED: 'User "%(obj1_name)s" now has access to the server "%(obj2_name)s".',
+    AUDIT_ACTIONS.USER_ACCESS_REMOVED: 'User "%(obj1_name)s" no longer has access to the server "%(obj2_name)s".',
     AUDIT_ACTIONS.USER_CREATED: 'User "%(obj1_name)s" was created.',
     AUDIT_ACTIONS.USER_DELETED: 'User "%(obj1_name)s" was deleted.',
     AUDIT_ACTIONS.USER_ADDED_TO_GROUP: 'User "%(obj1_name)s" was added to the group "%(obj2_name)s".',
