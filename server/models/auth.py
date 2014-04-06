@@ -63,3 +63,7 @@ class PublicKey(Document, AuditableMixin):
     username = StringField(required=False)
     value = StringField(required=True)
     expire_date = DateTimeField()
+
+    @property
+    def name(self):
+        return self.key_name
