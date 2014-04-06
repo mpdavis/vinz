@@ -1,5 +1,6 @@
 
 from scanner.runner import VinzRunner
+from scanner.exceptions import DarkServerException
 
 import settings
 
@@ -14,8 +15,7 @@ def get_users_on_host(hostname):
     results = runner.run()
 
     if not hostname in results['contacted']:
-        # Couldn't contact host
-        pass
+        raise DarkServerException("Host %s could not be contacted." % hostname)
 
     output = results['contacted'][hostname]['stdout']
 
@@ -48,7 +48,7 @@ def add_user(username, hosts):
     contacted = results['contacted']
     for host in hosts:
         if not contacted.get(host, None):
-            # This host failed.  Do something about it.
+            raise DarkServerException("Host %s could not be contacted." % host)
             pass
 
 
@@ -69,5 +69,5 @@ def remove_user(username, hosts):
     contacted = results['contacted']
     for host in hosts:
         if not contacted.get(host, None):
-            # This host failed.  Do something about it.
+            raise DarkServerException("Host %s could not be contacted." % host)
             pass
