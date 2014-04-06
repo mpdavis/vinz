@@ -48,6 +48,10 @@ class User(Document, AuditableMixin):
     def is_anonymous(self):
         return False
 
+    @property
+    def name(self):
+        return self.username
+
 
 class UserGroup(Document, AuditableMixin):
     name = StringField(required=True)
