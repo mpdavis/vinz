@@ -103,6 +103,10 @@ body {
   margin-bottom: 10px;
 }
 
+.sectionBannerTitle {
+  text-align: center;
+}
+
 .sectionTitle {
   text-shadow: none;
   color: #45494d;
@@ -133,13 +137,14 @@ body {
   margin-bottom: 5px;
 }
 
-.closeButton a {
-  margin-top: 3px;
-  float: right;
+.backButton {
+  position: absolute;
+  left: 5px;
+  margin-top: 2px;
   color: #afafaf;
 }
 
-.closeButton a:hover {
+.backButton:hover {
   color: #45494d;
   cursor: pointer;
   text-decoration: none;
