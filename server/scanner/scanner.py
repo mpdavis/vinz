@@ -1,8 +1,8 @@
 
+import multiprocessing
 
 from internal import public_key as internal_public_key
 from internal import server as internal_server
-from internal import user as internal_user
 
 from api import ssh_key as api_ssh_key
 from api import user as api_user
@@ -17,12 +17,14 @@ class ServerScanner():
 
     def __init__(
             self,
-            server,
+            queue,
+            server=None,
             add_users=False,
             remove_users=False,
             add_keys=False,
             remove_keys=False):
 
+        self.queue = queue
         self.server = server
         self.add_users = add_users
         self.remove_users = remove_users
@@ -130,7 +132,28 @@ class ServerScanner():
         self.scan_users()
         self.scan_keys()
 
-        return self.keys_from_db
+        self.queue.put({
+            'hostname': self.server.hostname,
+            'state': 'done'
+        })
+        return
+
+
+def scan_server(queue, hostname, add_users=False, remove_users=False, add_keys=False, remove_keys=False):
+    """
+    Sets up a ServerScanner and scans the server using a multiprocessing queue.
+    """
+
+    server = internal_server.get_server_by_hostname(hostname)
+
+    server_scanner = ServerScanner(queue,
+                                   server,
+                                   add_users=add_users,
+                                   remove_users=remove_users,
+                                   add_keys=add_keys,
+                                   remove_keys=remove_keys)
+
+    return server_scanner.scan()
 
 
 class Scanner():
@@ -163,13 +186,28 @@ class Scanner():
         """
         Kicks off the entire Scanner
         """
+        queue = multiprocessing.Queue()
+        processes = []
         for server in self.servers:
-            server_scanner = ServerScanner(server,
-                                           add_users=self.add_users,
-                                           remove_users=self.remove_users,
-                                           add_keys=self.add_keys,
-                                           remove_keys=self.remove_keys)
 
-            self.scan_state[server.hostname] = server_scanner.scan()
+            arguments = (
+                queue,
+                server.hostname,
+                self.add_users,
+                self.remove_users,
+                self.add_keys,
+                self.remove_keys
+            )
+
+            proc = multiprocessing.Process(target=scan_server, args=arguments)
+            processes.append(proc)
+            proc.start()
+
+        for process in processes:
+            process.join()
+
+        for process in processes:
+            response = queue.get()
+            self.scan_state[response['hostname']] = response['state']
 
         return self.scan_state

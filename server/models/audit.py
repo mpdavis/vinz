@@ -41,9 +41,11 @@ class ActivityLog(Document):
     """
     actor = ReferenceField('User')
     timestamp = DateTimeField(default=datetime.datetime.now)
-    obj = GenericReferenceField()  # Not sure on this yet
+    obj = GenericReferenceField()
     secondary_obj = GenericReferenceField(required=False)
-    action = StringField()  # TODO: Define possible values for this
+
+    # Possible values defined in constants.AUDIT_ACTIONS
+    action = StringField()
 
 
 class ScanLog(Document):
@@ -52,7 +54,10 @@ class ScanLog(Document):
     """
     server = ReferenceField('Server', required=True)
     timestamp = DateTimeField(default=datetime.datetime.now)
+
+    # Possible statuses defined in constants.SCAN_LOG_STATUS
     status = IntField()
+    server_status = IntField()
 
     users_expected = ListField(StringField)
     actual_users = ListField(StringField)

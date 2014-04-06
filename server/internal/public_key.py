@@ -4,14 +4,20 @@
 
 .. moduleauthor:: Max Peterson <maxpete@iastate.edu>
 """
+from internal import activity_log
+
 from models.auth import PublicKey
 
 import datetime
 
 
-def create_public_key(user, key_name, value, **kwargs):
+def create_public_key(operator, user, key_name, value, **kwargs):
     """
     Create a new user in the database with the given values.
+    :param operator: User creating this PublicKey
+    :param user: The User who this PublicKey belongs to
+    :param key_name: The name given to this PubicKey to easily identify it
+    :param value: The actual key's value
     """
     public_key = PublicKey(
         owner=user,
@@ -22,22 +28,39 @@ def create_public_key(user, key_name, value, **kwargs):
         expire_date=datetime.datetime.now() + datetime.timedelta(days=90)
     )
     public_key.save()
+    activity_log.log_public_key_added(public_key, user, operator)
     user.key_list.append(public_key)
     user.save()
     return public_key
 
 
 def get_public_key(pub_key_id):
+    """
+    Fetch a single PublicKey by id
+    :param pub_key_id: The id of the PublicKey to get
+    :return: The PublicKey object from the database
+    """
     return PublicKey.objects.get(id=pub_key_id)
 
 
 def get_user_keys(user):
+    """
+    Get a list of PublicKey objects for a given User
+    :param user: The User to get the PublicKeys for
+    :return: A list of PublicKey objects
+    """
     return list(user.key_list)
 
 
-def delete_public_key(user, pub_key_id):
-    #TODO Some kind of security checks?
+def delete_public_key(operator, user, pub_key_id):
+    """
+    Remove a public key from all servers and delete it from the database
+    :param operator: The User deleting this PublicKey
+    :param user: User who the public key belongs to
+    :param pub_key_id: id of the public key to remove
+    """
     public_key = get_public_key(pub_key_id)
+    activity_log.log_public_key_deleted(public_key, user, operator)
     user.key_list.remove(public_key)
     user.save()
     public_key.delete()

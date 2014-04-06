@@ -33,7 +33,7 @@ class ServerGroupResource(AuthenticatedResource):
         return
 
     def delete(self, server_group_id):
-        server_group_api.delete_server_group(server_group_id)
+        server_group_api.delete_server_group(self.user, server_group_id)
         return '', HTTP_STATUS.DELETED
 
 
@@ -48,5 +48,5 @@ class ServerGroupResourceList(AuthenticatedResource):
 
     def post(self):
         args = server_group_parser.parse_args()
-        server_group = server_group_api.create_server_group(**args)
+        server_group = server_group_api.create_server_group(self.user, **args)
         return marshal(server_group, server_group_fields), HTTP_STATUS.CREATED

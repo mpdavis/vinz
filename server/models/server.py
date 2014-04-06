@@ -65,6 +65,3 @@ class ServerGroup(Document, AuditableMixin):
 
     def get_servers(self):
         return set(self.server_list)
-
-
-

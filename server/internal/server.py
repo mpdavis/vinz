@@ -135,9 +135,10 @@ def remove_group_from_server(operator, server, group_id, save_server=True):
     return False
 
 
-def delete_server(server_id):
+def delete_server(operator, server_id):
     #TODO Some kind of security checks?
     server = get_server(server_id)
+    activity_log.log_server_deleted(server, operator)
     server.delete()
 
 

@@ -60,7 +60,7 @@ class ServerResource(AuthenticatedResource):
         return updated_server
 
     def delete(self, server_id):
-        server_api.delete_server(server_id)
+        server_api.delete_server(self.user, server_id)
         return '', HTTP_STATUS.DELETED
 
 
