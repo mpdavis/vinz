@@ -74,3 +74,16 @@ ACTIVITY_LOG_MESSAGES = {
     AUDIT_ACTIONS.SERVER_ADDED_TO_GROUP: 'Server "%(obj1_name)s" was added to server-group "%(obj2_name)s".',
     AUDIT_ACTIONS.SERVER_REMOVED_FROM_GROUP: 'Server "%(obj1_name)s" was removed from server-group "%(obj2_name)s".',
 }
+
+
+class SCAN_LOG_STATUS(object):
+    EXCEPTION = -1
+    NO_CHANGE = 0
+    USERS_ADDED = 1
+    USERS_REMOVED = 2
+
+
+class SERVER_STATUS(object):
+    UNREACHABLE = -2
+    AUTH_EXCEPTION = -1
+    SUCCESS = 0
