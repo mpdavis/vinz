@@ -1,0 +1,2 @@
+class DarkServerException(Exception):
+    pass
