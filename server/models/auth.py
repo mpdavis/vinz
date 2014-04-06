@@ -48,6 +48,10 @@ class User(Document, AuditableMixin):
     def is_anonymous(self):
         return False
 
+    @property
+    def name(self):
+        return self.username
+
 
 class UserGroup(Document, AuditableMixin):
     name = StringField(required=True)
@@ -63,3 +67,7 @@ class PublicKey(Document, AuditableMixin):
     username = StringField(required=False)
     value = StringField(required=True)
     expire_date = DateTimeField()
+
+    @property
+    def name(self):
+        return self.key_name
