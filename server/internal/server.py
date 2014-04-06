@@ -19,7 +19,6 @@ def create_server(operator, name, hostname, **kwargs):
     """
     Create a server in the database with the given values.
     """
-    # TODO Auditable stuff
     existing_server = maybe_get_server_by_hostname(hostname)
     if existing_server:
         raise ServerAlreadyExistsError("A server with this hostname already exists.")

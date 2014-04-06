@@ -19,20 +19,10 @@ from internal import server as server_api
 from internal import user as user_api
 
 from rest import AuthenticatedResource
+from rest import server_fields
 from rest import server_group_fields
 from rest import user_fields
 
-
-server_fields = {
-    #'uri': fields.Url(endpoint='server'),  #TODO: Figure this out
-    'id': fields.String(),
-    'name': fields.String(),
-    'hostname': fields.String(),
-    'user_list': fields.List(fields.String),
-    'group_list': fields.List(fields.String),
-    'creation_date': fields.DateTime(),
-    'modified_date': fields.DateTime(),
-}
 
 server_parser = reqparse.RequestParser()
 server_parser.add_argument('name', type=str, location='json')
@@ -56,7 +46,7 @@ class ServerResource(AuthenticatedResource):
     def put(self, server_id):
         server = server_api.get_server(server_id)
         args = server_update_parser.parse_args()
-        updated_server = server_api.update_server(None, server, **args)  # TODO add user
+        updated_server = server_api.update_server(self.user, server, **args)
         return updated_server
 
     def delete(self, server_id):
@@ -75,7 +65,7 @@ class ServerResourceList(AuthenticatedResource):
 
     def post(self):
         args = server_parser.parse_args()
-        server = server_api.create_server(None, **args)  # TODO add user
+        server = server_api.create_server(self.user, **args)
         return marshal(server, server_fields), HTTP_STATUS.CREATED
 
 
@@ -105,7 +95,7 @@ class ServerUserResourceList(AuthenticatedResource):
         """
         server = server_api.get_server(server_id)
         args = server_user_parser.parse_args()
-        server_api.add_user_to_server(None, server, args.get('user_id'))  # TODO add operator
+        server_api.add_user_to_server(self.user, server, args.get('user_id'))
         return marshal(server.get_all_users(), user_fields), HTTP_STATUS.CREATED
 
 
@@ -119,7 +109,7 @@ class ServerUserResource(AuthenticatedResource):
         Remove a user's access from a server
         """
         server = server_api.get_server(server_id)
-        server_api.remove_user_from_server(None, server, user_id)  # TODO add operator
+        server_api.remove_user_from_server(self.user, server, user_id)
         return '', HTTP_STATUS.DELETED
 
 
@@ -149,7 +139,7 @@ class ServerUserGroupResourceList(AuthenticatedResource):
         """
         server = server_api.get_server(server_id)
         args = server_usergroup_parser.parse_args()
-        server_api.add_group_to_server(None, server, args.get('user_group_id'))  # TODO add operator
+        server_api.add_group_to_server(self.user, server, args.get('user_group_id'))
         return marshal(server.get_groups(), server_group_fields), HTTP_STATUS.CREATED
 
 
@@ -163,5 +153,5 @@ class ServerUserGroupResource(AuthenticatedResource):
         Remove a user's access from a server
         """
         server = server_api.get_server(server_id)
-        server_api.remove_group_from_server(None, server, user_group_id)  # TODO add operator
+        server_api.remove_group_from_server(self.user, server, user_group_id)
         return '', HTTP_STATUS.DELETED

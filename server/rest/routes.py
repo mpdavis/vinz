@@ -17,11 +17,18 @@ from rest.server import ServerUserGroupResourceList
 from rest.server import ServerUserResource
 from rest.server import ServerUserResourceList
 
+from rest.server_group import ServerGroupResource
+from rest.server_group import ServerGroupResourceList
+from rest.server_group import ServerGroupServersResource
+from rest.server_group import ServerGroupServersResourceList
+
 from rest.user import UserResource
 from rest.user import UserResourceList
 
 from rest.user_group import UserGroupResource
 from rest.user_group import UserGroupResourceList
+from rest.user_group import UserGroupUsersResource
+from rest.user_group import UserGroupUsersResourceList
 
 
 BASE_API_PATH = '/api%s'
@@ -52,8 +59,15 @@ def initialize_routes(api):
     add_resource(BASE_API_PATH % '/servers/<string:server_id>/usergroups/', ServerUserGroupResourceList, endpoint='server-user-groups')
     add_resource(BASE_API_PATH % '/servers/<string:server_id>/usergroups/<string:user_group_id>', ServerUserGroupResource, endpoint='server-user-group')
 
+    add_resource(BASE_API_PATH % '/servergroups/', ServerGroupResourceList, endpoint='server-groups')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>', ServerGroupResource, endpoint='server-group')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/', ServerGroupServersResourceList, endpoint='server-group-servers')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/<string:server_id>', ServerGroupServersResource, endpoint='server-group-server')
+
     add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
     add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')
 
     add_resource(BASE_API_PATH % '/usergroups/', UserGroupResourceList, endpoint='user-groups')
     add_resource(BASE_API_PATH % '/usergroups/<string:user_group_id>', UserGroupResource, endpoint='user-group')
+    add_resource(BASE_API_PATH % '/usergroups/<string:user_group_id>/users/', UserGroupUsersResourceList, endpoint='user-group-users')
+    add_resource(BASE_API_PATH % '/usergroups/<string:user_group_id>/users/<string:user_id>', UserGroupUsersResource, endpoint='user-group-user')
