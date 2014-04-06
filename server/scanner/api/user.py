@@ -49,7 +49,6 @@ def add_user(username, hosts):
     for host in hosts:
         if not contacted.get(host, None):
             raise DarkServerException("Host %s could not be contacted." % host)
-            pass
 
 
 def remove_user(username, hosts):
@@ -70,4 +69,3 @@ def remove_user(username, hosts):
     for host in hosts:
         if not contacted.get(host, None):
             raise DarkServerException("Host %s could not be contacted." % host)
-            pass
