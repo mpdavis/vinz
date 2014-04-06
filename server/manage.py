@@ -58,7 +58,7 @@ def setup_dev():
     for email, data in DEV_USERS.iteritems():
         user = None
         try:
-            user = internal_user.create_user(data[0], data[1], email, data[2], data[3])
+            user = internal_user.create_user(None, data[0], data[1], email, data[2], data[3])
             print "Created user %s: %s" % (data[2], email)
         except UserAlreadyExistsError:
             user = internal_user.get_user_by_email(email)
@@ -71,7 +71,7 @@ def setup_dev():
 
             if not user.key_list:
                 print "Adding public key for %s" % user.username
-                key = internal_public_key.create_public_key(user, 'test key', VINZ_PUBLIC_KEY)
+                key = internal_public_key.create_public_key(user, user, 'test key', VINZ_PUBLIC_KEY)
 
 
 @manager.command

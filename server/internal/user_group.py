@@ -2,88 +2,103 @@
 .. module:: internal.user
    :synopsis: Location for internal API functions relating to user resources
 """
-from internal.auth.utils import maybe_get_user_by_email
+from internal import activity_log
 
 from internal.exceptions import UserGroupAlreadyExistsError
 
 from models.auth import UserGroup
 
 
-def create_user_group(name, **kwargs):
+def create_user_group(operator, name, **kwargs):
     """
     Create a new User Group in the database with the given values.
     """
-    # TODO Auditable stuff
-    existing_user_group = get_user_group_by_name(name)
+    existing_user_group = maybe_get_user_group_by_name(name)
     if existing_user_group:
         raise UserGroupAlreadyExistsError("A user with that email address exists.")
     user_group = UserGroup(name=name)
+    activity_log.log_user_group_created(user_group, operator)
     user_group.save()
     return user_group
 
 
 def get_user_group(user_group_id):
+    """
+    Fetch a single UserGroup object by its id
+    :param user_group_id: The id of the UserGroup to get
+    :return: The UserGroup object
+    """
     return UserGroup.objects.get(id=user_group_id)
 
-def get_user_group_by_name(user_group_name):
+
+def maybe_get_user_group_by_name(user_group_name):
+    """
+    Tries to find a UserGroup with the given name, and returns one if it exists
+    :param user_group_name: The name to lookup
+    :return: A UserGroup if one exists, otherwise None
+    """
     try:
         return UserGroup.objects.get(name=user_group_name)
     except UserGroup.DoesNotExist:
         return None
 
+
 def get_user_groups():
-    # fails if requesting user is not admin
+    """
+    Get a list of all UserGroups
+    """
     return list(UserGroup.objects.all())
 
-def delete_user_group(user_id):
+
+def delete_user_group(operator, user_group_id):
+    """
+    Delete a UserGroup
+    :param operator: The person performing this action
+    :param user_group_id: The id of the UserGroup to delete
+    """
     #TODO Some kind of security checks?
-    user_group = get_user_group(user_id)
+    user_group = get_user_group(user_group_id)
+    activity_log.log_user_group_deleted(user_group, operator)
     user_group.delete()
 
-def add_remove_check(email, user_group_name):
+
+def add_user_to_user_group(operator, user, user_group):
     """
-    Check if the user is existed in a given server group
+    Add a user to a UserGroup
+    :param operator: The User performing this action
+    :param user: The user to add
+    :param user_group: The UserGroup to add the user to
+    :return: The UserGroup
     """
-    user = maybe_get_user_by_email(email)
-    user_group = get_user_group_by_name(user_group_name)
-
-    users = user_group.get_users()
-
-    if user in users:
-        return True
-    else:
-        return False
-
-
-def add_user_to_user_group(email, user_group_name):
-
-    user = maybe_get_user_by_email(email)
     if not user:
-        raise ValueError("No user found for email: %s" % email)
+        raise ValueError("User cannot be None.")
 
-    user_group = get_user_group_by_name(user_group_name)
     if not user_group:
-        raise ValueError("No user group found for name: %s" % user_group_name)
+        raise ValueError("UserGroup cannot be None.")
 
-    if add_remove_check(email, user_group_name) == False:
-        #not sure if this is correct?
-        user_group.user_list.add(user)
-    else:
-        print("The user: %s is already in the user group: %s" % (email, user_group_name))
+    if user not in user_group.user_list:
+        user_group.user_list.append(user)
+        user_group.save()
+        activity_log.log_user_added_to_user_group(user, user_group, operator)
+
+    return user_group
 
 
-def remove_user_from_user_group(email, user_group_name):
-    user = maybe_get_user_by_email(email)
+def remove_user_from_user_group(operator, user, user_group):
+    """
+    Remove a user to a UserGroup
+    :param operator: The User performing this action
+    :param user: The user to remove
+    :param user_group: The UserGroup to remove the user from
+    :return: The UserGroup
+    """
     if not user:
-        raise ValueError("No user found for email: %s" % email)
+        raise ValueError("User cannot be None.")
 
-    user_group = get_user_group_by_name(user_group_name)
     if not user_group:
-        raise ValueError("No user group found for name: %s" % user_group_name)
+        raise ValueError("UserGroup cannot be None.")
 
-    if add_remove_check(email, user_group_name):
-        #not sure if this is correct?
+    if user in user_group.user_list:
         user_group.user_list.remove(user)
-    else:
-        print("The user: %s is not found in the user group: %s" % (email, user_group_name))
-
+        user_group.save()
+        activity_log.log_user_removed_from_user_group(user, user_group, operator)
