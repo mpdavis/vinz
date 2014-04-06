@@ -79,8 +79,7 @@ ACTIVITY_LOG_MESSAGES = {
 class SCAN_LOG_STATUS(object):
     EXCEPTION = -1
     NO_CHANGE = 0
-    USERS_ADDED = 1
-    USERS_REMOVED = 2
+    USERS_ALTERED = 1
 
 
 class SERVER_STATUS(object):

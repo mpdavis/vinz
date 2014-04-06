@@ -21,10 +21,7 @@ def create_scan_log(server, server_status, users_expected, actual_users, unexpec
     if unexpected_users:
         status = SCAN_LOG_STATUS.EXCEPTION
     elif users_expected_set.difference(actual_users_set):
-        if users_expected_set.issubset(actual_users_set):
-            status = SCAN_LOG_STATUS.USERS_ADDED
-        else:
-            status = SCAN_LOG_STATUS.USERS_REMOVED
+        status = SCAN_LOG_STATUS.USERS_ALTERED
     else:
         status = SCAN_LOG_STATUS.NO_CHANGE
 
