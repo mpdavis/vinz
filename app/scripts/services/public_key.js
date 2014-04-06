@@ -14,13 +14,13 @@ angular.module('vinzApp')
         return Key.query();
       },
       getKey: function(keyId) {
-        return Key.get({id: KeyId});
+        return Key.get({id: keyId});
       },
       createKey: function(newKey) {
         $http.post(keysURL, newKey);
       },
       removeKey: function(keyId) {
-        Key.remove({id: KeyId});
+        Key.remove({id: keyId});
       }
     };
   });

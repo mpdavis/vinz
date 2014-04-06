@@ -23,9 +23,9 @@
     </thead>
     <tbody>
       <tr ng-repeat="key in myKeys | filter:keySearch">
-        <td>{{key.name}}</td>
+        <td>{{key.key_name}}</td>
         <td>{{key.creation_date}}</td>
-        <td class="col-sm-2"><div ng-click="removeKey(key.id);" class="btn btn-default serverInfoBtn">Remove</div></td>
+        <td class="col-sm-2"><div ng-click="removeKey(key.id);" class="btn btn-danger serverInfoBtn">Remove</div></td>
       </tr>
     </tbody>
   </table>
@@ -41,10 +41,10 @@
         <div class="modal-body">
           <div class="simple-form form-group">
             <label>Name</label>
-            <input type="text" ng-model="newKey.name" class="form-control" placeholder="Awesome key name..."></input>
+            <input type="text" ng-model="newKey.key_name" class="form-control" placeholder="Awesome key name..."></input>
 
             <label>Key</label>
-            <textarea ng-model="newKey.key" class="form-control" rows="3" placeholder="Copy public key here..."></textarea>
+            <textarea ng-model="newKey.value" class="form-control" rows="3" placeholder="Copy public key here..."></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -72,7 +72,7 @@ $(function() {
 
   $("#newKeyModal").on('hidden.bs.modal', function() {
     scope.$apply(function() {
-        scope.newKey = {name: "", key: ""};
+        scope.newKey = {key_name: "", value: ""};
     });
   });
 });

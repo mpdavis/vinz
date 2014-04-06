@@ -2,7 +2,7 @@
 
 angular.module('vinzApp')
   .controller('PublicKeyCtrl', ['$scope', 'publicKey', function ($scope, publicKey) {
-    $scope.newKey = {name: "", value: ""};
+    $scope.newKey = {key_name: "", value: ""};
     $scope.myKeys = publicKey.getKeys();
 
     $scope.createKey = function(newKey) {
