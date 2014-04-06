@@ -7,14 +7,14 @@ angular.module('vinzApp')
       numLogs = logs.length;
   	});
 
-  	var count = 1;
-  	var interval = $interval(function() {
-      console.log(count*30 + 'seconds');
-  		logService.getActivityLogs(function(newLogs) {
-  			if (newLogs.length != numLogs.length) {
-  				$scope.activityLogs = newLogs;
-  				numLogs = newLogs.length;
-  			}
-  		});
-  	}, 30*1000);
+  	//var count = 1;
+  	// var interval = $interval(function() {
+   //    console.log(count*30 + 'seconds');
+  	// 	logService.getActivityLogs(function(newLogs) {
+  	// 		if (newLogs.length != numLogs.length) {
+  	// 			$scope.activityLogs = newLogs;
+  	// 			numLogs = newLogs.length;
+  	// 		}
+  	// 	});
+  	// }, 30*1000);
   }]);

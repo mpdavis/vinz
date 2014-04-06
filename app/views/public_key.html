@@ -1,0 +1,80 @@
+<div style="visibility" class="container animated" ng-class="{bounceInUp: loaded, bounceOutDown: finish}">
+
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-sm-6 sectionTitle">
+      My Public Keys
+    </div>
+    <div class="row sectionBody col-sm-offset-3 col-sm-3">
+      <div id="newKeyButton" class="col-sm-12 btn btn-default">
+        Add Key
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Table -->
+  <table class="serverTable table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date Added</th>
+        <th class="col-sm-2">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="key in myKeys | filter:keySearch">
+        <td>{{key.key_name}}</td>
+        <td>{{key.creation_date}}</td>
+        <td class="col-sm-2"><div ng-click="removeKey(key.id);" class="btn btn-danger serverInfoBtn">Remove</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- New Key Modal -->
+  <div id="newKeyModal" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+          <h4 class="modal-title">New Key</h4>
+        </div>
+        <div class="modal-body">
+          <div class="simple-form form-group">
+            <label>Name</label>
+            <input type="text" ng-model="newKey.key_name" class="form-control" placeholder="Awesome key name..."></input>
+
+            <label>Key</label>
+            <textarea ng-model="newKey.value" class="form-control" rows="3" placeholder="Copy public key here..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="createKeyButton" type="button" class="btn btn-primary" ng-click="createKey(newKey)">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  var scope = angular.element($("#vinzApp")).scope();
+
+  $(".navbar-nav li").removeClass("active");
+
+  $("#newKeyButton").click(function() {
+    $("#newKeyModal").modal('show');
+  });
+
+  $("#createKeyButton").click(function() {
+    $("#newKeyModal").modal('hide');
+  });
+
+  $("#newKeyModal").on('hidden.bs.modal', function() {
+    scope.$apply(function() {
+        scope.newKey = {key_name: "", value: ""};
+    });
+  });
+});
+</script>
+
