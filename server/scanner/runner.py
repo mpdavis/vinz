@@ -38,7 +38,7 @@ class VinzRunner(Runner):
         if module_args:
             arguments['module_args'] = module_args
 
-        return super(VinzRunner, self).__init__(**arguments)
+        super(VinzRunner, self).__init__(**arguments)
 
     def run(self):
         results = super(VinzRunner, self).run()

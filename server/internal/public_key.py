@@ -6,6 +6,8 @@
 """
 from models.auth import PublicKey
 
+from scanner.api import ssh_key as ssh_key_api
+
 import datetime
 
 
@@ -36,7 +38,11 @@ def get_user_keys(user):
 
 
 def delete_public_key(user, pub_key_id):
-    #TODO Some kind of security checks?
+    """
+    Remove a public key from all servers and delete it from the database
+    :param user: User who the public key belongs to
+    :param pub_key_id: id of the public key to remove
+    """
     public_key = get_public_key(pub_key_id)
     user.key_list.remove(public_key)
     user.save()
