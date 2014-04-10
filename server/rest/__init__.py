@@ -13,6 +13,18 @@ from internal.exceptions import ServerAlreadyExistsError
 from internal.exceptions import UserAlreadyExistsError
 
 
+server_fields = {
+    #'uri': fields.Url(endpoint='server'),  #TODO: Figure this out
+    'id': fields.String(),
+    'name': fields.String(),
+    'hostname': fields.String(),
+    'user_list': fields.List(fields.String),
+    'group_list': fields.List(fields.String),
+    'creation_date': fields.DateTime(),
+    'modified_date': fields.DateTime(),
+}
+
+
 server_group_fields = {
     #'uri': fields.Url(endpoint='server_group'),  #TODO: Figure this out
     'id': fields.String(),

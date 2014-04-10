@@ -299,3 +299,39 @@ def log_server_removed_from_server_group(server, server_group, actor):
     )
     log.save()
     return log
+
+
+def log_user_group_added_to_server(user_group, server, actor):
+    """
+    Log when a UserGroup is added to a server (gains access)
+    :param user_group: The UserGroup that now has access
+    :param server: The Server that the UserGroup now has access to
+    :param actor: The User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user_group,
+        secondary_obj=server,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_GROUP_ACCESS_ADDED,
+    )
+    log.save()
+    return log
+
+
+def log_user_group_removed_from_server(user_group, server, actor):
+    """
+    Log when a UserGroup is removed from a server (loses access)
+    :param user_group: The UserGroup that has lost access
+    :param server: The Server to remove the UserGroup from
+    :param actor: The User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user_group,
+        secondary_obj=server,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_GROUP_ACCESS_REMOVED,
+    )
+    log.save()
+    return log
