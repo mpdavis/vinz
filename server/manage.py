@@ -142,10 +142,10 @@ def remove_public_key(username, filename):
 @manager.command
 def scan():
     from scanner.scanner import Scanner
-    s = Scanner()
+    s = Scanner(debug=True)
     results = s.scan()
-    pp = pprint.PrettyPrinter()
-    pp.pprint(results)
+    # pp = pprint.PrettyPrinter()
+    # pp.pprint(results)
 
 
 if __name__ == "__main__":
