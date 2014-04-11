@@ -67,7 +67,7 @@ class ServerScanner():
         :param user: The username of the user to add
         """
         if self.add_users:
-            api_user.add_user(user, self.server)
+            api_user.add_user(user, self.server.hostname)
 
     def remove_user(self, user):
         """
@@ -76,7 +76,7 @@ class ServerScanner():
         :param user: The username of the user to remove
         """
         if self.remove_users:
-            api_user.remove_user(user, self.server)
+            api_user.remove_user(user, self.server.hostname)
 
     def scan_users(self):
         """
@@ -216,7 +216,10 @@ def scan_server(queue, hostname, add_users=False, remove_users=False, add_keys=F
 
     try:
         server_scanner.scan()
-    except:
+    except Exception, e:
+
+        # import logging
+        # logging.exception(e)
 
         if debug:
             print_line("ERROR: Unable to contact server", server.hostname)
