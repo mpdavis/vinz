@@ -102,13 +102,13 @@ def get_users():
 @manager.command
 def add_user(username):
     from scanner.api import user
-    user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
+    user.add_user(username, ['vinz-ubuntu-12-04.student.iastate.edu'])
 
 
 @manager.command
 def remove_user(username):
     from scanner.api import user
-    user.remove_user(username, ['vinz-ubuntu.student.iastate.edu'])
+    user.remove_user(username, ['vinz-ubuntu-12-04.student.iastate.edu'])
 
 
 @manager.command
@@ -120,7 +120,7 @@ def get_keys():
 @manager.command
 def add_public_key(username, filename):
     from scanner.api import ssh_key
-    host = 'vinz-ubuntu.student.iastate.edu'
+    host = 'vinz-ubuntu-12-04.student.iastate.edu'
     with open(filename) as f:
         result = ssh_key.add_user_public_key(username, [host], f.read())
     if result[host]['success']:
@@ -132,7 +132,7 @@ def add_public_key(username, filename):
 @manager.command
 def remove_public_key(username, filename):
     from scanner.api import ssh_key
-    host = 'vinz-ubuntu.student.iastate.edu'
+    host = 'vinz-ubuntu-12-04.student.iastate.edu'
     with open(filename) as f:
         result = ssh_key.remove_user_public_key(username, [host], f.read())
     if result[host]['success']:
