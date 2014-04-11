@@ -214,7 +214,19 @@ def scan_server(queue, hostname, add_users=False, remove_users=False, add_keys=F
                                    remove_keys=remove_keys,
                                    debug=debug)
 
-    return server_scanner.scan()
+    try:
+        server_scanner.scan()
+    except:
+
+        if debug:
+            print_line("ERROR: Unable to contact server", server.hostname)
+
+        queue.put({
+            'hostname': server.hostname,
+            'state':    'error'
+        })
+
+    return
 
 
 class Scanner():
