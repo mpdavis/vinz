@@ -17,7 +17,9 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 
 DEV_SERVERS = {
-    'ubuntu': 'vinz-ubuntu.student.iastate.edu',
+    'ubuntu 8.04': 'vinz-ubuntu-08-04.student.iastate.edu',
+    'ubuntu 10.04': 'vinz-ubuntu-10-04.student.iastate.edu',
+    'ubuntu 12.04': 'vinz-ubuntu-12-04.student.iastate.edu',
     'debian': 'vinz-debian.student.iastate.edu',
     'fedora': 'vinz-fedora.student.iastate.edu',
     'opensuse': 'vinz-opensuse.student.iastate.edu',
