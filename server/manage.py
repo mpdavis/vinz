@@ -17,7 +17,9 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 
 DEV_SERVERS = {
-    'ubuntu': 'vinz-ubuntu.student.iastate.edu',
+    'ubuntu 8.04': 'vinz-ubuntu-08-04.student.iastate.edu',
+    'ubuntu 10.04': 'vinz-ubuntu-10-04.student.iastate.edu',
+    'ubuntu 12.04': 'vinz-ubuntu-12-04.student.iastate.edu',
     'debian': 'vinz-debian.student.iastate.edu',
     'fedora': 'vinz-fedora.student.iastate.edu',
     'opensuse': 'vinz-opensuse.student.iastate.edu',
@@ -100,13 +102,13 @@ def get_users():
 @manager.command
 def add_user(username):
     from scanner.api import user
-    user.add_user(username, ['vinz-ubuntu.student.iastate.edu'])
+    user.add_user(username, ['vinz-ubuntu-12-04.student.iastate.edu'])
 
 
 @manager.command
 def remove_user(username):
     from scanner.api import user
-    user.remove_user(username, ['vinz-ubuntu.student.iastate.edu'])
+    user.remove_user(username, ['vinz-ubuntu-12-04.student.iastate.edu'])
 
 
 @manager.command
@@ -118,7 +120,7 @@ def get_keys():
 @manager.command
 def add_public_key(username, filename):
     from scanner.api import ssh_key
-    host = 'vinz-ubuntu.student.iastate.edu'
+    host = 'vinz-ubuntu-12-04.student.iastate.edu'
     with open(filename) as f:
         result = ssh_key.add_user_public_key(username, [host], f.read())
     if result[host]['success']:
@@ -130,7 +132,7 @@ def add_public_key(username, filename):
 @manager.command
 def remove_public_key(username, filename):
     from scanner.api import ssh_key
-    host = 'vinz-ubuntu.student.iastate.edu'
+    host = 'vinz-ubuntu-12-04.student.iastate.edu'
     with open(filename) as f:
         result = ssh_key.remove_user_public_key(username, [host], f.read())
     if result[host]['success']:
@@ -142,10 +144,10 @@ def remove_public_key(username, filename):
 @manager.command
 def scan():
     from scanner.scanner import Scanner
-    s = Scanner()
+    s = Scanner(debug=True)
     results = s.scan()
-    pp = pprint.PrettyPrinter()
-    pp.pprint(results)
+    # pp = pprint.PrettyPrinter()
+    # pp.pprint(results)
 
 
 if __name__ == "__main__":
