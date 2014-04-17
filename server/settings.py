@@ -69,5 +69,6 @@ IGNORED_USERS = [
     'gopher',
     'vcsa',
     'postfix',
+    'root',
 
 ]

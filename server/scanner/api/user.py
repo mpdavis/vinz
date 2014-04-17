@@ -36,6 +36,10 @@ def add_user(username, hosts):
     :param username: The username of the user to be added to the remote machines
     :param hosts: A list of servers to add the user to
     """
+
+    if username == 'root':
+        return
+
     if not isinstance(username, basestring):
         raise ValueError("Username must be a string")
 
@@ -56,6 +60,10 @@ def remove_user(username, hosts):
     :param username: The username of the user to be removed from the remote machines
     :param hosts: A list of servers to remove the user from
     """
+
+    if username == 'root':
+        return
+
     if not isinstance(username, basestring):
         raise ValueError("Username must be a string")
 
