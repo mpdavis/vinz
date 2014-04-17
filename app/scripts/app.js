@@ -32,6 +32,22 @@ var app = angular.module('vinzApp', [
         templateUrl: 'static/views/public_key.html',
         controller: 'PublicKeyCtrl'
       })
+      .when('/server_groups', {
+        templateUrl: 'static/views/server_groups.html',
+        controller: 'ServerGroupsCtrl'
+      })
+      .when('/server_groups/:id', {
+        templateUrl: 'static/views/server_group_detail.html',
+        controller: 'ServerGroupDetailCtrl'
+      })
+      .when('/user_groups', {
+        templateUrl: 'static/views/user_groups.html',
+        controller: 'UserGroupsCtrl'
+      })
+      .when('/user_groups/:id', {
+        templateUrl: 'static/views/user_group_detail.html',
+        controller: 'UserGroupDetailCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

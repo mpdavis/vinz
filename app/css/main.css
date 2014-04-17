@@ -19,6 +19,14 @@ body {
 }
 
 /* NAV */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
 .navbar {
   border: 0 none;
   background: #cc0000;
@@ -72,15 +80,15 @@ body {
   box-shadow: none;
 }
 
-.navbar-dropdown {
+.bordered {
   border: 1px solid #b30000;
   border-width: 0 1px;
 }
-
+/*
 .navbar-dropdown:hover {
   color: white;
   background-color: #b30000;
-}
+}*/
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   color: #b30000;

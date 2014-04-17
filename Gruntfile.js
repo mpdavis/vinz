@@ -155,7 +155,13 @@ module.exports = function(grunt) {
                     directories.frontend.js + 'services/logs.js',
                     directories.frontend.js + 'services/servers.js',
                     directories.frontend.js + 'controllers/public_key.js',
-                    directories.frontend.js + 'services/public_key.js'
+                    directories.frontend.js + 'services/public_key.js',
+                    directories.frontend.js + 'controllers/server_groups.js',
+                    directories.frontend.js + 'controllers/server_group_detail.js',
+                    directories.frontend.js + 'controllers/user_groups.js',
+                    directories.frontend.js + 'controllers/user_group_detail.js',
+                    directories.frontend.js + 'services/user_groups.js',
+                    directories.frontend.js + 'services/server_groups.js'
                 ],
                 dest: directories.static.js + 'app.js'
             }
