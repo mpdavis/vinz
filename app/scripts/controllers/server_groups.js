@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('ServerGroupsCtrl', ['$scope', 'servers', '$location', '$timeout', function ($scope, servers, $location, $timeout) {
-    $scope.newServer = {name: "", hostname: ""};
-    $scope.myServers = servers.getServers();
+  .controller('ServerGroupsCtrl', ['$scope', 'serverGroups', '$location', '$timeout', function ($scope, serverGroups, $location, $timeout) {
+    $scope.newServerGroup = {name: ""};
+    $scope.myServers = serverGroups.getServerGroups();
     $scope.finish = false;
 
-    $scope.createServer = function(newServer) {
-    	servers.createServer(newServer);
-    	$scope.myServers = servers.getServers();
+    $scope.createServer = function(newServerGroup) {
+    	serverGroups.createServerGroup(newServerGroup);
+    	$scope.myServers = serverGroups.getServerGroups();
     }
 
     $scope.detail = function(name) {
     	$scope.finish = true;
     	$timeout(function() {
-    		$location.path( '/servers/' + name );
+    		$location.path( '/server_groups/' + name );
     	}, 500);
     }
   }]);

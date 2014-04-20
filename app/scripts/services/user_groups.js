@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('vinzApp')
-  .factory('userGroups', function () {
+  .factory('userGroups', function ($http, $resource) {
     // Service logic
     // ...
 
