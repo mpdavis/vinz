@@ -6,7 +6,7 @@ body {
   width: 80%;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   .container {
     width: 95%;
   }
@@ -48,7 +48,7 @@ body {
 }
 
 .navbar .navbar-brand {
-  font-family: 'Oleo Script Swash Caps', cursive;
+  /*font-family: 'Oleo Script Swash Caps', cursive;*/
   color: white;
   border: 1px solid #b30000;
   border-width: 0 1px 0 0;
@@ -80,10 +80,8 @@ body {
 .sectionBanner {
   background: white;
   border: 1px solid #dddddd;
-  height: 40px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-left: 0px;
 }
 
 .sectionBannerTitle {
@@ -91,15 +89,14 @@ body {
 }
 
 .sectionTitle {
-  text-shadow: none;
   color: #45494d;
-  font-size: 20px;
-  line-height: 40px;
-  float: left;
+  font-size: 22px;
+  line-height: 42px;
 }
 
 .sectionBody {
-  margin-top: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .right-inner-addon {
@@ -122,8 +119,8 @@ body {
 
 .backButton {
   position: absolute;
-  left: 5px;
-  margin-top: 2px;
+  top: 4px;
+  left: 20px;
   color: #afafaf;
 }
 

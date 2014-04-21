@@ -39,7 +39,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Dashboard</a></li>
+            <li id="dashboard-nav"><a href="#/dashboard">Dashboard</a></li>
             <li id="logs-nav"><a href="#/logs">Logs</a></li>
             <li id="servers-nav" class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">Servers <b class="caret"></b></a>
@@ -85,10 +85,6 @@
        }
        app.value("user", currentUser);
     </script>
-
-    <script src='//192.168.1.22:3000/socket.io/socket.io.js'></script>
-<script>var ___socket___ = io.connect('http://192.168.1.22:3000');</script>
-<script src='//192.168.1.22:3001/client/browser-sync-client.0.7.0.js'></script>
 
 </body>
 </html>
