@@ -1,4 +1,4 @@
-<div class="container animated fadeInDown">
+<div class="container">
   <style>
     #dashboard {
       background-color: white;
@@ -30,13 +30,10 @@
 <script type="text/javascript">
 $(function() {
   $(".navbar-nav li").removeClass("active");
-  $("#dashboard-nav").addClass("active");
-
-  //Get context with jQuery - using jQuery's .get() method.
-  
+  $("#dashboard-nav").addClass("active");  
 
   var data1 = {
-    labels : ["Jan 2014","Feb 2014"," Mar 2014","Apr 2014","May 2014","June 2014","July 14"],
+    labels : ["Jan","Feb"," Mar","Apr","May","June","July"],
     datasets : [
       {
         fillColor : "rgba(220,220,220,0.5)",

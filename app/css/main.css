@@ -48,7 +48,7 @@ body {
 }
 
 .navbar .navbar-brand {
-  /*font-family: 'Oleo Script Swash Caps', cursive;*/
+  font-family: 'Oleo Script Swash Caps', cursive;
   color: white;
   border: 1px solid #b30000;
   border-width: 0 1px 0 0;

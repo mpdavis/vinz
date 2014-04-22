@@ -31,29 +31,11 @@ angular.module('vinzApp')
         return servers;
       },
       getNonGroupServers: function(serverGroupId, callback) {
+        //TODO
         var servers = GroupServer.query({id: serverGroupId}, function() {
           callback(servers);
         });
         return servers;
       }
-      // getServerGroupUsers: function(serverId, callback) {
-      //   var users = ServerUser.query({id: serverId}, function() {
-      //     callback(users);
-      //   });
-      //   return users;
-      // },
-      // getNonServerGroupUsers: function(serverId, callback) {
-      //   var users = ServerUser.query({id: serverId, no_access: true}, function() {
-      //     callback(users);
-      //   });
-      //   return users;
-      // },
-      // revokeAccess: function(serverId, userId) {
-      //   ServerUser.remove({id: serverId, user_id: userId});
-      // },
-      // grantAccess: function(serverId, userId) {
-      //   var serverUsersAPI = serverGroupsURL + serverId + '/users/';
-      //   $http.post(serverUsersAPI, {user_id: userId});
-      // }
     };
   });
