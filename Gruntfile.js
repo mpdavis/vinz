@@ -30,7 +30,8 @@ module.exports = function(grunt) {
             'angularSanitize': bowerBase + 'angular-sanitize/',
             'bootstrap': bowerBase + 'bootstrap/',
             'jquery': bowerBase + 'jquery/',
-            'fontAwesome': bowerBase + 'font-awesome/'
+            'fontAwesome': bowerBase + 'font-awesome/',
+            'chartjs': bowerBase + 'chartjs/'
         },
         'build': {
             'js': buildBase + 'js/'
@@ -146,6 +147,7 @@ module.exports = function(grunt) {
                     directories.bower.angularRoute + 'angular-route.js',
                     directories.bower.angularCookies + 'angular-cookies.js',
                     directories.bower.angularSanitize + 'angular-sanitize.js',
+                    directories.bower.chartjs + 'Chart.min.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/logs.js',
                     directories.frontend.js + 'controllers/servers.js',
@@ -155,7 +157,14 @@ module.exports = function(grunt) {
                     directories.frontend.js + 'services/logs.js',
                     directories.frontend.js + 'services/servers.js',
                     directories.frontend.js + 'controllers/public_key.js',
-                    directories.frontend.js + 'services/public_key.js'
+                    directories.frontend.js + 'services/public_key.js',
+                    directories.frontend.js + 'controllers/server_groups.js',
+                    directories.frontend.js + 'controllers/server_group_detail.js',
+                    directories.frontend.js + 'controllers/user_groups.js',
+                    directories.frontend.js + 'controllers/user_group_detail.js',
+                    directories.frontend.js + 'services/user_groups.js',
+                    directories.frontend.js + 'services/server_groups.js',
+                    directories.frontend.js + 'controllers/dashboard.js'
                 ],
                 dest: directories.static.js + 'app.js'
             }

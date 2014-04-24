@@ -35,7 +35,6 @@ class UserAPITestCase(TestCase):
     def test_get_users(self, m_run):
         m_run.return_value = EXAMPLE_CORRECT_RETURN_VALUE
         users = api_user.get_users_on_host('vinz-ubuntu.student.iastate.edu')
-        self.assertTrue('root' in users)
         self.assertTrue('vinz' in users)
 
     @patch('scanner.runner.VinzRunner.run')

@@ -22,25 +22,43 @@
     <link rel="stylesheet" href="static/css/styles.css">
   </head>
   <body ng-app="vinzApp">
-    <!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
+    <nav class="navbar" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="#">Vinz</a>
         </div>
-        <div class="navbar-collapse collapse">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+            <li id="dashboard-nav"><a href="#/dashboard">Dashboard</a></li>
             <li id="logs-nav"><a href="#/logs">Logs</a></li>
-            <li id="servers-nav"><a href="#/servers">Servers</a></li>
-            <li id="users-nav"><a href="#/users">Users</a></li>
+            <li id="servers-nav" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">Servers <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#/servers">Individual</a></li>
+                <li><a href="#/server_groups">Groups</a></li>
+              </ul>
+            </li>
+            <li id="users-nav" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#/users">Individual</a></li>
+                <li><a href="#/user_groups">Groups</a></li>
+              </ul>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown navbar-dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown">{{ g.user.email }}<b class="caret"></b></a>
+            <li class="dropdown account">
+              <a class="dropdown-toggle" data-toggle="dropdown">{{ g.user.email }} <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#/public_key">My Public Keys</a></li>
                 <li><a href="#">Account</a></li>
@@ -50,17 +68,23 @@
               </ul>
             </li>
           </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
     <!-- Add your site or application content here -->
-    <div id="vinzApp" class="container" ng-view=""></div>
-
+    <div id="vinzApp" ng-view=""></div>
 
     <script src="static/js/jquery.js"></script>
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/app.js"></script>
+
+    <script>
+       var currentUser = {
+        "id": "{{g.user.id}}"
+       }
+       app.value("user", currentUser);
+    </script>
 
 </body>
 </html>

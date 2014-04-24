@@ -1,93 +1,76 @@
-
-/* Space out content a bit */
 body {
-  font-family: 'Open Sans', sans-serif;
-  padding-top: 80px;
-  padding-bottom: 20px;
-  font-weight: 400;
   background-color: #EBE7EB;
 }
 
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 100%;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
+.container {
+  width: 80%;
 }
 
-/* NAV */
+@media (max-width: 1200px) {
+  .container {
+    width: 95%;
+  }
+}
+
 .navbar {
   border: 0 none;
   background: #cc0000;
+  border-radius: 0px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  height: 70px;
-  font-size: 14px;
 }
 
-.navbar-default .navbar-nav > li > a {
-  text-shadow: none;
-  color: #EBE7EB;
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s;
-  line-height: 40px;
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-  color: white;
-  background-color: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.navbar-default .navbar-brand {
-  font-family: 'Oleo Script Swash Caps', cursive;
-  color: white;
-  font-size: 32px;
-  line-height: 40px;
-  border: 1px solid #b30000;
-  border-width: 0 1px;
-}
-
-.navbar-default .navbar-brand:hover {
-  color: #b30000;
-  background-color: white;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  color: white;
-  background: #b30000;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.navbar-dropdown {
-  border: 1px solid #b30000;
-  border-width: 0 1px;
-}
-
-.navbar-dropdown:hover {
-  color: white;
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
   background-color: #b30000;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: #b30000;
+}
+
+.active {
+  background-color: #b30000;
+}
+
+.navbar-toggle {
+  border: 1px solid white;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: white;
+}
+
+.navbar a {
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.navbar .navbar-brand {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  color: white;
+  border: 1px solid #b30000;
+  border-width: 0 1px 0 0;
+  font-size: 28px;
+}
+
+.navbar .navbar-brand:hover {
   color: #b30000;
   background-color: white;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+
+.navbar .account {
+  border: 1px solid #b30000;
+  border-width: 0 0 0 1px;
+}
+
+.bordered {
+  border: 1px solid #b30000;
+  border-width: 0 1px;
 }
 
 .dropdown-toggle {
@@ -97,10 +80,8 @@ body {
 .sectionBanner {
   background: white;
   border: 1px solid #dddddd;
-  height: 40px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-left: 0px;
 }
 
 .sectionBannerTitle {
@@ -108,15 +89,14 @@ body {
 }
 
 .sectionTitle {
-  text-shadow: none;
   color: #45494d;
-  font-size: 20px;
-  line-height: 40px;
-  float: left;
+  font-size: 22px;
+  line-height: 42px;
 }
 
 .sectionBody {
-  margin-top: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .right-inner-addon {
@@ -139,8 +119,8 @@ body {
 
 .backButton {
   position: absolute;
-  left: 5px;
-  margin-top: 2px;
+  top: 4px;
+  left: 20px;
   color: #afafaf;
 }
 

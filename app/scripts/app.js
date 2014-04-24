@@ -9,8 +9,8 @@ var app = angular.module('vinzApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'static/views/logs.html',
-        controller: 'LogsCtrl'
+        templateUrl: 'static/views/dashboard.html',
+        controller: 'DashboardCtrl'
       })
       .when('/servers', {
         templateUrl: 'static/views/servers.html',
@@ -31,6 +31,26 @@ var app = angular.module('vinzApp', [
       .when('/public_key', {
         templateUrl: 'static/views/public_key.html',
         controller: 'PublicKeyCtrl'
+      })
+      .when('/server_groups', {
+        templateUrl: 'static/views/server_groups.html',
+        controller: 'ServerGroupsCtrl'
+      })
+      .when('/server_groups/:id', {
+        templateUrl: 'static/views/server_group_detail.html',
+        controller: 'ServerGroupDetailCtrl'
+      })
+      .when('/user_groups', {
+        templateUrl: 'static/views/user_groups.html',
+        controller: 'UserGroupsCtrl'
+      })
+      .when('/user_groups/:id', {
+        templateUrl: 'static/views/user_group_detail.html',
+        controller: 'UserGroupDetailCtrl'
+      })
+      .when('/dashboard', {
+        templateUrl: 'static/views/dashboard.html',
+        controller: 'DashboardCtrl'
       })
       .otherwise({
         redirectTo: '/'

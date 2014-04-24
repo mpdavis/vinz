@@ -1,0 +1,99 @@
+<div class="container">
+  <style>
+    #dashboard {
+      background-color: white;
+      margin-left: 0;
+      width: 100%;
+    }
+  </style>
+
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-xs-4 sectionTitle">
+      Dashboard
+    </div>
+  </div>
+
+
+  <div id="dashboard" class="row">
+    <div class="chartOneContainer col-xs-12 col-md-6">
+      <h2>Servers vs. Users</h2>
+      <canvas id="chartOne"></canvas>
+    </div>
+    <div class="chartTwoContainer col-xs-12 col-md-6">
+      <h2>Machine Type</h2>
+      <canvas id="chartTwo"></canvas>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $(".navbar-nav li").removeClass("active");
+  $("#dashboard-nav").addClass("active");  
+
+  var data1 = {
+    labels : ["Jan","Feb"," Mar","Apr","May","June","July"],
+    datasets : [
+      {
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,1)",
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#fff",
+        data : [5, 10, 15, 20, 17, 24, 23]
+      },
+      {
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,1)",
+        pointColor : "rgba(151,187,205,1)",
+        pointStrokeColor : "#fff",
+        data : [1, 3, 5, 6, 7, 9, 10]
+      }
+    ]
+  }
+
+  var size = $(".chartOneContainer").width();
+  var canvasOne = document.getElementById('chartOne');
+  canvasOne.width  = size*.8;
+  canvasOne.height = size*.8;
+  var ctxOne = $("#chartOne").get(0).getContext("2d");
+  var chartOne = new Chart(ctxOne).Line(data1,{});
+  
+  var data2 = [
+  {
+    value: 30,
+    color:"#F38630",
+    label : 'AWS',
+    labelColor : 'white',
+    labelFontSize : '16'
+  },
+  {
+    value : 50,
+    color : "#E0E4CC",
+    label : 'ISU',
+    labelColor : 'white',
+    labelFontSize : '16'
+  },
+  {
+    value : 100,
+    color : "#69D2E7",
+    label : 'Google',
+    labelColor : 'white',
+    labelFontSize : '16'
+  }     
+]
+
+  var canvasTwo = document.getElementById('chartTwo');
+  canvasTwo.width  = size*.8;
+  canvasTwo.height = size*.8;
+  var ctxTwo = $("#chartTwo").get(0).getContext("2d");
+  var chartTwo = new Chart(ctxTwo).Pie(data2,{});
+  
+
+
+  var scope = angular.element($("#vinzApp")).scope();
+
+  var $dashboard = $("#dashboard");
+
+});
+</script>

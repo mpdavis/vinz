@@ -1,11 +1,11 @@
 <div class="container" >
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-xs-12 sectionTitle sectionBannerTitle">
-      Server Dashboard
+    <div class="col-sm-12 sectionTitle sectionBannerTitle">
+      Server Group Dashboard
     </div>
-    <a class="btn btn-default backButton" href="#/servers/">
-      <i class="fa fa-chevron-left"></i> All Servers
+    <a class="btn btn-default backButton" href="#/server_groups/">
+      <i class="fa fa-chevron-left"></i> All Groups
     </a>
   </div>
 
@@ -13,20 +13,24 @@
 	<table class="serverTable table table-hover table-bordered">
 		<tbody>
 			<tr>
-				<th>Name</th>
-				<td>{{server.name}}</td>
-			</tr>
-			<tr>
-				<th>Hostname</th>
-				<td>{{server.hostname}}</td>
+				<th>Group Name</th>
+				<td>{{serverGroup.name}}</td>
 			</tr>
 		</tbody>
 	</table>
 
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-xs-2 sectionTitle">
-      Users
+    <div class="col-xs-2 sectionBody">
+      <div class="btn-group btn-input clearfix">
+        <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+          <span data-bind="label">Servers</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">User</a></li>
+          <li><a href="#">User Groups</a></li>
+        </ul>
+      </div>
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-8">
       <div class="btn-group col-xs-6" data-toggle="buttons">

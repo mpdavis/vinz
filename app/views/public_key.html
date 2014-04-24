@@ -1,4 +1,4 @@
-<div style="visibility" class="container animated" ng-class="{bounceInUp: loaded, bounceOutDown: finish}">
+<div class="container">
 
   <!-- Section Header -->
   <div class="row sectionBanner">
@@ -22,9 +22,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="key in myKeys | filter:keySearch">
+      <tr ng-repeat="key in myKeys | filter:keySearch" ng-init="key.modified_date = ( key.modified_date | date:'medium' )">
         <td>{{key.key_name}}</td>
-        <td>{{key.creation_date}}</td>
+        <td>{{key.modified_date}}</td>
         <td class="col-sm-2"><div ng-click="removeKey(key.id);" class="btn btn-danger serverInfoBtn">Remove</div></td>
       </tr>
     </tbody>
