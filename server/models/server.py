@@ -15,7 +15,7 @@ from models.auth import User
 from models.auth import UserGroup
 
 
-class Server(Document, AuditableMixin):
+class Server(AuditableMixin, Document):
     name = StringField(required=True)
     hostname = StringField(required=True)
     user_list = ListField(ReferenceField(User))
@@ -59,7 +59,7 @@ class Server(Document, AuditableMixin):
         return [user.username for user in users]
 
 
-class ServerGroup(Document, AuditableMixin):
+class ServerGroup(AuditableMixin, Document):
     name = StringField(required=True)
     server_list = ListField(ReferenceField(Server))
 

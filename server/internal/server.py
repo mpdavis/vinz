@@ -28,8 +28,8 @@ def create_server(operator, name, hostname, **kwargs):
     return server
 
 
-def get_servers():
-    return list(Server.objects.all())
+def get_servers(limit=20, offset=0):
+    return list(Server.objects.skip(offset).limit(limit))
 
 
 def get_server(server_id):

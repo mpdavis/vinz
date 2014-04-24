@@ -26,7 +26,7 @@ class ServerScannerTestCase(TestCase):
     def test_unblock_add(self, add_user):
         scanner = ServerScanner(queue=self.queue, server=self.server, add_users=True)
         scanner.add_user('mike')
-        add_user.assert_called_once_with('mike', self.server)
+        add_user.assert_called_once_with('mike', self.server.hostname)
 
     @patch('scanner.api.user.remove_user')
     def test_block_remove(self, remove_user):
@@ -37,4 +37,4 @@ class ServerScannerTestCase(TestCase):
     def test_unblock_remove(self, remove_user):
         scanner = ServerScanner(queue=self.queue, server=self.server, remove_users=True)
         scanner.remove_user('mike')
-        remove_user.assert_called_once_with('mike', self.server)
+        remove_user.assert_called_once_with('mike', self.server.hostname)

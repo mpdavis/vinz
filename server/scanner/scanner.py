@@ -134,6 +134,26 @@ class ServerScanner():
             keys_to_add[user] = db_key_set.difference(server_key_set)
             keys_to_remove[user] = server_key_set.difference(db_key_set)
 
+        for user, keys in self.keys_from_db.iteritems():
+
+            # converting both key lists to sets
+            db_key_set = set(keys)
+            server_key_set = set(self.keys_from_server.get(user, []))
+
+            if not db_key_set.symmetric_difference(server_key_set):
+                # Server and DB agree.  Nothing to do
+                continue
+
+            if user in keys_to_add:
+                keys_to_add[user].union(db_key_set.difference(server_key_set))
+            else:
+                keys_to_add[user] = db_key_set.difference(server_key_set)
+
+            if user in keys_to_remove:
+                keys_to_remove[user].union(server_key_set.difference(db_key_set))
+            else:
+                keys_to_remove[user] = server_key_set.difference(db_key_set)
+
         if self.debug:
             print_line('Finished parsing keys', self.server.hostname)
 
@@ -218,8 +238,8 @@ def scan_server(queue, hostname, add_users=False, remove_users=False, add_keys=F
         server_scanner.scan()
     except Exception, e:
 
-        # import logging
-        # logging.exception(e)
+        import logging
+        logging.exception(e)
 
         if debug:
             print_line("ERROR: Unable to contact server", server.hostname)

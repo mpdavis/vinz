@@ -43,11 +43,11 @@ def maybe_get_user_group_by_name(user_group_name):
         return None
 
 
-def get_user_groups():
+def get_user_groups(limit=20, offset=0):
     """
     Get a list of all UserGroups
     """
-    return list(UserGroup.objects.all())
+    return list(UserGroup.objects.skip(offset).limit(limit))
 
 
 def delete_user_group(operator, user_group_id):
