@@ -26,6 +26,8 @@ class User(AuditableMixin, Document):
     active = BooleanField(required=True, default=True)
     key_list = ListField(ReferenceField('PublicKey'))
 
+    lowercase_display_name = StringField()
+
     def get_display_name(self):
         return "%s %s" % (self.first_name, self.last_name)
 
@@ -56,6 +58,8 @@ class User(AuditableMixin, Document):
 class UserGroup(AuditableMixin, Document):
     name = StringField(required=True)
     user_list = ListField(ReferenceField(User))
+
+    lowercase_name = StringField()
 
     def get_users(self):
         return set(self.user_list)

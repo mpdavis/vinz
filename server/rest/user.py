@@ -12,6 +12,7 @@ from internal import user as user_api
 
 from rest import AuthenticatedResource
 from rest import get_pagination_params
+from rest import get_search_term
 from rest import user_fields
 
 
@@ -50,7 +51,8 @@ class UserResourceList(AuthenticatedResource):
     @marshal_with(user_fields)
     def get(self):
         page, page_size = get_pagination_params()
-        return user_api.get_users(page_size, (page-1) * page_size)
+        term = get_search_term()
+        return user_api.get_users(page_size, (page-1) * page_size, term)
 
     def post(self):
         args = user_parser.parse_args()
