@@ -21,6 +21,8 @@ class Server(AuditableMixin, Document):
     user_list = ListField(ReferenceField(User))
     group_list = ListField(ReferenceField(UserGroup))
 
+    lowercase_name = StringField()
+
     def get_groups(self):
         """
         Gets all of the groups that have access to the machine.
@@ -62,6 +64,8 @@ class Server(AuditableMixin, Document):
 class ServerGroup(AuditableMixin, Document):
     name = StringField(required=True)
     server_list = ListField(ReferenceField(Server))
+
+    lowercase_name = StringField()
 
     def get_servers(self):
         return set(self.server_list)
