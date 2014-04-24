@@ -110,3 +110,7 @@ def remove_server_from_server_group(operator, server, server_group):
         activity_log.log_server_removed_from_server_group(server, server_group, operator)
 
     return server_group
+
+
+def get_num_server_groups():
+    return ServerGroup.objects.all().count()

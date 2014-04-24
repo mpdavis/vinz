@@ -61,3 +61,7 @@ def delete_user(operator, user_id):
     user = get_user(user_id)
     activity_log.log_user_deleted(user, operator)
     user.delete()
+
+
+def get_num_users():
+    return User.objects.all().count()
