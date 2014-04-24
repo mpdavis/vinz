@@ -32,7 +32,7 @@ DEV_SERVERS = {
 DEV_USERS = {
     'test@test.com': ['Test', 'Tester', 'test', 'testpassword'],
     'vinz@test.com': ['Vinz', 'Vinzer', 'vinz', 'vinz'],
-    'maxpete@iastate.edu': ['Max', 'Peterson', 'maxpete', 'vinz'],
+    'maxpete@iastate.edu': ['Max', 'Peterson', 'max', 'vinz'],
     'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
     'jhummel@iastate.edu': ['Jake', 'Hummel', 'jhummel', 'vinz'],
     'zheilman@iastate.edu': ['Zach', 'Heilman', 'zheilman', 'vinz'],
@@ -49,10 +49,13 @@ def setup_dev():
     from internal.exceptions import ServerAlreadyExistsError
     from internal.exceptions import UserAlreadyExistsError
 
+    system_user = internal_user.create_user(None, "Vinz", "System", "system@vinz.com",
+                                            "vinz", "vinz")
+
     servers = []
     for name, url in DEV_SERVERS.iteritems():
         try:
-            server = internal_server.create_server(None, name, url)
+            server = internal_server.create_server(system_user, name, url)
             servers.append(server)
             print "Created server %s: %s" % (name, url)
         except ServerAlreadyExistsError:
@@ -63,7 +66,7 @@ def setup_dev():
     for email, data in DEV_USERS.iteritems():
         user = None
         try:
-            user = internal_user.create_user(None, data[0], data[1], email, data[2], data[3])
+            user = internal_user.create_user(system_user, data[0], data[1], email, data[2], data[3])
             print "Created user %s: %s" % (data[2], email)
         except UserAlreadyExistsError:
             user = internal_user.get_user_by_email(email)
@@ -72,7 +75,7 @@ def setup_dev():
         if user:
             for server in servers:
                 print "Adding %s to %s" % (user.username, server.hostname)
-                internal_server.add_user_to_server(None, server, user.id)
+                internal_server.add_user_to_server(system_user, server, user.id)
 
             if not user.key_list:
                 print "Adding public key for %s" % user.username
