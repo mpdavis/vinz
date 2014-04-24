@@ -11,6 +11,7 @@ from constants import HTTP_STATUS
 from internal import user as user_api
 
 from rest import AuthenticatedResource
+from rest import get_pagination_params
 from rest import user_fields
 
 
@@ -48,8 +49,8 @@ class UserResourceList(AuthenticatedResource):
 
     @marshal_with(user_fields)
     def get(self):
-        # TODO check if the user is admin   checkAdmin(user_id)
-        return user_api.get_users()
+        page, page_size = get_pagination_params()
+        return user_api.get_users(page_size, (page-1) * page_size)
 
     def post(self):
         args = user_parser.parse_args()

@@ -26,12 +26,12 @@ def create_server_group(operator, name, **kwargs):
     return server_group
 
 
-def get_server_groups():
+def get_server_groups(limit=20, offset=0):
     """
     Fetch all of the ServerGroups from the database
     :return: a list of ServerGroup objects
     """
-    return list(ServerGroup.objects.all())
+    return list(ServerGroup.objects.skip(offset).limit(limit))
 
 
 def get_server_group(server_group_id):
