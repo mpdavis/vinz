@@ -59,6 +59,6 @@ class ScanLog(Document):
     status = IntField()
     server_status = IntField()
 
-    users_expected = ListField(StringField)
-    actual_users = ListField(StringField)
-    unexpected_users = ListField(StringField)
+    users_expected = ListField(StringField())
+    actual_users = ListField(StringField())
+    unexpected_users = ListField(StringField())
