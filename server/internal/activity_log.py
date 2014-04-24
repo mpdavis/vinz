@@ -21,12 +21,12 @@ def get_activity_log_text(log):
     return ACTIVITY_LOG_MESSAGES[log.action] % ctx
 
 
-def get_all_activity_logs():
+def get_all_activity_logs(limit=20, offset=0):
     """
     Get all the activity logs in the database
     :return: A list of ActivityLog objects
     """
-    return list(ActivityLog.objects.all().order_by('-timestamp'))
+    return list(ActivityLog.objects.skip(offset).limit(limit).order_by('-timestamp'))
 
 
 def log_server_created(server, actor):

@@ -45,9 +45,9 @@ def get_user_by_email(email):
         return None
 
 
-def get_users():
+def get_users(limit=20, offset=0):
     # fails if requesting user is not admin
-    return list(User.objects.all())
+    return list(User.objects.skip(offset).limit(limit))
 
 
 def delete_user(operator, user_id):

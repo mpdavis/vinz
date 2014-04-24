@@ -14,6 +14,7 @@ from internal.activity_log import get_activity_log_text
 from internal.activity_log import get_all_activity_logs
 
 from rest import AuthenticatedResource
+from rest import get_pagination_params
 from rest import user_fields
 
 
@@ -38,5 +39,6 @@ class ActivityLogResourceList(AuthenticatedResource):
 
     @marshal_with(activity_log_fields)
     def get(self):
-        logs = get_all_activity_logs()
+        page, page_size = get_pagination_params()
+        logs = get_all_activity_logs(page_size, (page-1) * page_size)
         return logs
