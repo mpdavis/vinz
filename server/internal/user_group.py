@@ -105,3 +105,7 @@ def remove_user_from_user_group(operator, user, user_group):
         user_group.user_list.remove(user)
         user_group.save()
         activity_log.log_user_removed_from_user_group(user, user_group, operator)
+
+
+def get_num_user_groups():
+    return UserGroup.objects.all().count()

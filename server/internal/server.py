@@ -162,3 +162,7 @@ def get_usernames_for_hostname(hostname):
 
     usernames = server.get_usernames()
     return usernames
+
+
+def get_num_servers():
+    return Server.objects.all().count()
