@@ -1,12 +1,12 @@
 <div class="container" >
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-sm-12 sectionTitle sectionBannerTitle">
-      Server Group Dashboard
-    </div>
     <a class="btn btn-default backButton" href="#/server_groups/">
       <i class="fa fa-chevron-left"></i> All Groups
     </a>
+    <div class="col-sm-12 sectionTitle sectionBannerTitle">
+      Server Group Dashboard
+    </div>
   </div>
 
 	<!-- Server Overview -->
@@ -21,24 +21,16 @@
 
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-xs-2 sectionBody">
-      <div class="btn-group btn-input clearfix">
-        <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
-          <span data-bind="label">Servers</span> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">User</a></li>
-          <li><a href="#">User Groups</a></li>
-        </ul>
-      </div>
+    <div class="col-xs-2 sectionTitle">
+      Servers
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-8">
       <div class="btn-group col-xs-6" data-toggle="buttons">
         <label class="btn btn-default active">
-          <input id="showAccess" type="radio" name="access" checked="checked"> Access
+          <input id="showAccess" type="radio" name="access" checked="checked"> In Group
         </label>
         <label class="btn btn-default">
-          <input type="radio" name="access"> No Access
+          <input type="radio" name="access"> Not In Group
         </label>
       </div>
       <div class="col-xs-6 right-inner-addon">
@@ -52,13 +44,13 @@
 	<table class="serverTable table table-hover table-striped table-bordered">
     <thead>
       <tr>
-        <th>Username</th>
-        <th>Email</th>
+        <th>Name</th>
+        <th>Hostname</th>
         <th>Access</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in usersToDisplayUnderServer | filter:userSearch">
+      <tr ng-repeat="user in serversToDisplayUnderGroup | filter:userSearch">
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
         <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success':  !access.has }">{{access.message}}</div></td>

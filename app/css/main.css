@@ -119,9 +119,10 @@ body {
 
 .backButton {
   position: absolute;
-  top: 4px;
-  left: 20px;
   color: #afafaf;
+  margin-top: 4px;
+  margin-left: 4px;
+  z-index: 100;
 }
 
 .backButton:hover {

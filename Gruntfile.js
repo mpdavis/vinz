@@ -31,7 +31,7 @@ module.exports = function(grunt) {
             'bootstrap': bowerBase + 'bootstrap/',
             'jquery': bowerBase + 'jquery/',
             'fontAwesome': bowerBase + 'font-awesome/',
-            'chartjs': bowerBase + 'chartjs/'
+            'flot': bowerBase + 'flot/'
         },
         'build': {
             'js': buildBase + 'js/'
@@ -147,7 +147,7 @@ module.exports = function(grunt) {
                     directories.bower.angularRoute + 'angular-route.js',
                     directories.bower.angularCookies + 'angular-cookies.js',
                     directories.bower.angularSanitize + 'angular-sanitize.js',
-                    directories.bower.chartjs + 'Chart.min.js',
+                    directories.bower.flot + 'jquery.flot.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/logs.js',
                     directories.frontend.js + 'controllers/servers.js',
