@@ -1,4 +1,6 @@
 
+import os
+
 from ansible.runner import Runner
 from ansible.inventory import Inventory
 
@@ -20,6 +22,8 @@ class VinzRunner(Runner):
                  module_args=None,
                  remote_port=None,
                  ):
+
+        os.environ['ANSIBLE_HOST_KEY_CHECKING'] = "False"
 
         if not isinstance(hosts, list):
             hosts = [hosts]

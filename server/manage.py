@@ -1,3 +1,4 @@
+
 import pprint
 
 from crontab import CronTab
@@ -17,13 +18,13 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 
 DEV_SERVERS = {
-    # 'ubuntu 8.04': 'vinz-ubuntu-08-04.student.iastate.edu',
-    # 'ubuntu 10.04': 'vinz-ubuntu-10-04.student.iastate.edu',
-    'ubuntu 12.04': 'vinz-ubuntu.student.iastate.edu',
-    'debian 7': 'vinz-debian.student.iastate.edu',
-    # 'debian 6': 'vinz-debian-6.student.iastate.edu',
-    # 'debian 5': 'vinz-debian-5.student.iastate.edu',
-    # 'debian 4': 'vinz-debian-4.student.iastate.edu',
+    'ubuntu 8.04': 'vinz-ubuntu-08-04.student.iastate.edu',
+    'ubuntu 10.04': 'vinz-ubuntu-10-04.student.iastate.edu',
+    'ubuntu 12.04': 'vinz-ubuntu-12-04.student.iastate.edu',
+    'debian 7': 'vinz-debian-7.student.iastate.edu',
+    'debian 6': 'vinz-debian-6.student.iastate.edu',
+    'debian 5': 'vinz-debian-5.student.iastate.edu',
+    'debian 4': 'vinz-debian-4.student.iastate.edu',
     'fedora': 'vinz-fedora.student.iastate.edu',
     'opensuse': 'vinz-opensuse.student.iastate.edu',
     'centos': 'vinz-centos.student.iastate.edu',
@@ -150,7 +151,7 @@ def remove_public_key(username, filename):
 @manager.command
 def scan():
     from scanner.scanner import Scanner
-    s = Scanner(debug=True, add_users=True, remove_users=True, add_keys=True, remove_keys=False)
+    s = Scanner(debug=True, add_users=True, remove_users=True, add_keys=True, remove_keys=True)
     results = s.scan()
     # pp = pprint.PrettyPrinter()
     # pp.pprint(results)
