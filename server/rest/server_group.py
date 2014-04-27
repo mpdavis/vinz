@@ -12,11 +12,14 @@ from constants import HTTP_STATUS
 from internal import server as server_api
 from internal import server_group as server_group_api
 
+from internal import user as user_api
+
 from rest import AuthenticatedResource
 from rest import get_pagination_params
 from rest import get_search_term
 from rest import server_fields
 from rest import server_group_fields
+from rest import user_fields
 
 
 server_group_parser = reqparse.RequestParser()
@@ -93,4 +96,42 @@ class ServerGroupServersResource(AuthenticatedResource):
         server_group = server_group_api.get_server_group(server_group_id)
         server = server_api.get_server(server_id)
         server_group_api.remove_server_from_server_group(self.user, server, server_group)
+        return '', HTTP_STATUS.DELETED
+
+
+server_group_user_parser = reqparse.RequestParser()
+server_group_user_parser.add_argument('user_id', type=str, location='json', required=True)
+
+
+class ServerGroupUsersResourceList(AuthenticatedResource):
+    """
+    REST endpoint to serve up a list of users who have access to a ServerGroup
+    """
+
+    @marshal_with(user_fields)
+    def get(self, server_group_id):
+        server_group = server_group_api.get_server_group(server_group_id)
+        return list(server_group.get_users())
+
+    def post(self, server_group_id):
+        """
+        Add user access to a ServerGroup
+        :param server_group_id: The ServerGroup id supplied in the URL
+        """
+        server_group = server_group_api.get_server_group(server_group_id)
+        args = server_group_user_parser.parse_args()
+        user = user_api.get_user(args.get('user_id'))
+        server_group_api.add_user_access_to_server_group(self.user, user, server_group)
+        return marshal(server_group, server_group_fields), HTTP_STATUS.CREATED
+
+
+class ServerGroupUsersResource(AuthenticatedResource):
+    """
+    REST endpoint to interact with a specific ServerGroup user
+    """
+
+    def delete(self, server_group_id, user_id):
+        server_group = server_group_api.get_server_group(server_group_id)
+        user = user_api.get_user(user_id)
+        server_group_api.remove_user_access_from_server_group(self.user, user, server_group)
         return '', HTTP_STATUS.DELETED
