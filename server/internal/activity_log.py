@@ -29,6 +29,10 @@ def get_all_activity_logs(limit=20, offset=0):
     return list(ActivityLog.objects.skip(offset).limit(limit).order_by('-timestamp'))
 
 
+def get_num_activity_logs():
+    return ActivityLog.objects.all().count()
+
+
 def log_server_created(server, actor):
     """
     Log when a server is created
