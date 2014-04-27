@@ -48,12 +48,12 @@ class UserResourceList(AuthenticatedResource):
     REST endpoint to serve up a list of User resources from the database.
     """
 
+    @marshal_with(user_fields)
     def get(self):
         page, page_size = get_pagination_params()
         term = get_search_term()
         users = user_api.get_users(page_size, (page-1) * page_size, term)
-        marshaled_users = marshal(users, user_fields)
-        return {'count': user_api.get_num_users(), 'users': marshaled_users}
+        return users
 
     def post(self):
         args = user_parser.parse_args()

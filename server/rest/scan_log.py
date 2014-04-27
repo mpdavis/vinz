@@ -13,7 +13,6 @@ from flask.ext.restful import reqparse
 from constants import HTTP_STATUS
 
 from internal.scan_log import get_all_scan_logs
-from internal.scan_log import get_num_scan_logs
 
 from rest import AuthenticatedResource
 from rest import get_pagination_params
@@ -40,11 +39,11 @@ class ScanLogResourceList(AuthenticatedResource):
     REST endpoint to serve up a list of activity logs
     """
 
+    @marshal_with(scan_log_fields)
     def get(self):
         page, page_size = get_pagination_params()
         logs = get_all_scan_logs(page_size, (page-1) * page_size)
-        marshaled_logs = marshal(logs, scan_log_fields)
-        return {'count': get_num_scan_logs(), 'scan_logs': marshaled_logs}
+        return logs
 
     def post(self):
         """Kick off a scan manually"""
