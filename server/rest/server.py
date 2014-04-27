@@ -89,7 +89,7 @@ class ServerUserResourceList(AuthenticatedResource):
         no_access = request.args.get('no_access')
         if no_access:
             access = set(server.get_users())
-            all_users = set(user_api.get_users())
+            all_users = set(user_api.get_all_users())
             return list(all_users.difference(access))
         return server.get_all_users()
 

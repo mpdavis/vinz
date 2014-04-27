@@ -114,3 +114,91 @@ def remove_server_from_server_group(operator, server, server_group):
 
 def get_num_server_groups():
     return ServerGroup.objects.all().count()
+
+
+def add_user_access_to_server_group(operator, user, server_group):
+    """
+    Give a User access to a ServerGroup
+    :param operator: User performing this action
+    :param user: The User to add
+    :param server_group: The ServerGroup to add to
+    :return: The updated ServerGroup
+    """
+    if not user:
+        raise ValueError("User cannot be None")
+
+    if not server_group:
+        raise ValueError("ServerGroup cannot be None")
+
+    if user not in server_group.get_users():
+        server_group.user_list.append(user)
+        server_group.save()
+        activity_log.log_user_added_to_server_group(user, server_group, operator)
+
+    return server_group
+
+
+def remove_user_access_from_server_group(operator, user, server_group):
+    """
+    Revoke a User's access to a ServerGroup
+    :param operator: User performing this action
+    :param user: The User to remove
+    :param server_group: The ServerGroup to remove from
+    :return: The updated ServerGroup
+    """
+    if not user:
+        raise ValueError("User cannot be None")
+
+    if not server_group:
+        raise ValueError("ServerGroup cannot be None")
+
+    if user in server_group.get_users():
+        server_group.user_list.remove(user)
+        server_group.save()
+        activity_log.log_user_removed_from_server_group(user, server_group, operator)
+
+    return server_group
+
+
+def add_user_group_access_to_server_group(operator, user_group, server_group):
+    """
+    Give a UserGroup access to a ServerGroup
+    :param operator: User performing this action
+    :param user_group: The UserGroup to add
+    :param server_group: The ServerGroup to add to
+    :return: The updated ServerGroup
+    """
+    if not user_group:
+        raise ValueError("UserGroup cannot be None")
+
+    if not server_group:
+        raise ValueError("ServerGroup cannot be None")
+
+    if user_group not in server_group.get_groups():
+        server_group.group_list.append(user_group)
+        server_group.save()
+        activity_log.log_user_group_added_to_server_group(user_group, server_group, operator)
+
+    return server_group
+
+
+def remove_user_group_access_from_server_group(operator, user_group, server_group):
+    """
+    Revoke a UserGroups' access to a ServerGroup
+    :param operator: User performing this action
+    :param user_group: The UserGroup to remove
+    :param server_group: The ServerGroup to remove from
+    :return: The updated ServerGroup
+    """
+    if not user_group:
+        raise ValueError("UserGroup cannot be None")
+
+    if not server_group:
+        raise ValueError("ServerGroup cannot be None")
+
+    if user_group in server_group.get_groups():
+        server_group.group_list.remove(user_group)
+        server_group.save()
+        activity_log.log_user_group_removed_from_server_group(user_group, server_group, operator)
+
+    return server_group

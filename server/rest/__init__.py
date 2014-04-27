@@ -45,6 +45,15 @@ user_fields = {
     'key_list': fields.List(fields.String)
 }
 
+user_group_fields = {
+    #'uri': fields.Url(endpoint='user_group'),  #TODO: Figure this out
+    'id': fields.String(),
+    'name': fields.String(),
+    'user_list': fields.List(fields.String),
+    'creation_date': fields.DateTime(),
+    'modified_date': fields.DateTime(),
+}
+
 
 class VinzApi(Api):
     """

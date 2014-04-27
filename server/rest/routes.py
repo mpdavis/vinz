@@ -23,6 +23,10 @@ from rest.server_group import ServerGroupResource
 from rest.server_group import ServerGroupResourceList
 from rest.server_group import ServerGroupServersResource
 from rest.server_group import ServerGroupServersResourceList
+from rest.server_group import ServerGroupUsersResource
+from rest.server_group import ServerGroupUsersResourceList
+from rest.server_group import ServerGroupUserGroupsResource
+from rest.server_group import ServerGroupUserGroupsResourceList
 
 from rest.stats import StatisticsResource
 
@@ -68,6 +72,10 @@ def initialize_routes(api):
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>', ServerGroupResource, endpoint='server-group')
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/', ServerGroupServersResourceList, endpoint='server-group-servers')
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/<string:server_id>', ServerGroupServersResource, endpoint='server-group-server')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/users/', ServerGroupUsersResourceList, endpoint='server-group-users')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/users/<string:user_id>', ServerGroupUsersResource, endpoint='server-group-user')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/', ServerGroupUserGroupsResourceList, endpoint='server-group-users')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/<string:user_group_id>', ServerGroupUserGroupsResource, endpoint='server-group-user')
 
     add_resource(BASE_API_PATH % '/stats/', StatisticsResource, endpoint='stats')
 
