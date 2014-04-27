@@ -106,7 +106,7 @@ class ServerScanner():
             for user in self.users_to_add:
                 self.add_user(user)
 
-        # self.users_to_remove = self.server_users.difference(self.vinz_users)
+        self.users_to_remove = self.server_users.difference(self.vinz_users)
 
         # if self.debug:
         #     print_line('Users to remove', self.server.hostname, self.users_to_remove)
@@ -235,7 +235,9 @@ class ServerScanner():
 
         from models.audit import ScanLog
         logs = ScanLog.objects.all().count()
-        logging.warn(logs)
+
+        if self.debug:
+            print_line("Log created", self.server.hostname)
 
         return
 

@@ -19,12 +19,12 @@ SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
 
 DEV_SERVERS = {
     'ubuntu 8.04': 'vinz-ubuntu-08-04.student.iastate.edu',
-    'ubuntu 10.04': 'vinz-ubuntu-10-04.student.iastate.edu',
+    # 'ubuntu 10.04': 'vinz-ubuntu-10-04.student.iastate.edu',
     'ubuntu 12.04': 'vinz-ubuntu-12-04.student.iastate.edu',
     'debian 7': 'vinz-debian-7.student.iastate.edu',
-    'debian 6': 'vinz-debian-6.student.iastate.edu',
+    # 'debian 6': 'vinz-debian-6.student.iastate.edu',
     'debian 5': 'vinz-debian-5.student.iastate.edu',
-    'debian 4': 'vinz-debian-4.student.iastate.edu',
+    # 'debian 4': 'vinz-debian-4.student.iastate.edu',
     'fedora': 'vinz-fedora.student.iastate.edu',
     'opensuse': 'vinz-opensuse.student.iastate.edu',
     'centos': 'vinz-centos.student.iastate.edu',
@@ -100,7 +100,7 @@ def setup_cron():
 @manager.command
 def get_users():
     from scanner.api import user
-    print user.get_users_on_host('vinz-debian.student.iastate.edu')
+    print user.get_users_on_host('vinz-debian-7.student.iastate.edu')
     print user.get_users_on_host('vinz-fedora.student.iastate.edu')
     print user.get_users_on_host('vinz-opensuse.student.iastate.edu')
     print user.get_users_on_host('vinz-centos.student.iastate.edu')
@@ -151,11 +151,14 @@ def remove_public_key(username, filename):
 @manager.command
 def scan():
     from scanner.scanner import Scanner
+    s = Scanner(debug=False, add_users=True, remove_users=True, add_keys=True, remove_keys=True)
+    results = s.scan()
+
+@manager.command
+def debug_scan():
+    from scanner.scanner import Scanner
     s = Scanner(debug=True, add_users=True, remove_users=True, add_keys=True, remove_keys=True)
     results = s.scan()
-    # pp = pprint.PrettyPrinter()
-    # pp.pprint(results)
-
 
 if __name__ == "__main__":
     manager.run()

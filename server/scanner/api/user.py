@@ -26,9 +26,8 @@ def get_users_on_host(hostname):
         output = results['contacted'][hostname]['stdout']
     except Exception, e:
         # logging.exception(e)
-        # logging.warn(results)
-        pass
-
+        logging.warn(results)
+        raise e
 
     users = []
     for line in iter(output.splitlines()):
