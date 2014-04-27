@@ -4,6 +4,7 @@ from flask.ext.login import login_required
 from flask.ext.restful import Api
 from flask.ext.restful import fields
 from flask.ext.restful import Resource
+from flask.ext.restful.reqparse import RequestParser
 
 from constants import HTTP_STATUS
 
@@ -71,3 +72,37 @@ class AuthenticatedResource(Resource):
     @property
     def user(self):
         return get_current_user()
+
+
+class PaginationRequestParser(RequestParser):
+
+    def __init__(self, *args, **kwargs):
+        super(PaginationRequestParser, self).__init__(*args, **kwargs)
+        self.add_argument("page", type=int, location='args', default=1, required=False)
+        self.add_argument("page_size", type=int, location='args', default=20, required=False)
+
+
+pagination_parser = PaginationRequestParser()
+
+
+def get_pagination_params():
+    page_args = pagination_parser.parse_args()
+    return page_args.get('page'), page_args.get('page_size')
+
+
+class SearchTermRequestParser(RequestParser):
+
+    def __init__(self, *args, **kwargs):
+        super(SearchTermRequestParser, self).__init__(*args, **kwargs)
+        self.add_argument("search_term", type=str, location='args', default=None, required=False)
+
+
+search_term_parser = SearchTermRequestParser()
+
+
+def get_search_term():
+    search_args = search_term_parser.parse_args()
+    term = search_args.get('search_term')
+    if term:
+        term = term.lower()
+    return term

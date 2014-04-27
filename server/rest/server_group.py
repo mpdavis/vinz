@@ -13,6 +13,8 @@ from internal import server as server_api
 from internal import server_group as server_group_api
 
 from rest import AuthenticatedResource
+from rest import get_pagination_params
+from rest import get_search_term
 from rest import server_fields
 from rest import server_group_fields
 
@@ -46,7 +48,9 @@ class ServerGroupResourceList(AuthenticatedResource):
 
     @marshal_with(server_group_fields)
     def get(self):
-        return server_group_api.get_server_groups()
+        page, page_size = get_pagination_params()
+        term = get_search_term()
+        return server_group_api.get_server_groups(page_size, (page-1) * page_size, term)
 
     def post(self):
         args = server_group_parser.parse_args()

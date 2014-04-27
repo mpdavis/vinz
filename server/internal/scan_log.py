@@ -30,9 +30,9 @@ def create_scan_log(server, server_status, users_expected, actual_users, unexpec
         server_status=server_status,
         timestamp=now,
         status=status,
-        users_expected=users_expected,
-        actual_users=actual_users,
-        unexpected_users=unexpected_users,
+        users_expected=list(users_expected),
+        actual_users=list(actual_users),
+        unexpected_users=list(unexpected_users),
     )
     log.save()
     return log

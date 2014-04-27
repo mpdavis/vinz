@@ -15,11 +15,13 @@ from models.auth import User
 from models.auth import UserGroup
 
 
-class Server(Document, AuditableMixin):
+class Server(AuditableMixin, Document):
     name = StringField(required=True)
     hostname = StringField(required=True)
     user_list = ListField(ReferenceField(User))
     group_list = ListField(ReferenceField(UserGroup))
+
+    lowercase_name = StringField()
 
     def get_groups(self):
         """
@@ -59,9 +61,11 @@ class Server(Document, AuditableMixin):
         return [user.username for user in users]
 
 
-class ServerGroup(Document, AuditableMixin):
+class ServerGroup(AuditableMixin, Document):
     name = StringField(required=True)
     server_list = ListField(ReferenceField(Server))
+
+    lowercase_name = StringField()
 
     def get_servers(self):
         return set(self.server_list)

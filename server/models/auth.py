@@ -17,7 +17,7 @@ from mongoengine import StringField
 from models.audit import AuditableMixin
 
 
-class User(Document, AuditableMixin):
+class User(AuditableMixin, Document):
     first_name = StringField(required=True)
     last_name = StringField(required=True)
     email = StringField(required=True)
@@ -25,6 +25,8 @@ class User(Document, AuditableMixin):
     username = StringField(required=True)
     active = BooleanField(required=True, default=True)
     key_list = ListField(ReferenceField('PublicKey'))
+
+    lowercase_display_name = StringField()
 
     def get_display_name(self):
         return "%s %s" % (self.first_name, self.last_name)
@@ -53,15 +55,17 @@ class User(Document, AuditableMixin):
         return self.username
 
 
-class UserGroup(Document, AuditableMixin):
+class UserGroup(AuditableMixin, Document):
     name = StringField(required=True)
     user_list = ListField(ReferenceField(User))
+
+    lowercase_name = StringField()
 
     def get_users(self):
         return set(self.user_list)
 
 
-class PublicKey(Document, AuditableMixin):
+class PublicKey(AuditableMixin, Document):
     owner = ReferenceField(User)
     key_name = StringField(required=True)
     username = StringField(required=False)

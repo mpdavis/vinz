@@ -20,18 +20,20 @@ def create_server_group(operator, name, **kwargs):
     if existing_server_group:
         raise ServerGroupAlreadyExistsError("The server group with the same name already exits")
 
-    server_group = ServerGroup(name=name)
+    server_group = ServerGroup(name=name, lowercase_name=name.lower())
     server_group.save()
     activity_log.log_server_group_created(server_group, operator)
     return server_group
 
 
-def get_server_groups():
+def get_server_groups(limit=20, offset=0, term=None):
     """
     Fetch all of the ServerGroups from the database
     :return: a list of ServerGroup objects
     """
-    return list(ServerGroup.objects.all())
+    if term:
+        list(ServerGroup.objects.filter(lowercase_name__contains=term).skip(offset).limit(limit))
+    return list(ServerGroup.objects.skip(offset).limit(limit))
 
 
 def get_server_group(server_group_id):
@@ -108,3 +110,7 @@ def remove_server_from_server_group(operator, server, server_group):
         activity_log.log_server_removed_from_server_group(server, server_group, operator)
 
     return server_group
+
+
+def get_num_server_groups():
+    return ServerGroup.objects.all().count()

@@ -13,6 +13,8 @@ from internal import user as user_api
 from internal import user_group as user_group_api
 
 from rest import AuthenticatedResource
+from rest import get_pagination_params
+from rest import get_search_term
 from rest import user_fields
 
 
@@ -54,13 +56,14 @@ class UserGroupResourceList(AuthenticatedResource):
 
     @marshal_with(user_group_fields)
     def get(self):
-        # TODO check if the user is admin   checkAdmin(user_id)
-        return user_group_api.get_user_groups()
+        page, page_size = get_pagination_params()
+        term = get_search_term()
+        return user_group_api.get_user_groups(page_size, (page-1) * page_size, term)
 
     def post(self):
         args = user_group_parser.parse_args()
         user_group = user_group_api.create_user_group(self.user, **args)
-        return marshal(user_group , user_group_fields), HTTP_STATUS.CREATED
+        return marshal(user_group, user_group_fields), HTTP_STATUS.CREATED
 
 
 user_group_user_parser = reqparse.RequestParser()

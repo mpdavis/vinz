@@ -19,6 +19,8 @@ from internal import server as server_api
 from internal import user as user_api
 
 from rest import AuthenticatedResource
+from rest import get_pagination_params
+from rest import get_search_term
 from rest import server_fields
 from rest import server_group_fields
 from rest import user_fields
@@ -61,7 +63,9 @@ class ServerResourceList(AuthenticatedResource):
 
     @marshal_with(server_fields)
     def get(self):
-        return server_api.get_servers()
+        page, page_size = get_pagination_params()
+        term = get_search_term()
+        return server_api.get_servers(page_size, (page-1) * page_size, term)
 
     def post(self):
         args = server_parser.parse_args()

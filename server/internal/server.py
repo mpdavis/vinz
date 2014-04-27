@@ -22,14 +22,17 @@ def create_server(operator, name, hostname, **kwargs):
     existing_server = maybe_get_server_by_hostname(hostname)
     if existing_server:
         raise ServerAlreadyExistsError("A server with this hostname already exists.")
-    server = Server(name=name, hostname=hostname)
+    server = Server(name=name, hostname=hostname, lowercase_name=name.lower())
     server.save()
     activity_log.log_server_created(server, operator)
     return server
 
 
-def get_servers():
-    return list(Server.objects.all())
+def get_servers(limit=20, offset=0, search_term=None):
+    if search_term:
+        return list(Server.objects.filter(lowercase_name__contains=search_term)
+                                  .skip(offset).limit(limit))
+    return list(Server.objects.skip(offset).limit(limit))
 
 
 def get_server(server_id):
@@ -159,3 +162,7 @@ def get_usernames_for_hostname(hostname):
 
     usernames = server.get_usernames()
     return usernames
+
+
+def get_num_servers():
+    return Server.objects.all().count()

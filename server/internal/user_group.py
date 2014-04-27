@@ -15,8 +15,8 @@ def create_user_group(operator, name, **kwargs):
     """
     existing_user_group = maybe_get_user_group_by_name(name)
     if existing_user_group:
-        raise UserGroupAlreadyExistsError("A user with that email address exists.")
-    user_group = UserGroup(name=name)
+        raise UserGroupAlreadyExistsError("A usergroup with that name already exists.")
+    user_group = UserGroup(name=name, lowercase_name=name.lower())
     activity_log.log_user_group_created(user_group, operator)
     user_group.save()
     return user_group
@@ -43,11 +43,14 @@ def maybe_get_user_group_by_name(user_group_name):
         return None
 
 
-def get_user_groups():
+def get_user_groups(limit=20, offset=0, term=None):
     """
     Get a list of all UserGroups
     """
-    return list(UserGroup.objects.all())
+    if term:
+        return list(UserGroup.objects.filter(lowercase_name__contains=term)
+                                     .skip(offset).limit(limit))
+    return list(UserGroup.objects.skip(offset).limit(limit))
 
 
 def delete_user_group(operator, user_group_id):
@@ -102,3 +105,7 @@ def remove_user_from_user_group(operator, user, user_group):
         user_group.user_list.remove(user)
         user_group.save()
         activity_log.log_user_removed_from_user_group(user, user_group, operator)
+
+
+def get_num_user_groups():
+    return UserGroup.objects.all().count()

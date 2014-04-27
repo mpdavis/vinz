@@ -20,7 +20,10 @@ def create_user(operator, first_name, last_name, email, username, password, **kw
     existing_user = maybe_get_user_by_email(email)
     if existing_user:
         raise UserAlreadyExistsError("A user with that email address exists.")
-    user = User(first_name=first_name, last_name=last_name, email=email, username=username)
+    name = "%s %s" % (first_name, last_name)
+    lower_name = name.lower()
+    user = User(first_name=first_name, last_name=last_name, email=email, username=username,
+                lowercase_display_name=lower_name)
     user.password = User.encode_password(password)
     user.save()
     activity_log.log_user_created(user, operator)
@@ -45,9 +48,12 @@ def get_user_by_email(email):
         return None
 
 
-def get_users():
-    # fails if requesting user is not admin
-    return list(User.objects.all())
+def get_users(limit=20, offset=0, term=None):
+    # TODO fails if requesting user is not admin
+    if term:
+        return list(User.objects.filter(lowercase_display_name__contains=term)
+                                .skip(offset).limit(limit))
+    return list(User.objects.skip(offset).limit(limit))
 
 
 def delete_user(operator, user_id):
@@ -55,3 +61,7 @@ def delete_user(operator, user_id):
     user = get_user(user_id)
     activity_log.log_user_deleted(user, operator)
     user.delete()
+
+
+def get_num_users():
+    return User.objects.all().count()
