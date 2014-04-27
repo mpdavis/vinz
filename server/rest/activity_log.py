@@ -12,6 +12,7 @@ from flask.ext.restful import reqparse
 
 from internal.activity_log import get_activity_log_text
 from internal.activity_log import get_all_activity_logs
+from internal.activity_log import get_num_activity_logs
 
 from rest import AuthenticatedResource
 from rest import get_pagination_params
@@ -37,8 +38,8 @@ class ActivityLogResourceList(AuthenticatedResource):
     REST endpoint to serve up a list of activity logs
     """
 
-    @marshal_with(activity_log_fields)
     def get(self):
         page, page_size = get_pagination_params()
         logs = get_all_activity_logs(page_size, (page-1) * page_size)
-        return logs
+        marshaled_logs = marshal(logs, activity_log_fields)
+        return {'count': get_num_activity_logs(), 'activity_logs': marshaled_logs}

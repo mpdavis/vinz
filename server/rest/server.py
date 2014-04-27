@@ -61,11 +61,12 @@ class ServerResourceList(AuthenticatedResource):
     REST endpoint to serve up a list of Server resources from the database.
     """
 
-    @marshal_with(server_fields)
     def get(self):
         page, page_size = get_pagination_params()
         term = get_search_term()
-        return server_api.get_servers(page_size, (page-1) * page_size, term)
+        servers = server_api.get_servers(page_size, (page-1) * page_size, term)
+        marshaled_servers = marshal(servers, server_fields)
+        return {'count': server_api.get_num_servers(), 'servers': marshaled_servers}
 
     def post(self):
         args = server_parser.parse_args()
