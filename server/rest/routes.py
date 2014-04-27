@@ -74,8 +74,8 @@ def initialize_routes(api):
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/<string:server_id>', ServerGroupServersResource, endpoint='server-group-server')
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/users/', ServerGroupUsersResourceList, endpoint='server-group-users')
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/users/<string:user_id>', ServerGroupUsersResource, endpoint='server-group-user')
-    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/', ServerGroupUserGroupsResourceList, endpoint='server-group-users')
-    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/<string:user_group_id>', ServerGroupUserGroupsResource, endpoint='server-group-user')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/', ServerGroupUserGroupsResourceList, endpoint='server-group-user-groups')
+    add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/<string:user_group_id>', ServerGroupUserGroupsResource, endpoint='server-group-user-group')
 
     add_resource(BASE_API_PATH % '/stats/', StatisticsResource, endpoint='stats')
 
