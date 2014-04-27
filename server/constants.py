@@ -66,6 +66,10 @@ class AUDIT_ACTIONS(object):
     USER_ACCESS_ADDED_TO_SERVER_GROUP = 'user_access_added_to_server_group'
     # When a user loses access to a ServerGroup
     USER_ACCESS_REMOVED_FROM_SERVER_GROUP = 'user_access_removed_from_server_group'
+    # When a UserGroup gains access to a ServerGroup
+    USER_GROUP_ACCESS_ADDED_TO_SERVER_GROUP = 'user_group_access_added_to_server_group'
+    # When a UserGroup loses access from a ServerGroup
+    USER_GROUP_ACCESS_REMOVED_FROM_SERVER_GROUP = 'user_group_access_removed_from_server_group'
 
     # When a new UserGroup is created in vinz
     USER_GROUP_CREATED = 'user_group_created'
@@ -94,6 +98,8 @@ ACTIVITY_LOG_MESSAGES = {
     AUDIT_ACTIONS.USER_GROUP_ACCESS_REMOVED: 'User-group "%(obj1_name)s" no longer has access to the server "%(obj2_name)s".',
     AUDIT_ACTIONS.USER_ACCESS_ADDED_TO_SERVER_GROUP: 'User "%(obj1_name)s" now has access to the server-group "%(obj2_name)s".',
     AUDIT_ACTIONS.USER_ACCESS_REMOVED_FROM_SERVER_GROUP: 'User "%(obj1_name)s" no longer has access to the server-group "%(obj2_name)s".',
+    AUDIT_ACTIONS.USER_GROUP_ACCESS_ADDED_TO_SERVER_GROUP: 'User-group "%(obj1_name)s" now has access to the server-group "%(obj2_name)s".',
+    AUDIT_ACTIONS.USER_GROUP_ACCESS_REMOVED_FROM_SERVER_GROUP: 'User-group "%(obj1_name)s" no longer has access to the server-group "%(obj2_name)s".',
 }
 
 

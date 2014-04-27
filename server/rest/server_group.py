@@ -11,6 +11,7 @@ from constants import HTTP_STATUS
 
 from internal import server as server_api
 from internal import server_group as server_group_api
+from internal import user_group as user_group_api
 
 from internal import user as user_api
 
@@ -20,6 +21,7 @@ from rest import get_search_term
 from rest import server_fields
 from rest import server_group_fields
 from rest import user_fields
+from rest import user_group_fields
 
 
 server_group_parser = reqparse.RequestParser()
@@ -134,4 +136,42 @@ class ServerGroupUsersResource(AuthenticatedResource):
         server_group = server_group_api.get_server_group(server_group_id)
         user = user_api.get_user(user_id)
         server_group_api.remove_user_access_from_server_group(self.user, user, server_group)
+        return '', HTTP_STATUS.DELETED
+
+
+server_group_user_group_parser = reqparse.RequestParser()
+server_group_user_group_parser.add_argument('user_group_id', type=str, location='json', required=True)
+
+
+class ServerGroupUserGroupsResourceList(AuthenticatedResource):
+    """
+    REST endpoint to serve up a list of UserGroups that have access to a ServerGroup
+    """
+
+    @marshal_with(user_group_fields)
+    def get(self, server_group_id):
+        server_group = server_group_api.get_server_group(server_group_id)
+        return list(server_group.get_groups())
+
+    def post(self, server_group_id):
+        """
+        Add UserGroup access to a ServerGroup
+        :param server_group_id: The ServerGroup id supplied in the URL
+        """
+        server_group = server_group_api.get_server_group(server_group_id)
+        args = server_group_user_group_parser.parse_args()
+        user_group = user_group_api.get_user_group(args.get('user_group_id'))
+        server_group_api.add_user_group_access_to_server_group(self.user, user_group, server_group)
+        return marshal(server_group, server_group_fields), HTTP_STATUS.CREATED
+
+
+class ServerGroupUserGroupsResource(AuthenticatedResource):
+    """
+    REST endpoint to interact with a specific ServerGroup UserGroup
+    """
+
+    def delete(self, server_group_id, user_group_id):
+        server_group = server_group_api.get_server_group(server_group_id)
+        user_group = user_group_api.get_user_group(user_group_id)
+        server_group_api.remove_user_group_access_from_server_group(self.user, user_group, server_group)
         return '', HTTP_STATUS.DELETED
