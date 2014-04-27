@@ -59,3 +59,12 @@ class UserResourceList(AuthenticatedResource):
         args = user_parser.parse_args()
         user = user_api.create_user(self.user, **args)
         return marshal(user, user_fields), HTTP_STATUS.CREATED
+
+
+class UserServersResourceList(AuthenticatedResource):
+    """
+    REST endpoint to serve up a list of Server resources that a user has access to.
+    """
+
+    def get(self):
+        pass
