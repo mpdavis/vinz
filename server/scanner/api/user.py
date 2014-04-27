@@ -1,6 +1,11 @@
 
+import logging
+
+from scanner.api import ssh_key
 from scanner.runner import VinzRunner
 from scanner.exceptions import DarkServerException
+
+from internal import user as internal_user
 
 import settings
 
@@ -13,11 +18,13 @@ def get_users_on_host(hostname):
 
     runner = VinzRunner(hostname, module_name='command', module_args='cat /etc/passwd')
     results = runner.run()
-
+    
     if not hostname in results['contacted']:
         raise DarkServerException("Host %s could not be contacted." % hostname)
-
-    output = results['contacted'][hostname]['stdout']
+    try:
+        output = results['contacted'][hostname]['stdout']
+    except Exception, e:
+        output = ''
 
     users = []
     for line in iter(output.splitlines()):
@@ -67,13 +74,20 @@ def remove_user(username, hosts):
     if not isinstance(username, basestring):
         raise ValueError("Username must be a string")
 
-    runner = VinzRunner(hosts, module_name='user', module_args='name=%s state=absent' % username)
-    results = runner.run()
+    user = internal_user.get_user_by_username(username)
+    if not user:
+        return
 
-    if not isinstance(hosts, list):
-        hosts = [hosts]
+    for key in list(user.key_list):
+        ssh_key.remove_user_public_key(username, hosts, key.value)
 
-    contacted = results['contacted']
-    for host in hosts:
-        if not contacted.get(host, None):
-            raise DarkServerException("Host %s could not be contacted." % host)
+    # runner = VinzRunner(hosts, module_name='user', module_args='name=%s state=absent' % username)
+    # results = runner.run()
+
+    # if not isinstance(hosts, list):
+    #     hosts = [hosts]
+
+    # contacted = results['contacted']
+    # for host in hosts:
+    #     if not contacted.get(host, None):
+    #         raise DarkServerException("Host %s could not be contacted." % host)
