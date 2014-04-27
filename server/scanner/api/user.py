@@ -20,14 +20,11 @@ def get_users_on_host(hostname):
     results = runner.run()
     
     if not hostname in results['contacted']:
-        logging.warn(results)
         raise DarkServerException("Host %s could not be contacted." % hostname)
     try:
         output = results['contacted'][hostname]['stdout']
     except Exception, e:
-        # logging.exception(e)
-        logging.warn(results)
-        raise e
+        output = ''
 
     users = []
     for line in iter(output.splitlines()):
