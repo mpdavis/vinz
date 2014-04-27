@@ -2,6 +2,8 @@
 .. module:: rest.server_group
    :synopsis: REST Resource definitions relating to server Groups
 """
+from flask import request
+
 from flask.ext.restful import fields
 from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
@@ -76,6 +78,11 @@ class ServerGroupServersResourceList(AuthenticatedResource):
     @marshal_with(server_fields)
     def get(self, server_group_id):
         server_group = server_group_api.get_server_group(server_group_id)
+        not_in_group = request.args.get('not_in_group')
+        if not_in_group:
+            in_group = set(server_group.server_list)
+            all_servers = set(server_api.get_all_servers())
+            return list(all_servers.difference(in_group))
         return list(server_group.server_list)
 
     def post(self, server_group_id):
@@ -113,6 +120,11 @@ class ServerGroupUsersResourceList(AuthenticatedResource):
     @marshal_with(user_fields)
     def get(self, server_group_id):
         server_group = server_group_api.get_server_group(server_group_id)
+        no_access = request.args.get('no_access')
+        if no_access:
+            access = set(server_group.get_users())
+            all_users = set(user_api.get_all_users())
+            return list(all_users.difference(access))
         return list(server_group.get_users())
 
     def post(self, server_group_id):
@@ -151,6 +163,11 @@ class ServerGroupUserGroupsResourceList(AuthenticatedResource):
     @marshal_with(user_group_fields)
     def get(self, server_group_id):
         server_group = server_group_api.get_server_group(server_group_id)
+        no_access = request.args.get('no_access')
+        if no_access:
+            access = set(server_group.get_groups())
+            all_user_groups = set(user_group_api.get_all_user_groups())
+            return list(all_user_groups.difference(access))
         return list(server_group.get_groups())
 
     def post(self, server_group_id):
