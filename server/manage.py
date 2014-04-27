@@ -14,7 +14,7 @@ manager.add_command("runserver", Server(host='0.0.0.0', port=5000))
 #TODO: This probably needs to be a setting somewhere. Most likely kept in the database.
 VINZ_USER = 'vagrant'
 VINZ_COMMENT = 'vinz'
-SCAN_COMMAND = '/usr/bin/python /vagrant/app/manage.py scan'
+SCAN_COMMAND = '/usr/bin/python /vagrant/server/manage.py scan'
 
 
 DEV_SERVERS = {
