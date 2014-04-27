@@ -46,15 +46,12 @@ class ServerGroupResourceList(AuthenticatedResource):
     REST endpoint to serve up a list of Server Group resources from the database.
     """
 
+    @marshal_with(server_group_fields)
     def get(self):
         page, page_size = get_pagination_params()
         term = get_search_term()
         server_groups = server_group_api.get_server_groups(page_size, (page-1) * page_size, term)
-        marshaled_server_groups = marshal(server_groups, server_group_fields)
-        return {
-            'count': server_group_api.get_num_server_groups(),
-            'server_groups': marshaled_server_groups,
-        }
+        return server_groups
 
     def post(self):
         args = server_group_parser.parse_args()
