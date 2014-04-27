@@ -96,6 +96,10 @@ def remove_user_public_key(username, hosts, user_public_key):
     :param user_public_key: The key to remove
     :return: A dict of whether operation succeeded on each host
     """
+
+    if username == 'root':
+        return {}
+
     module_args = 'state=absent user=%s key=\"%s\"' % (username, user_public_key)
     runner = VinzRunner(hosts=hosts, module_name='authorized_key', module_args=module_args)
     response = runner.run()

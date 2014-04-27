@@ -1,7 +1,12 @@
 
+import logging
 import multiprocessing
 
+from constants import SCAN_LOG_STATUS
+from constants import SERVER_STATUS
+
 from internal import public_key as internal_public_key
+from internal import scan_log as internal_scan_log
 from internal import server as internal_server
 
 from api import ssh_key as api_ssh_key
@@ -26,6 +31,9 @@ class ServerScanner():
 
     server_users = None
     vinz_users = None
+
+    users_to_add = None
+    users_to_remove = None
 
     def __init__(
             self,
@@ -86,26 +94,26 @@ class ServerScanner():
         if self.debug:
             print_line('Starting to scan users', self.server.hostname, 'add_users = %s, remove_users = %s' % (self.add_users, self.remove_users))
 
-        server_users = self.get_users_from_server()
-        vinz_users = self.get_users_from_vinz()
+        self.server_users = self.get_users_from_server()
+        self.vinz_users = self.get_users_from_vinz()
 
-        add_users = vinz_users.difference(server_users)
+        self.users_to_add = self.vinz_users.difference(self.server_users)
 
         if self.debug:
-            print_line('Users to add', self.server.hostname, add_users)
+            print_line('Users to add', self.server.hostname, self.users_to_add)
 
-        if self.add_users and self.add_users:
-            for user in add_users:
+        if self.add_users and self.users_to_add:
+            for user in self.users_to_add:
                 self.add_user(user)
 
-        remove_users = server_users.difference(vinz_users)
+        self.users_to_remove = self.server_users.difference(self.vinz_users)
 
-        if self.debug:
-            print_line('Users to remove', self.server.hostname, remove_users)
+        # if self.debug:
+        #     print_line('Users to remove', self.server.hostname, self.users_to_remove)
 
-        if self.remove_users and self.remove_users:
-            for user in remove_users:
-                self.remove_user(user)
+        # if self.remove_users and self.users_to_remove:
+        #     for user in self.users_to_remove:
+        #         self.remove_user(user)
 
         if self.debug:
             print_line('Finished scanning users', self.server.hostname)
@@ -216,6 +224,19 @@ class ServerScanner():
             'hostname': self.server.hostname,
             'state': 'done'
         })
+
+        internal_scan_log.create_scan_log(self.server,
+                                          SERVER_STATUS.SUCCESS,
+                                          self.server_users,
+                                          self.vinz_users,
+                                          self.users_to_remove,)
+
+        from models.audit import ScanLog
+        logs = ScanLog.objects.all().count()
+
+        if self.debug:
+            print_line("Log created", self.server.hostname)
+
         return
 
 
@@ -238,7 +259,6 @@ def scan_server(queue, hostname, add_users=False, remove_users=False, add_keys=F
         server_scanner.scan()
     except Exception, e:
 
-        import logging
         logging.exception(e)
 
         if debug:
