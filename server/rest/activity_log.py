@@ -12,6 +12,7 @@ from flask.ext.restful import reqparse
 
 from internal.activity_log import get_activity_log_text
 from internal.activity_log import get_all_activity_logs
+from internal.activity_log import get_num_activity_logs
 
 from rest import AuthenticatedResource
 from rest import get_pagination_params

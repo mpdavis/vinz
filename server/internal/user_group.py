@@ -53,6 +53,13 @@ def get_user_groups(limit=20, offset=0, term=None):
     return list(UserGroup.objects.skip(offset).limit(limit))
 
 
+def get_all_user_groups():
+    """
+    :return: a list of all UserGroups
+    """
+    return list(UserGroup.objects.all())
+
+
 def delete_user_group(operator, user_group_id):
     """
     Delete a UserGroup

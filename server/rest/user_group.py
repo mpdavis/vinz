@@ -16,16 +16,8 @@ from rest import AuthenticatedResource
 from rest import get_pagination_params
 from rest import get_search_term
 from rest import user_fields
+from rest import user_group_fields
 
-
-user_group_fields = {
-    #'uri': fields.Url(endpoint='user_group'),  #TODO: Figure this out
-    'id': fields.String(),
-    'name': fields.String(),
-    'user_list': fields.List(fields.String),
-    'creation_date': fields.DateTime(),
-    'modified_date': fields.DateTime(),
-}
 
 user_group_parser = reqparse.RequestParser()
 user_group_parser.add_argument("name", type=str, location='json')
@@ -58,7 +50,8 @@ class UserGroupResourceList(AuthenticatedResource):
     def get(self):
         page, page_size = get_pagination_params()
         term = get_search_term()
-        return user_group_api.get_user_groups(page_size, (page-1) * page_size, term)
+        user_groups = user_group_api.get_user_groups(page_size, (page-1) * page_size, term)
+        return user_groups
 
     def post(self):
         args = user_group_parser.parse_args()

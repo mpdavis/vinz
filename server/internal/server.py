@@ -35,6 +35,10 @@ def get_servers(limit=20, offset=0, search_term=None):
     return list(Server.objects.skip(offset).limit(limit))
 
 
+def get_all_servers():
+    return list(Server.objects.all())
+
+
 def get_server(server_id):
     return Server.objects.get(id=server_id)
 

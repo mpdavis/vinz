@@ -56,6 +56,10 @@ def get_users(limit=20, offset=0, term=None):
     return list(User.objects.skip(offset).limit(limit))
 
 
+def get_all_users():
+    return list(User.objects.all())
+
+
 def delete_user(operator, user_id):
     #TODO Some kind of security checks?
     user = get_user(user_id)
