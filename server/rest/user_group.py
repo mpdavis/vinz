@@ -58,7 +58,8 @@ class UserGroupResourceList(AuthenticatedResource):
     def get(self):
         page, page_size = get_pagination_params()
         term = get_search_term()
-        return user_group_api.get_user_groups(page_size, (page-1) * page_size, term)
+        user_groups = user_group_api.get_user_groups(page_size, (page-1) * page_size, term)
+        return user_groups
 
     def post(self):
         args = user_group_parser.parse_args()

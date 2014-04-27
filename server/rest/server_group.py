@@ -50,7 +50,8 @@ class ServerGroupResourceList(AuthenticatedResource):
     def get(self):
         page, page_size = get_pagination_params()
         term = get_search_term()
-        return server_group_api.get_server_groups(page_size, (page-1) * page_size, term)
+        server_groups = server_group_api.get_server_groups(page_size, (page-1) * page_size, term)
+        return server_groups
 
     def post(self):
         args = server_group_parser.parse_args()

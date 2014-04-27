@@ -108,13 +108,6 @@ class ServerScanner():
 
         self.users_to_remove = self.server_users.difference(self.vinz_users)
 
-        # if self.debug:
-        #     print_line('Users to remove', self.server.hostname, self.users_to_remove)
-
-        # if self.remove_users and self.users_to_remove:
-        #     for user in self.users_to_remove:
-        #         self.remove_user(user)
-
         if self.debug:
             print_line('Finished scanning users', self.server.hostname)
 
@@ -231,9 +224,6 @@ class ServerScanner():
                                           self.vinz_users,
                                           self.users_to_remove,)
 
-        from models.audit import ScanLog
-        logs = ScanLog.objects.all().count()
-
         if self.debug:
             print_line("Log created", self.server.hostname)
 
@@ -269,6 +259,7 @@ def scan_server(queue, hostname, add_users=False, remove_users=False, add_keys=F
             'state':    'error'
         })
 
+        internal_scan_log.create_scan_log(server, SERVER_STATUS.UNREACHABLE)
     return
 
 
