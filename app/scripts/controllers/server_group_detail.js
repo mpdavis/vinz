@@ -7,22 +7,60 @@ angular.module('vinzApp')
   	$scope.serverGroup = serverGroups.getServerGroup(serverGroupId);
     $scope.access = {has:true, message: "Revoke"};
 
-    var accessDictionary = {};
+    $scope.tableItems = serverGroups.getGroupServers(serverGroupId);
+  	
+    // caseId = 0 => servers in group
+    // caseId = 1 => servers not in group
+    // caseId = 2 => users with access to group
+    // caseId = 3 => users without access to group
+    // caseId = 4 => usergroups with access to group
+    // caseId = 5 => usergroups without access to group
+    $scope.shownInTable = function(caseId) {
+      switch(caseId)
+      {
+      case 0:
+        showGroupServers();
+        break;
+      case 1:
+        showNonGroupServers();
+        break;
+      case 2:
+        showGroupUsers();
+        break;
+      case 3:
+        showNonGroupUsers();
+        break;
+      case 4:
+        showGroupUserGroups();
+        break;
+      case 5:
+        showNonGroupUserGroups();
+        break;
+      }
+    }
 
-    //TODO
-    $scope.groupServers = serverGroups.getGroupServers(serverGroupId, function(groupServers) {
-  		for (var i=0; i<groupServers.length; i++) {
-  			var server = groupServers[i];
-  			accessDictionary[server.id] = false;
-  		}
-  	});
+    function showGroupServers() {
 
-    //TODO
-  	$scope.nonGroupServers = serverGroups.getNonGroupServers(serverGroupId, function(nonGroupServers) {
-  		for (var i=0; i<nonGroupServers.length; i++) {
-  			var server = nonGroupServers[i];
-  			accessDictionary[server.id] = true; 
-  		}
-  	});
+    }
+
+    function showNonGroupServers() {
+
+    }
+
+    function showGroupUsers() {
+
+    }
+
+    function showNonGroupUsers() {
+
+    }
+
+    function showGroupUserGroups() {
+
+    }
+
+    function showNonGroupUserGroups() {
+      
+    }
 
   }]);

@@ -31,7 +31,6 @@ angular.module('vinzApp')
         return servers;
       },
       getNonGroupServers: function(serverGroupId, callback) {
-        //TODO
         var servers = GroupServer.query({id: serverGroupId}, function() {
           callback(servers);
         });
