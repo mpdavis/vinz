@@ -225,8 +225,6 @@ class ServerScanner():
             'state': 'done'
         })
 
-        # logging.warn(self.users_to_remove)
-
         internal_scan_log.create_scan_log(self.server,
                                           SERVER_STATUS.SUCCESS,
                                           self.server_users,
