@@ -10,6 +10,8 @@ from rest.activity_log import ActivityLogResourceList
 from rest.public_key import PublicKeyResource
 from rest.public_key import PublicKeyResourceList
 
+from rest.scan_log import ScanLogResourceList
+
 from rest.server import ServerResource
 from rest.server import ServerResourceList
 from rest.server import ServerUserGroupResource
@@ -50,6 +52,7 @@ def initialize_routes(api):
 
     # List Routes here
     add_resource(BASE_API_PATH % '/logs/', ActivityLogResourceList, endpoint='logs')
+    add_resource(BASE_API_PATH % '/scan_logs/', ScanLogResourceList, endpoint='scan-logs')
 
     add_resource(BASE_API_PATH % '/keys/', PublicKeyResourceList, endpoint='keys')
     add_resource(BASE_API_PATH % '/keys/<string:pub_key_id>', PublicKeyResource, endpoint='key')
