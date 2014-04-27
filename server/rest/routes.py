@@ -10,6 +10,8 @@ from rest.activity_log import ActivityLogResourceList
 from rest.public_key import PublicKeyResource
 from rest.public_key import PublicKeyResourceList
 
+from rest.scan_log import ScanLogResourceList
+
 from rest.server import ServerResource
 from rest.server import ServerResourceList
 from rest.server import ServerUserGroupResource
@@ -21,6 +23,8 @@ from rest.server_group import ServerGroupResource
 from rest.server_group import ServerGroupResourceList
 from rest.server_group import ServerGroupServersResource
 from rest.server_group import ServerGroupServersResourceList
+
+from rest.stats import StatisticsResource
 
 from rest.user import UserResource
 from rest.user import UserResourceList
@@ -48,6 +52,7 @@ def initialize_routes(api):
 
     # List Routes here
     add_resource(BASE_API_PATH % '/logs/', ActivityLogResourceList, endpoint='logs')
+    add_resource(BASE_API_PATH % '/scan_logs/', ScanLogResourceList, endpoint='scan-logs')
 
     add_resource(BASE_API_PATH % '/keys/', PublicKeyResourceList, endpoint='keys')
     add_resource(BASE_API_PATH % '/keys/<string:pub_key_id>', PublicKeyResource, endpoint='key')
@@ -63,6 +68,8 @@ def initialize_routes(api):
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>', ServerGroupResource, endpoint='server-group')
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/', ServerGroupServersResourceList, endpoint='server-group-servers')
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/servers/<string:server_id>', ServerGroupServersResource, endpoint='server-group-server')
+
+    add_resource(BASE_API_PATH % '/stats/', StatisticsResource, endpoint='stats')
 
     add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
     add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')
