@@ -45,3 +45,15 @@ def create_scan_log(server, server_status, users_expected=None, actual_users=Non
     )
     log.save()
     return log
+
+
+def get_all_scan_logs(limit=20, offset=0):
+    """
+    Get all the activity logs in the database
+    :return: A list of ActivityLog objects
+    """
+    return list(ScanLog.objects.skip(offset).limit(limit).order_by('-timestamp'))
+
+
+def get_num_scan_logs():
+    return ScanLog.objects.all().count()
