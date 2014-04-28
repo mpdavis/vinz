@@ -13,6 +13,7 @@ from internal import user as user_api
 from rest import AuthenticatedResource
 from rest import get_pagination_params
 from rest import get_search_term
+from rest import server_fields
 from rest import user_fields
 
 
@@ -66,5 +67,7 @@ class UserServersResourceList(AuthenticatedResource):
     REST endpoint to serve up a list of Server resources that a user has access to.
     """
 
-    def get(self):
-        pass
+    @marshal_with(server_fields)
+    def get(self, user_id):
+        user = user_api.get_user(user_id)
+        return user_api.get_servers_with_access(user)
