@@ -32,6 +32,7 @@ from rest.stats import StatisticsResource
 
 from rest.user import UserResource
 from rest.user import UserResourceList
+from rest.user import UserServersResourceList
 
 from rest.user_group import UserGroupResource
 from rest.user_group import UserGroupResourceList
@@ -81,6 +82,7 @@ def initialize_routes(api):
 
     add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
     add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')
+    add_resource(BASE_API_PATH % '/users/<string:user_id>/servers/', UserServersResourceList, endpoint='user-servers')
 
     add_resource(BASE_API_PATH % '/usergroups/', UserGroupResourceList, endpoint='user-groups')
     add_resource(BASE_API_PATH % '/usergroups/<string:user_group_id>', UserGroupResource, endpoint='user-group')
