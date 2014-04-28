@@ -31,6 +31,9 @@ scan_log_fields = {
     'users_expected': fields.List(fields.String()),
     'actual_users': fields.List(fields.String()),
     'unexpected_users': fields.List(fields.String()),
+    'keys_added': fields.List(fields.String()),
+    'keys_removed': fields.List(fields.String()),
+    'unexpected_keys': fields.List(fields.String()),
 }
 
 
