@@ -212,8 +212,7 @@ class ServerScanner():
                     api_ssh_key.remove_user_public_key(user, [self.server.hostname], key)
             if self.remove_keys:
                 keys_removed[user] = set(keys)
-            else:
-                unexpected_keys[user] = set(keys)
+            unexpected_keys[user] = set(keys)
 
         if self.debug:
             print_line('Finished removing keys from the server', self.server.hostname, self.keys_to_remove.keys())
