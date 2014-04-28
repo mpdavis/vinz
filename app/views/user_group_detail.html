@@ -1,1 +1,89 @@
-<p>This is the user_group_detail view.</p>
+<div class="container" >
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-sm-12 sectionTitle sectionBannerTitle">
+      User Group Dashboard
+    </div>
+    <a class="btn btn-default backButton" href="#/user_groups/">
+      <i class="fa fa-chevron-left"></i> All Groups
+    </a>
+  </div>
+
+	<!-- Server Overview -->
+	<table class="serverTable table table-hover table-bordered">
+		<tbody>
+			<tr>
+				<th>Group Name</th>
+				<td>{{userGroup.name}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+  <!-- Section Header -->
+  <div class="row sectionBanner">
+    <div class="col-xs-2 sectionBody">
+      <div class="btn-group btn-input clearfix">
+        <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+          <span data-bind="label">Users</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Server</a></li>
+          <li><a href="#">Server Groups</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row sectionBody col-xs-offset-2 col-xs-8">
+      <div class="btn-group col-xs-6" data-toggle="buttons">
+        <label class="btn btn-default active">
+          <input id="showAccess" type="radio" name="access" checked="checked"> Access
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="access"> No Access
+        </label>
+      </div>
+      <div class="col-xs-6 right-inner-addon">
+        <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
+        <i class="fa fa-search"></i>
+      </div>
+    </div>
+  </div>
+
+	<!-- User Servers -->
+	<table class="userTable table table-hover table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Hostname</th>
+        <th>Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="server in serversToDisplayUnderUser | filter:serverSearch">
+        <td>{{server.name}}</td>
+        <td>{{server.hostname}}</td>
+        <td class="col-sm-2"><div ng-click="toggleAccess(server);" class="btn userInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success':  !access.has }">{{access.message}}</div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+$(function() {
+  var scope = angular.element($("#vinzApp")).scope();
+  var $showAccess = $("#showAccess");
+
+  $(".navbar-nav li").removeClass("active");
+  $("#users-nav").addClass("active");
+
+  //This should be doable with angular, but I couldn't get it to.
+  $('input:radio[name="access"]').change(function() {
+    scope.$apply(function() {
+        if ($showAccess.is(':checked')) {
+          scope.showHasAccess(true);
+        } else {
+          scope.showHasAccess(false);
+        }
+    });
+  });
+});
+</script>
