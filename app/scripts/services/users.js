@@ -30,7 +30,7 @@ angular.module('vinzApp')
         });
         return servers;
       },
-      getNonUserServers: function(userId, callback) {
+      getUserNonServers: function(userId, callback) {
         var servers = UserServer.query({id: userId, no_access: true}, function() {
           callback(servers);
         });

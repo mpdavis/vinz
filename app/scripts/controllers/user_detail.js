@@ -9,9 +9,9 @@ angular.module('vinzApp')
 
     var accessDictionary = {};
 
-    $scope.nonUserServers = servers.getNonUserServers(userId, function(nonUserServers) {
-  		for (var i=0; i<nonUserServers.length; i++) {
-  			var server = nonUserServer[i];
+    $scope.userNonServers = users.getUserNonServers(userId, function(userNonServers) {
+  		for (var i=0; i<userNonServers.length; i++) {
+  			var server = userNonServer[i];
   			accessDictionary[server.id] = false;
   		}
   	});
@@ -32,7 +32,7 @@ angular.module('vinzApp')
       } else {
         $scope.access.has = false;
         $scope.access.message = "Grant";
-        $scope.serversToDisplayUnderUser = $scope.nonUserServers;
+        $scope.serversToDisplayUnderUser = $scope.userNonServers;
       }
   	}
 
@@ -41,11 +41,11 @@ angular.module('vinzApp')
   			servers.revokeAccess(userId, server.id);
   			accessDictionary[server.id] = false;
         removeFromArray($scope.userServers, server.id, "id");
-        $scope.nonUserServers.push(server);
+        $scope.userNonServers.push(server);
   		} else {
   			servers.grantAccess(userId, server.id);
   			accessDictionary[server.id] = true;
-        removeFromArray($scope.nonUserServers, server.id, "id");
+        removeFromArray($scope.userNonServers, server.id, "id");
         $scope.userServers.push(server);
   		}
     }
