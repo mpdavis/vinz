@@ -8,6 +8,7 @@
 import datetime
 
 from constants import SCAN_LOG_STATUS
+from constants import SERVER_STATUS
 
 from models.audit import ScanLog
 
@@ -70,3 +71,26 @@ def get_all_scan_logs(limit=20, offset=0):
 
 def get_num_scan_logs():
     return ScanLog.objects.all().count()
+
+
+def get_scan_log_stat_graph_by_day():
+    now = datetime.datetime.now()
+    seven_days_ago = now - datetime.timedelta(days=7)
+    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago).order_by('-timestamp'))
+    days = {}
+    counter = 0
+    for log in logs:
+        day = log.timestamp.day
+        if day not in days:
+            counter += 1
+            days[day] = {
+                'counter': counter,
+                'successful': 0,
+                'failed': 0,
+            }
+        if log.server_status >= SERVER_STATUS.SUCCESS:
+            days[day]['successful'] += 1
+        else:
+            days[day]['failed'] += 1
+    return days
+
