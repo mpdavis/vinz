@@ -12,7 +12,8 @@ from constants import SCAN_LOG_STATUS
 from models.audit import ScanLog
 
 
-def create_scan_log(server, server_status, users_expected=None, actual_users=None, unexpected_users=None, keys_added=None, keys_removed=None, unexpected_keys=None):
+def create_scan_log(server, server_status, users_expected=None, actual_users=None, unexpected_users=None,
+                    keys_added=None, keys_removed=None, unexpected_keys=None):
     now = datetime.datetime.now()
 
     if not users_expected:
