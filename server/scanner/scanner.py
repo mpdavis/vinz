@@ -35,8 +35,8 @@ class ServerScanner():
     users_to_add = None
     users_to_remove = None
 
-    keys_to_add = []
-    keys_to_remove = []
+    keys_to_add = None
+    keys_to_remove = None
 
     keys_from_db = None
     keys_from_server = None
