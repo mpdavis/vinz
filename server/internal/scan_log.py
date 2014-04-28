@@ -76,12 +76,15 @@ def get_num_scan_logs():
 def get_scan_log_stat_graph_by_day():
     now = datetime.datetime.now()
     seven_days_ago = now - datetime.timedelta(days=7)
-    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago))
+    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago).order_by('-timestamp'))
     days = {}
+    counter = 0
     for log in logs:
         day = log.timestamp.day
         if day not in days:
+            counter += 1
             days[day] = {
+                'counter': counter,
                 'successful': 0,
                 'failed': 0,
             }
