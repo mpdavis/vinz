@@ -24,17 +24,9 @@ angular.module('vinzApp')
       createServerGroup: function(newServerGroup) {
         $http.post(serverGroupsURL, newServerGroup);
       },
-      getGroupServers: function(serverGroupId, callback) {
-        var servers = GroupServer.query({id: serverGroupId}, function() {
-          callback(servers);
-        });
+      getGroupServers: function(serverGroupId) {
+        var servers = GroupServer.query({id: serverGroupId});
         return servers;
       },
-      getNonGroupServers: function(serverGroupId, callback) {
-        var servers = GroupServer.query({id: serverGroupId}, function() {
-          callback(servers);
-        });
-        return servers;
-      }
     };
   });

@@ -26,13 +26,13 @@
     </div>
     <div class="sectionBody btn-group pull-right" data-toggle="buttons" style="padding-right: 5px;">
       <label class="btn btn-default active">
-        <input id="showAccess" type="radio" name="access" checked="checked"> Servers
+        <input id="maintainServers" type="radio" name="shown" checked="checked"> Servers
       </label>
       <label class="btn btn-default">
-        <input type="radio" name="access"> Users
+        <input id="maintainUsers" type="radio" name="shown"> Users
       </label>
       <label class="btn btn-default">
-        <input type="radio" name="access"> User Groups
+        <input id="maintainUserGroups" type="radio" name="shown"> User Groups
       </label>
     </div>
   </div>
@@ -45,9 +45,9 @@
       Servers
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-8">
-      <div class="btn-group col-xs-6" data-toggle="buttons">
+      <div id="maintain-toggles" class="btn-group col-xs-6" data-toggle="buttons">
         <label class="btn btn-default active">
-          <input id="showAccess" type="radio" name="access" checked="checked"> In Group
+          <input type="radio" name="access" checked="checked"> In Group
         </label>
         <label class="btn btn-default">
           <input type="radio" name="access"> Not In Group
@@ -61,7 +61,7 @@
   </div>
 
 	<!-- ServerGroup Servers Table -->
-	<table id="serverTable" class="serverTable table table-hover table-striped table-bordered">
+	<table id="servers" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 0 || shown == 1)}">
     <thead>
       <tr>
         <th>Name</th>
@@ -79,7 +79,7 @@
   </table>
 
   <!-- ServerGroup Users Table -->
-  <table id="serverTable" class="serverTable table table-hover table-striped table-bordered">
+  <table id="users" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 2 || caseId == 3)}">
     <thead>
       <tr>
         <th>Name</th>
@@ -97,7 +97,7 @@
   </table>
 
   <!-- ServerGroup UserGroups -->
-  <table id="serverTable" class="serverTable table table-hover table-striped table-bordered">
+  <table id="userGroups" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 4 || caseId == 5)}">
     <thead>
       <tr>
         <th>Name</th>
@@ -117,7 +117,6 @@
 <script type="text/javascript">
 $(function() {
   var scope = angular.element($("#vinzApp")).scope();
-  var $showAccess = $("#showAccess");
 
   $(".navbar-nav li").removeClass("active");
   $("#servers-nav").addClass("active");
@@ -125,12 +124,24 @@ $(function() {
   //This should be doable with angular, but I couldn't get it to.
   $('input:radio[name="access"]').change(function() {
     scope.$apply(function() {
-        if ($showAccess.is(':checked')) {
-          scope.showHasAccess(true);
-        } else {
-          scope.showHasAccess(false);
-        }
+       scope.toggleAccess();
     });
+  });
+
+  $('input:radio[name="shown"]').change(function() {
+    if ($('#maintainServers').is(':checked')) {
+      scope.$apply(function() {
+         scope.shownInTable(0);
+      });
+    } else if ($('#maintainUsers').is(':checked')) {
+      scope.$apply(function() {
+         scope.shownInTable(2);
+      });
+    } else {
+      scope.$apply(function() {
+         scope.shownInTable(4);
+      });
+    }
   });
 });
 </script>
