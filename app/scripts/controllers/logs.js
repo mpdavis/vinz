@@ -13,7 +13,7 @@ angular.module('vinzApp')
     var loaded = true;
   	$scope.myPagingFunction = function() {
       if (loaded) {
-        pageSize++;
+        page++;
         logService.getActivityLogs(page, pageSize, function(logs) {
           for (var i = 0; i < logs.length; i++) {
               $scope.activityLogs.push(logs[i]);
