@@ -48,7 +48,7 @@ angular.module('vinzApp')
         return GroupUser.query({id: serverGroupId, no_access: true});
       },
       revokeUserAccessToGroup: function(serverGroupId, userId) {
-        GroupUser.remove({id: serverGroupId, server_id: serverId});
+        GroupUser.remove({id: serverGroupId, user_id: userId});
       },
       grantUserAccessToGroup: function(serverGroupId, userId) {
         var groupUsersAPI = serverGroupsURL + serverGroupId + '/users/';
