@@ -19,38 +19,27 @@
 		</tbody>
 	</table>
 
-  <!-- Maintain Banner -->
-  <div class="row sectionBanner">
-    <div class="col-xs-3 sectionTitle">
-      Maintain
-    </div>
-    <div class="sectionBody btn-group pull-right" data-toggle="buttons" style="padding-right: 5px;">
-      <label class="btn btn-default active">
-        <input id="maintainServers" type="radio" name="shown" checked="checked"> Servers
-      </label>
-      <label class="btn btn-default">
-        <input id="maintainUsers" type="radio" name="shown"> Users
-      </label>
-      <label class="btn btn-default">
-        <input id="maintainUserGroups" type="radio" name="shown"> User Groups
-      </label>
-    </div>
-  </div>
-
-  <br>
-
   <!-- Table Header -->
   <div class="row sectionBanner">
-    <div class="col-xs-2 sectionTitle">
-      Servers
+    <div class="col-xs-2 sectionBody">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          {{maintain.title}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="shownInTable(0);">Servers</a></li>
+          <li><a ng-click="shownInTable(2);">Users</a></li>
+          <li><a ng-click="shownInTable(4);">User Groups</a></li>
+        </ul>
+      </div>
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-8">
       <div class="btn-group col-xs-6" data-toggle="buttons">
         <label class="btn btn-default active">
-          <input id="inGroupYes" type="radio" name="access" checked="checked"> In Group
+          <input id="inGroupYes" type="radio" name="access" checked="checked"> {{maintain.inGroupYesLabel}}
         </label>
         <label class="btn btn-default">
-          <input id="inGroupNo" type="radio" name="access"> Not In Group
+          <input id="inGroupNo" type="radio" name="access"> {{maintain.inGroupNoLabel}}
         </label>
       </div>
       <div class="col-xs-6 right-inner-addon">
@@ -125,22 +114,6 @@ $(function() {
     scope.$apply(function() {
        scope.toggleInGroup();
     });
-  });
-
-  $('input:radio[name="shown"]').change(function() {
-    if ($('#maintainServers').is(':checked')) {
-      scope.$apply(function() {
-         scope.shownInTable(0);
-      });
-    } else if ($('#maintainUsers').is(':checked')) {
-      scope.$apply(function() {
-         scope.shownInTable(2);
-      });
-    } else {
-      scope.$apply(function() {
-         scope.shownInTable(4);
-      });
-    }
   });
 });
 </script>

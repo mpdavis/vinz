@@ -7,6 +7,7 @@ angular.module('vinzApp')
     $scope.serverGroup = serverGroups.getServerGroup(serverGroupId);
 
     $scope.access = {has:true, message: "Revoke"};
+    $scope.maintain = {title: "Servers", inGroupYesLabel: "In Group", inGroupNoLabel: "Not In Group"};
     $scope.action = {buttonClass: "danger", message: "Remove"};
     $scope.inGroupYes = true;
 
@@ -19,43 +20,54 @@ angular.module('vinzApp')
     $scope.shownInTable = function(caseId) {
       if (!$scope.inGroupYes && caseId % 2 == 0) {
         caseId++;
-        console.log("not in group toggled");
       }
-
-      console.log(caseId);
 
       $scope.caseId = caseId;
 
-      if (caseId % 2 == 0) {
+      if ($scope.inGroupYes) {
         $scope.action.buttonClass = "danger";
       } else {
         $scope.action.buttonClass = "success";
       }
 
+      if (caseId == 0 || caseId == 1) {
+        $scope.maintain.title = "Servers";
+        $scope.maintain.inGroupNoLabel = "Not In Group";
+        $scope.maintain.inGroupYesLabel = "In Group";
+      } else if (caseId == 2 || caseId == 3) {
+        $scope.maintain.title = "Users";
+        $scope.maintain.inGroupNoLabel = "No Access";
+        $scope.maintain.inGroupYesLabel = "Has Access";
+      } else {
+        $scope.maintain.title = "User Groups";
+        $scope.maintain.inGroupNoLabel = "No Access";
+        $scope.maintain.inGroupYesLabel = "Has Access";
+      }
+
       switch(caseId)
       {
       case 0:
-        showGroupServers();
+        $scope.myServers = serverGroups.getGroupServers(serverGroupId);
         $scope.action.message = "Remove";
         break;
       case 1:
-        showNonGroupServers();
+        $scope.myServers = serverGroups.getNonGroupServers(serverGroupId);
         $scope.action.message = "Add";
         break;
       case 2:
-        showGroupUsers();
+        $scope.myUsers = serverGroups.getServerGroupUsers(serverGroupId);
         $scope.action.message = "Revoke";
         break;
       case 3:
-        showNonGroupUser();
+        $scope.myUsers = serverGroups.getNonServerGroupUsers(serverGroupId);
         $scope.action.message = "Grant";
         break;
       case 4:
-        showGroupUserGroups();
+        $scope.myUserGroups = serverGroups.getServerGroupUserGroups(serverGroupId);
         $scope.action.message = "Revoke";
         break;
       case 5:
-        showNonGroupUserGroups();
+        $scope.myUserGroups = serverGroups.getNonServerGroupUserGroups(serverGroupId);
         $scope.action.message = "Grant";
         break;
       }
@@ -97,37 +109,13 @@ angular.module('vinzApp')
         break;
       case 4:
         removeFromArray($scope.myUserGroups, id, 'id');
-        serverGroups.grantUserGroupAccessToGroup(serverGroupId, id);
+        serverGroups.revokeUserGroupAccessToGroup(serverGroupId, id);
         break;
       case 5:
         removeFromArray($scope.myUserGroups, id, 'id');
         serverGroups.grantUserGroupAccessToGroup(serverGroupId, id);
         break;
       }
-    }    
-
-    function showGroupServers() {
-      $scope.myServers = serverGroups.getGroupServers(serverGroupId);
-    }
-
-    function showNonGroupServers() {
-      $scope.myServers = serverGroups.getNonGroupServers(serverGroupId);
-    }
-
-    function showGroupUsers() {
-      $scope.myUsers = serverGroups.getServerGroupUsers(serverGroupId);
-    }
-
-    function showNonGroupUser() {
-      $scope.myUsers = serverGroups.getNonServerGroupUsers(serverGroupId);
-    }
-
-    function showGroupUserGroups() {
-      $scope.myUserGroups = serverGroups.getServerGroupUserGroups(serverGroupId);
-    }
-
-    function showNonGroupUserGroups() {
-      $scope.myUserGroups = serverGroups.getNonServerGroupUserGroups(serverGroupId);
     }
 
     function removeFromArray(myArray, searchTerm, property) {

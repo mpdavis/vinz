@@ -68,6 +68,10 @@ body {
   border-width: 0 0 0 1px;
 }
 
+.btn .caret {
+  margin-left: 3px;
+}
+
 .bordered {
   border: 1px solid #b30000;
   border-width: 0 1px;
