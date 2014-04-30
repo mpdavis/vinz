@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('vinzApp')
-  .controller('ServersCtrl', ['$scope', 'servers', '$location', function ($scope, servers, $location) {
+  .controller('ServersCtrl', ['$scope', 'servers', function ($scope, servers) {
     $scope.newServer = {name: "", hostname: ""};
     $scope.myServers = servers.getServers();
 
@@ -10,7 +10,18 @@ angular.module('vinzApp')
     	$scope.myServers = servers.getServers();
     }
 
-    $scope.detail = function(name) {
-    	$location.path( '/servers/' + name );	
+    var loaded = true;
+    $scope.myPagingFunction = function() {
+      if (loaded) {
+        pageSize++;
+        logService.getActivityLogs(page, pageSize, function(logs) {
+          for (var i = 0; i < logs.length; i++) {
+              $scope.activityLogs.push(logs[i]);
+          }
+          loaded = true;
+        });
+      }
+
+      loaded = false;
     }
   }]);

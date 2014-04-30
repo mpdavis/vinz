@@ -10,8 +10,8 @@ angular.module('vinzApp')
 
     //Servers API
     return {
-      getActivityLogs: function(callback) {
-        var logs = Log.query(function() {
+      getActivityLogs: function(page, pageSize, callback) {
+        var logs = Log.query({page_size: pageSize, page: page}, function() {
           for (key in logs) {
               if (logs.hasOwnProperty(key)) {
                   logs[key].timestamp = Date.parse(logs[key].timestamp); 

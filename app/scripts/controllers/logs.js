@@ -3,18 +3,25 @@
 angular.module('vinzApp')
   .controller('LogsCtrl', ['$scope', 'logService', '$interval', function ($scope, logService, $interval) {
   	var numLogs = 0;
-  	$scope.activityLogs = logService.getActivityLogs(function(logs) {
+    var page = 1;
+    var pageSize = 30;
+  	
+    $scope.activityLogs = logService.getActivityLogs(page, pageSize, function(logs) {
       numLogs = logs.length;
   	});
 
-  	//var count = 1;
-  	// var interval = $interval(function() {
-   //    console.log(count*30 + 'seconds');
-  	// 	logService.getActivityLogs(function(newLogs) {
-  	// 		if (newLogs.length != numLogs.length) {
-  	// 			$scope.activityLogs = newLogs;
-  	// 			numLogs = newLogs.length;
-  	// 		}
-  	// 	});
-  	// }, 30*1000);
-  }]);
+    var loaded = true;
+  	$scope.myPagingFunction = function() {
+      if (loaded) {
+        page++;
+        logService.getActivityLogs(page, pageSize, function(logs) {
+          for (var i = 0; i < logs.length; i++) {
+              $scope.activityLogs.push(logs[i]);
+          }
+          loaded = true;
+        });
+      }
+
+      loaded = false;
+    }
+}]);

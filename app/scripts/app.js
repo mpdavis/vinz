@@ -4,7 +4,8 @@ var app = angular.module('vinzApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'infinite-scroll'
 ])
   .config(function ($routeProvider) {
     $routeProvider

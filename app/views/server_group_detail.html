@@ -1,12 +1,12 @@
 <div class="container" >
   <!-- Section Header -->
   <div class="row sectionBanner">
-    <div class="col-sm-12 sectionTitle sectionBannerTitle">
-      Server Group Dashboard
-    </div>
     <a class="btn btn-default backButton" href="#/server_groups/">
       <i class="fa fa-chevron-left"></i> All Groups
     </a>
+    <div class="col-sm-12 sectionTitle sectionBannerTitle">
+      Server Group Dashboard
+    </div>
   </div>
 
 	<!-- Server Overview -->
@@ -19,58 +19,92 @@
 		</tbody>
 	</table>
 
-  <!-- Section Header -->
+  <!-- Table Header -->
   <div class="row sectionBanner">
     <div class="col-xs-2 sectionBody">
-      <div class="btn-group btn-input clearfix">
-        <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
-          <span data-bind="label">Servers</span> <span class="caret"></span>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          {{maintain.title}} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="#">User</a></li>
-          <li><a href="#">User Groups</a></li>
+          <li><a ng-click="shownInTable(0);">Servers</a></li>
+          <li><a ng-click="shownInTable(2);">Users</a></li>
+          <li><a ng-click="shownInTable(4);">User Groups</a></li>
         </ul>
       </div>
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-8">
       <div class="btn-group col-xs-6" data-toggle="buttons">
         <label class="btn btn-default active">
-          <input id="showAccess" type="radio" name="access" checked="checked"> Access
+          <input id="inGroupYes" type="radio" name="access" checked="checked"> {{maintain.inGroupYesLabel}}
         </label>
         <label class="btn btn-default">
-          <input type="radio" name="access"> No Access
+          <input id="inGroupNo" type="radio" name="access"> {{maintain.inGroupNoLabel}}
         </label>
       </div>
       <div class="col-xs-6 right-inner-addon">
-        <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
+        <input ng-model="search" type="text" class="form-control" placeholder="Search">
         <i class="fa fa-search"></i>
       </div>
     </div>
   </div>
 
-	<!-- Server Users -->
-	<table class="serverTable table table-hover table-striped table-bordered">
+	<!-- ServerGroup Servers Table -->
+	<table id="servers" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 0 || caseId == 1)}">
     <thead>
       <tr>
-        <th>Username</th>
+        <th>Name</th>
+        <th>Hostname</th>
+        <th>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="server in myServers | filter:search">
+        <td>{{server.name}}</td>
+        <td>{{server.hostname}}</td>
+        <td class="col-sm-2"><button ng-click="switchSides(server.id);" class="serverInfoBtn btn btn-{{action.buttonClass}}">{{action.message}}</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ServerGroup Users Table -->
+  <table id="users" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 2 || caseId == 3)}">
+    <thead>
+      <tr>
+        <th>Name</th>
         <th>Email</th>
         <th>Access</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in usersToDisplayUnderServer | filter:userSearch">
-        <td>{{user.username}}</td>
+      <tr ng-repeat="user in myUsers | filter:search">
+        <td>{{user.first_name}} {{user.last_name}}</td>
         <td>{{user.email}}</td>
-        <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success':  !access.has }">{{access.message}}</div></td>
+        <td class="col-sm-2"><button ng-click="switchSides(user.id);" class="serverInfoBtn btn btn-{{action.buttonClass}}">{{action.message}}</button></td>
       </tr>
     </tbody>
   </table>
-</div>
+
+  <!-- ServerGroup UserGroups -->
+  <table id="userGroups" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 4 || caseId == 5)}">
+    <thead>
+      <tr>
+        <th>Group Name</th>
+        <th>Hostname</th>
+        <th>Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="userGroup in myUserGroups | filter:search">
+        <td>{{userGroup.name}}</td>
+        <td class="col-sm-2"><button ng-click="switchSides(userGroup.id);" class="serverInfoBtn btn btn-{{action.buttonClass}}">{{action.message}}</button></td>
+      </tr>
+    </tbody>
+  </table>
 
 <script type="text/javascript">
 $(function() {
   var scope = angular.element($("#vinzApp")).scope();
-  var $showAccess = $("#showAccess");
 
   $(".navbar-nav li").removeClass("active");
   $("#servers-nav").addClass("active");
@@ -78,11 +112,7 @@ $(function() {
   //This should be doable with angular, but I couldn't get it to.
   $('input:radio[name="access"]').change(function() {
     scope.$apply(function() {
-        if ($showAccess.is(':checked')) {
-          scope.showHasAccess(true);
-        } else {
-          scope.showHasAccess(false);
-        }
+       scope.toggleInGroup();
     });
   });
 });
