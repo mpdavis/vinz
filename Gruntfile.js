@@ -44,7 +44,8 @@ module.exports = function(grunt) {
             'views': frontendBase + 'views/'
         },
         'npm': {
-            'almond': npmBase + 'almond/'
+            'almond': npmBase + 'almond/',
+            'angularFlot': npmBase + 'angular-flot/'
         },
         'static': {
             'js': staticBase + 'js/',
@@ -150,6 +151,7 @@ module.exports = function(grunt) {
                     directories.bower.angularSanitize + 'angular-sanitize.js',
                     directories.bower.ngInfiniteScroll + 'build/ng-infinite-scroll.min.js',
                     directories.bower.flot + 'jquery.flot.js',
+                    directories.npm.angularFlot + 'angular-flot.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/logs.js',
                     directories.frontend.js + 'controllers/servers.js',
