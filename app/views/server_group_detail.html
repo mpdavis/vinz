@@ -45,12 +45,12 @@
       Servers
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-8">
-      <div id="maintain-toggles" class="btn-group col-xs-6" data-toggle="buttons">
+      <div class="btn-group col-xs-6" data-toggle="buttons">
         <label class="btn btn-default active">
-          <input type="radio" name="access" checked="checked"> In Group
+          <input id="inGroupYes" type="radio" name="access" checked="checked"> In Group
         </label>
         <label class="btn btn-default">
-          <input type="radio" name="access"> Not In Group
+          <input id="inGroupNo" type="radio" name="access"> Not In Group
         </label>
       </div>
       <div class="col-xs-6 right-inner-addon">
@@ -61,19 +61,19 @@
   </div>
 
 	<!-- ServerGroup Servers Table -->
-	<table id="servers" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 0 || shown == 1)}">
+	<table id="servers" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 0 || caseId == 1)}">
     <thead>
       <tr>
         <th>Name</th>
         <th>Hostname</th>
-        <th>Access</th>
+        <th>Group</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="server in myServers | filter:search">
         <td>{{server.name}}</td>
         <td>{{server.hostname}}</td>
-        <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success': !access.has }">{{access.message}}</div></td>
+        <td class="col-sm-2"><button ng-click="switchSides(server.id);" class="serverInfoBtn btn btn-{{action.buttonClass}}">{{action.message}}</button></td>
       </tr>
     </tbody>
   </table>
@@ -83,15 +83,15 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Hostname</th>
+        <th>Email</th>
         <th>Access</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="user in myUsers | filter:search">
-        <td>{{server.name}}</td>
-        <td>{{server.hostname}}</td>
-        <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success': !access.has }">{{access.message}}</div></td>
+        <td>{{user.first_name}} {{user.last_name}}</td>
+        <td>{{user.email}}</td>
+        <td class="col-sm-2"><button ng-click="switchSides(user.id);" class="serverInfoBtn btn btn-{{action.buttonClass}}">{{action.message}}</button></td>
       </tr>
     </tbody>
   </table>
@@ -100,16 +100,15 @@
   <table id="userGroups" class="serverTable table table-hover table-striped table-bordered" ng-class="{'hide' : !(caseId == 4 || caseId == 5)}">
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Group Name</th>
         <th>Hostname</th>
         <th>Access</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="userGroup in myUserGroups | filter:search">
-        <td>{{server.name}}</td>
-        <td>{{server.hostname}}</td>
-        <td class="col-sm-2"><div ng-click="toggleAccess(user);" class="btn serverInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success': !access.has }">{{access.message}}</div></td>
+        <td>{{userGroup.name}}</td>
+        <td class="col-sm-2"><button ng-click="switchSides(userGroup.id);" class="serverInfoBtn btn btn-{{action.buttonClass}}">{{action.message}}</button></td>
       </tr>
     </tbody>
   </table>
@@ -124,7 +123,7 @@ $(function() {
   //This should be doable with angular, but I couldn't get it to.
   $('input:radio[name="access"]').change(function() {
     scope.$apply(function() {
-       scope.toggleAccess();
+       scope.toggleInGroup();
     });
   });
 
