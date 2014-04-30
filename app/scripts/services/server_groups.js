@@ -42,7 +42,6 @@ angular.module('vinzApp')
         $http.post(groupServersAPI, {server_id: serverId});
       },
       getServerGroupUsers: function(serverGroupId) {
-        console.log("-----");
         return GroupUser.query({id: serverGroupId});
       },
       getNonServerGroupUsers: function(serverGroupId) {
