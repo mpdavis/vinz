@@ -10,6 +10,10 @@ from internal.auth.utils import maybe_get_user_by_email
 from internal.exceptions import UserAlreadyExistsError
 
 from models.auth import User
+from models.auth import UserGroup
+
+from models.server import Server
+from models.server import ServerGroup
 
 
 def create_user(operator, first_name, last_name, email, username, password, **kwargs):
@@ -56,6 +60,10 @@ def get_users(limit=20, offset=0, term=None):
     return list(User.objects.skip(offset).limit(limit))
 
 
+def get_all_users():
+    return list(User.objects.all())
+
+
 def delete_user(operator, user_id):
     #TODO Some kind of security checks?
     user = get_user(user_id)
@@ -65,3 +73,26 @@ def delete_user(operator, user_id):
 
 def get_num_users():
     return User.objects.all().count()
+
+
+def get_servers_with_access(user):
+    """
+    TODO Cleanup this function
+    :param user:
+    :return:
+    """
+    servers = []
+    s = list(Server.objects.all().filter(user_list=user))
+    servers.extend(s)
+    sg = list(ServerGroup.objects.all().filter(user_list=user))
+    for server_group in sg:
+        servers.extend(server_group.get_servers())
+
+    ug = list(UserGroup.objects.all().filter(user_list=user))
+    for group in ug:
+        sug = list(Server.objects.all().filter(group_list=group))
+        servers.extend(sug)
+        sgug = list(ServerGroup.objects.all().filter(group_list=group))
+        servers.extend(sgug)
+
+    return servers

@@ -339,3 +339,75 @@ def log_user_group_removed_from_server(user_group, server, actor):
     )
     log.save()
     return log
+
+
+def log_user_added_to_server_group(user, server_group, actor):
+    """
+    Log when a User is granted access to a ServerGroup
+    :param user: The User gaining access
+    :param server_group: The ServerGroup that the User is getting access to
+    :param actor: The User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user,
+        secondary_obj=server_group,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_ACCESS_ADDED_TO_SERVER_GROUP,
+    )
+    log.save()
+    return log
+
+
+def log_user_removed_from_server_group(user, server_group, actor):
+    """
+    Log when a User's access to a ServerGroup is revoked
+    :param user: The User losing access
+    :param server_group: The ServerGroup that the User is losing access from
+    :param actor: The User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user,
+        secondary_obj=server_group,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_ACCESS_REMOVED_FROM_SERVER_GROUP,
+    )
+    log.save()
+    return log
+
+
+def log_user_group_added_to_server_group(user_group, server_group, actor):
+    """
+    Log when a UserGroup is granted access to a ServerGroup
+    :param user_group: The UserGroup gaining access
+    :param server_group: The ServerGroup that the UserGroup is getting access to
+    :param actor: The User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user_group,
+        secondary_obj=server_group,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_GROUP_ACCESS_ADDED_TO_SERVER_GROUP,
+    )
+    log.save()
+    return log
+
+
+def log_user_group_removed_from_server_group(user_group, server_group, actor):
+    """
+    Log when a UserGroup's access to a ServerGroup is revoked
+    :param user_group: The UserGroup losing access
+    :param server_group: The ServerGroup that the UserGroup is losing access from
+    :param actor: The User performing this action
+    :return: The new log
+    """
+    log = ActivityLog(
+        obj=user_group,
+        secondary_obj=server_group,
+        actor=actor,
+        action=AUDIT_ACTIONS.USER_GROUP_ACCESS_REMOVED_FROM_SERVER_GROUP,
+    )
+    log.save()
+    return log

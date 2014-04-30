@@ -35,6 +35,16 @@ class ServerScanner():
     users_to_add = None
     users_to_remove = None
 
+    keys_to_add = None
+    keys_to_remove = None
+
+    keys_from_db = None
+    keys_from_server = None
+
+    keys_added = None
+    keys_removed = None
+    unexpected_keys = None
+
     def __init__(
             self,
             queue,
@@ -54,7 +64,7 @@ class ServerScanner():
         self.debug = debug
 
         if self.debug:
-            print_line("ServerScanner initalized", self.server.hostname)
+            print_line("ServerScanner initialized", self.server.hostname)
 
     def get_users_from_server(self):
         """
@@ -165,6 +175,11 @@ class ServerScanner():
         """
         Handles the authorized_key files for this scanner
         """
+
+        keys_added = dict()
+        keys_removed = dict()
+        unexpected_keys = dict()
+
         if not self.server_users:
             self.server_users = self.get_users_from_server()
 
@@ -174,7 +189,7 @@ class ServerScanner():
         self.keys_from_server = api_ssh_key.get_authorized_keys_for_host(self.server.hostname, self.server_users)
 
         if self.debug:
-            print_line('Receieved keys from server', self.server.hostname)
+            print_line('Received keys from server', self.server.hostname)
 
         self.keys_from_db = internal_public_key.get_user_keys_for_server(self.server)
 
@@ -185,20 +200,26 @@ class ServerScanner():
 
         for user, keys in self.keys_to_add.iteritems():
             for key in keys:
-                # TODO: Log that this key is getting added
                 api_ssh_key.add_user_public_key(user, [self.server.hostname], key)
+            keys_added[user] = set(keys)
 
         if self.debug:
             print_line('Finished adding keys to the server', self.server.hostname, self.keys_to_add.keys())
 
         for user, keys in self.keys_to_remove.iteritems():
             for key in keys:
-                # TODO: Log that this key doesn't belong
                 if self.remove_keys:
                     api_ssh_key.remove_user_public_key(user, [self.server.hostname], key)
+            if self.remove_keys:
+                keys_removed[user] = set(keys)
+            unexpected_keys[user] = set(keys)
 
         if self.debug:
             print_line('Finished removing keys from the server', self.server.hostname, self.keys_to_remove.keys())
+
+        self.keys_added = keys_added
+        self.keys_removed = keys_removed
+        self.unexpected_keys = unexpected_keys
 
     def scan(self):
         if not self.server:
@@ -222,7 +243,10 @@ class ServerScanner():
                                           SERVER_STATUS.SUCCESS,
                                           self.server_users,
                                           self.vinz_users,
-                                          self.users_to_remove,)
+                                          self.users_to_remove,
+                                          self.keys_added,
+                                          self.keys_removed,
+                                          self.unexpected_keys,)
 
         if self.debug:
             print_line("Log created", self.server.hostname)

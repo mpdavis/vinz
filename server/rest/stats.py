@@ -8,6 +8,8 @@
 from flask.ext.restful import fields
 from flask.ext.restful import marshal_with
 
+from internal.scan_log import get_scan_log_stat_graph_by_day
+
 from internal.server import get_num_servers
 from internal.server_group import get_num_server_groups
 
@@ -38,3 +40,13 @@ class StatisticsResource(AuthenticatedResource):
             'user_count': get_num_users(),
             'user_group_count': get_num_user_groups(),
         }
+
+
+class ScanLogDaysGraphResource(AuthenticatedResource):
+    """
+    REST endpoint to server up a dict of data for the ScanLog graph
+    """
+
+    def get(self):
+        logs = get_scan_log_stat_graph_by_day()
+        return logs

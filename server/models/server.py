@@ -65,7 +65,25 @@ class ServerGroup(AuditableMixin, Document):
     name = StringField(required=True)
     server_list = ListField(ReferenceField(Server))
 
+    user_list = ListField(ReferenceField(User))
+    group_list = ListField(ReferenceField(UserGroup))
+
     lowercase_name = StringField()
 
     def get_servers(self):
+        """
+        Gets all of the servers in this ServerGroup.
+        """
         return set(self.server_list)
+
+    def get_groups(self):
+        """
+        Gets all of the groups that have access to this ServerGroup.
+        """
+        return list(self.group_list)
+
+    def get_users(self):
+        """
+        Gets the users who have access directly to this ServerGroup.
+        """
+        return list(self.user_list)
