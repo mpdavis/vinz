@@ -5,7 +5,8 @@ var app = angular.module('vinzApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'infinite-scroll'
+  'infinite-scroll',
+  'highcharts-ng'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -82,4 +83,8 @@ app.config(['$httpProvider', function($httpProvider){
     }
   }];
   $httpProvider.responseInterceptors.push(interceptor);
+}]);
+
+app.config(['$locationProvider', function($locationProvider){
+  $locationProvider.html5Mode(true);
 }]);
