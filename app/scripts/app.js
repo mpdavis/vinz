@@ -80,3 +80,7 @@ app.config(['$httpProvider', function($httpProvider){
   }];
   $httpProvider.responseInterceptors.push(interceptor);
 }]);
+
+app.config(['$locationProvider', function($locationProvider){
+  $locationProvider.html5Mode(true);
+}]);
