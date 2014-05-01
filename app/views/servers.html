@@ -29,7 +29,7 @@
       <tr ng-repeat="server in myServers | filter:serverSearch">
         <td>{{server.name}}</td>
         <td>{{server.hostname}}</td>
-        <td class="col-sm-2"><div ng-click="detail(server.id);" class="btn btn-default serverInfoBtn"><i class="fa fa-dashboard"></i></div></td>
+        <td class="col-sm-2"><a href="#/servers/{{server.id}}" class="btn btn-default serverInfoBtn"><i class="fa fa-dashboard"></i></a></td>
       </tr>
     </tbody>
   </table>

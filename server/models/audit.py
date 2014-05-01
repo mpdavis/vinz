@@ -62,3 +62,7 @@ class ScanLog(Document):
     users_expected = ListField(StringField())
     actual_users = ListField(StringField())
     unexpected_users = ListField(StringField())
+
+    keys_added = ListField(StringField())
+    keys_removed = ListField(StringField())
+    unexpected_keys = ListField(StringField())

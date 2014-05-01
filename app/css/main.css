@@ -68,6 +68,10 @@ body {
   border-width: 0 0 0 1px;
 }
 
+.btn .caret {
+  margin-left: 3px;
+}
+
 .bordered {
   border: 1px solid #b30000;
   border-width: 0 1px;
@@ -119,9 +123,10 @@ body {
 
 .backButton {
   position: absolute;
-  top: 4px;
-  left: 20px;
   color: #afafaf;
+  margin-top: 4px;
+  margin-left: 4px;
+  z-index: 100;
 }
 
 .backButton:hover {

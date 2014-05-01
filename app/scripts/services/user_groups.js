@@ -11,7 +11,7 @@ angular.module('vinzApp')
     var groupUsersAPI = userGroupsAPI + '/users/:users_id';
     var GroupUser = $resource(groupUsersAPI, {id:'@id'});
 
-    //serverGroups API
+    //userGroups API
     return {
       getUserGroups: function() {
         var userGroups = UserGroup.query();

@@ -28,10 +28,12 @@ from rest.server_group import ServerGroupUsersResourceList
 from rest.server_group import ServerGroupUserGroupsResource
 from rest.server_group import ServerGroupUserGroupsResourceList
 
+from rest.stats import ScanLogDaysGraphResource
 from rest.stats import StatisticsResource
 
 from rest.user import UserResource
 from rest.user import UserResourceList
+from rest.user import UserServersResourceList
 
 from rest.user_group import UserGroupResource
 from rest.user_group import UserGroupResourceList
@@ -78,9 +80,11 @@ def initialize_routes(api):
     add_resource(BASE_API_PATH % '/servergroups/<string:server_group_id>/usergroups/<string:user_group_id>', ServerGroupUserGroupsResource, endpoint='server-group-user-group')
 
     add_resource(BASE_API_PATH % '/stats/', StatisticsResource, endpoint='stats')
+    add_resource(BASE_API_PATH % '/scan_log_graph/', ScanLogDaysGraphResource, endpoint='scan-log-graph')
 
     add_resource(BASE_API_PATH % '/users/', UserResourceList, endpoint='users')
     add_resource(BASE_API_PATH % '/users/<string:user_id>', UserResource, endpoint='user')
+    add_resource(BASE_API_PATH % '/users/<string:user_id>/servers/', UserServersResourceList, endpoint='user-servers')
 
     add_resource(BASE_API_PATH % '/usergroups/', UserGroupResourceList, endpoint='user-groups')
     add_resource(BASE_API_PATH % '/usergroups/<string:user_group_id>', UserGroupResource, endpoint='user-group')
