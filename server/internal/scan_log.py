@@ -96,8 +96,8 @@ def get_scan_log_stat_graph_by_day():
     success_list = []
     fail_list = []
     for day, data in days.iteritems():
-        success_list.append([data['counter'], data['successful']])
-        fail_list.append([data['counter'], data['failed']])
+        success_list.append(data['successful'])
+        fail_list.append(data['failed'])
 
     return {
         'success': success_list,

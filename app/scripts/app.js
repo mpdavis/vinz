@@ -6,7 +6,7 @@ var app = angular.module('vinzApp', [
   'ngSanitize',
   'ngRoute',
   'infinite-scroll',
-  'angular-flot'
+  'highcharts-ng'
 ])
   .config(function ($routeProvider) {
     $routeProvider

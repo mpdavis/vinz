@@ -59,8 +59,7 @@
     </div>
     <div class="chart-container">
       <div class="chartOneContainer col-xs-12 stat well">
-        <h3>Graphs per day</h3>
-        <flot dataset="graph_data" id="chartOne"></div>
+        <highchart id="chart_data" config="chartConfig"></highchart>
       </div>
     </div>
   </div>
@@ -68,21 +67,9 @@
 
 <script type="text/javascript">
 $(function() {
-  var scope = angular.element($("#vinzApp")).scope();
-
-  console.log(scope);
 
   $(".navbar-nav li").removeClass("active");
   $("#dashboard-nav").addClass("active");
-
-  var size = $(".chartOneContainer").width();
-  var canvasOne = document.getElementById('chartOne');
-
-  var d1 = [];
-  console.log();
-  $.plot("#chartOne", [d1]);
-
-  var $dashboard = $("#dashboard");
 
 });
 </script>

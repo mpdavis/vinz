@@ -31,8 +31,9 @@ module.exports = function(grunt) {
             'bootstrap': bowerBase + 'bootstrap/',
             'jquery': bowerBase + 'jquery/',
             'fontAwesome': bowerBase + 'font-awesome/',
-            'flot': bowerBase + 'flot/',
-            'ngInfiniteScroll': bowerBase + 'ngInfiniteScroll/'
+            'ngInfiniteScroll': bowerBase + 'ngInfiniteScroll/',
+            'highcharts': bowerBase + 'highcharts/',
+            'highchartsng': bowerBase + 'highcharts-ng/',
         },
         'build': {
             'js': buildBase + 'js/'
@@ -45,7 +46,6 @@ module.exports = function(grunt) {
         },
         'npm': {
             'almond': npmBase + 'almond/',
-            'angularFlot': npmBase + 'angular-flot/'
         },
         'static': {
             'js': staticBase + 'js/',
@@ -150,8 +150,8 @@ module.exports = function(grunt) {
                     directories.bower.angularCookies + 'angular-cookies.js',
                     directories.bower.angularSanitize + 'angular-sanitize.js',
                     directories.bower.ngInfiniteScroll + 'build/ng-infinite-scroll.min.js',
-                    directories.bower.flot + 'jquery.flot.js',
-                    directories.npm.angularFlot + 'angular-flot.js',
+                    directories.bower.highcharts + 'highcharts.js',
+                    directories.bower.highchartsng + 'dist/highcharts-ng.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/logs.js',
                     directories.frontend.js + 'controllers/servers.js',
