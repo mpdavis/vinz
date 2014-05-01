@@ -6,12 +6,12 @@
       Server Groups
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-7">
-      <div id="newServerButton" class="col-xs-3 btn btn-default">
-        New
-      </div>
-      <div class="col-xs-9 right-inner-addon">
+      <div class="col-xs-9 col-xs-offset-2 right-inner-addon">
         <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
         <i class="fa fa-search"></i>
+      </div>
+      <div id="newServerButton" class="col-xs-1 btn btn-default">
+        <i class="fa fa-plus"></i>
       </div>
     </div>
   </div>
@@ -38,12 +38,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-          <h4 class="modal-title" id="newServerModalLabel">New Server</h4>
+          <h4 class="modal-title" id="newServerModalLabel">New Server Group</h4>
         </div>
         <div class="modal-body">
           <div class="simple-form form-group">
             <label>Name</label>
-            <input type="text" ng-model="newServerGroup.name" class="form-control" placeholder="Awesome server group name..."></input>
+            <input type="text" ng-model="newServerGroup.name" class="form-control"></input>
           </div>
         </div>
         <div class="modal-footer">

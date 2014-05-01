@@ -6,12 +6,12 @@
       Servers
     </div>
     <div class="row sectionBody col-xs-offset-2 col-xs-7">
-      <div id="newServerButton" class="col-xs-3 btn btn-default">
-        New
-      </div>
-      <div class="col-xs-9 right-inner-addon">
+      <div class="col-xs-9 col-xs-offset-2 right-inner-addon">
         <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
         <i class="fa fa-search"></i>
+      </div>
+      <div id="newServerButton" class="col-xs-1 btn btn-default">
+        <i class="fa fa-plus"></i>
       </div>
     </div>
   </div>
@@ -45,10 +45,11 @@
         <div class="modal-body">
           <div class="simple-form form-group">
             <label>Name</label>
-            <input type="text" ng-model="newServer.name" class="form-control" placeholder="Awesome server name..."></input>
+            <input type="text" ng-model="newServer.name" class="form-control"></input>
 
             <label>Hostname</label>
-            <input type="text" ng-model="newServer.hostname" class="form-control" placeholder="ex: '173.30.18.93' or 'http://server.mydomain.com'"></input>
+            <input type="text" ng-model="newServer.hostname" class="form-control"></input>
+            <p class="help-block">'173.30.18.93' or 'http://server.mydomain.com'</p>
           </div>
         </div>
         <div class="modal-footer">

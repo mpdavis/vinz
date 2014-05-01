@@ -31,8 +31,9 @@ module.exports = function(grunt) {
             'bootstrap': bowerBase + 'bootstrap/',
             'jquery': bowerBase + 'jquery/',
             'fontAwesome': bowerBase + 'font-awesome/',
-            'flot': bowerBase + 'flot/',
-            'ngInfiniteScroll': bowerBase + 'ngInfiniteScroll/'
+            'ngInfiniteScroll': bowerBase + 'ngInfiniteScroll/',
+            'highcharts': bowerBase + 'highcharts/',
+            'highchartsng': bowerBase + 'highcharts-ng/',
         },
         'build': {
             'js': buildBase + 'js/'
@@ -44,7 +45,7 @@ module.exports = function(grunt) {
             'views': frontendBase + 'views/'
         },
         'npm': {
-            'almond': npmBase + 'almond/'
+            'almond': npmBase + 'almond/',
         },
         'static': {
             'js': staticBase + 'js/',
@@ -149,7 +150,8 @@ module.exports = function(grunt) {
                     directories.bower.angularCookies + 'angular-cookies.js',
                     directories.bower.angularSanitize + 'angular-sanitize.js',
                     directories.bower.ngInfiniteScroll + 'build/ng-infinite-scroll.min.js',
-                    directories.bower.flot + 'jquery.flot.js',
+                    directories.bower.highcharts + 'highcharts.js',
+                    directories.bower.highchartsng + 'dist/highcharts-ng.js',
                     directories.frontend.js + 'app.js',
                     directories.frontend.js + 'controllers/logs.js',
                     directories.frontend.js + 'controllers/servers.js',
@@ -166,7 +168,8 @@ module.exports = function(grunt) {
                     directories.frontend.js + 'controllers/user_group_detail.js',
                     directories.frontend.js + 'services/user_groups.js',
                     directories.frontend.js + 'services/server_groups.js',
-                    directories.frontend.js + 'controllers/dashboard.js'
+                    directories.frontend.js + 'controllers/dashboard.js',
+                    directories.frontend.js + 'services/dashboard.js'
                 ],
                 dest: directories.static.js + 'app.js'
             }
