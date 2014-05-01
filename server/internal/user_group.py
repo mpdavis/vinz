@@ -17,8 +17,8 @@ def create_user_group(operator, name, **kwargs):
     if existing_user_group:
         raise UserGroupAlreadyExistsError("A usergroup with that name already exists.")
     user_group = UserGroup(name=name, lowercase_name=name.lower())
-    activity_log.log_user_group_created(user_group, operator)
     user_group.save()
+    activity_log.log_user_group_created(user_group, operator)
     return user_group
 
 
