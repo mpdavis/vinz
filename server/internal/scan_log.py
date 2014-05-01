@@ -76,28 +76,27 @@ def get_num_scan_logs():
 def get_scan_log_stat_graph_by_day():
     now = datetime.datetime.now()
     seven_days_ago = now - datetime.timedelta(days=7)
-    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago).order_by('-timestamp'))
-    days = {}
-    counter = 0
+    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago).order_by('timestamp'))
+
+    success_list = [0, 0, 0, 0, 0, 0, 0]
+    fail_list = [0, 0, 0, 0, 0, 0, 0]
+
+    counter = -1
+
+    day_map = {}
     for log in logs:
         day = log.timestamp.day
-        if day not in days:
-            counter += 1
-            days[day] = {
-                'counter': counter,
-                'successful': 0,
-                'failed': 0,
-            }
-        if log.server_status >= SERVER_STATUS.SUCCESS:
-            days[day]['successful'] += 1
-        else:
-            days[day]['failed'] += 1
 
-    success_list = []
-    fail_list = []
-    for day, data in days.iteritems():
-        success_list.append(data['successful'])
-        fail_list.append(data['failed'])
+        try:
+            index = day_map[day]
+        except KeyError:
+            day_map[day] = counter
+            counter += 1
+
+        if log.server_status >= SERVER_STATUS.SUCCESS:
+            success_list[counter] += 1
+        else:
+            fail_list[counter] += 1
 
     return {
         'success': success_list,

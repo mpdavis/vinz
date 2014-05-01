@@ -1,4 +1,5 @@
 
+import datetime
 import pprint
 
 from crontab import CronTab
@@ -154,11 +155,50 @@ def scan():
     s = Scanner(debug=False, add_users=True, remove_users=True, add_keys=True, remove_keys=True)
     results = s.scan()
 
+
 @manager.command
 def debug_scan():
     from scanner.scanner import Scanner
     s = Scanner(debug=True, add_users=True, remove_users=True, add_keys=True, remove_keys=True)
     results = s.scan()
+
+
+@manager.command
+def fake_scans():
+    from models.audit import ScanLog
+    from internal.server import get_server_by_hostname
+
+    server = get_server_by_hostname('vinz-ubuntu-12-04.student.iastate.edu')
+
+    now = datetime.datetime.now()
+    for day_index in xrange(7):
+        day_delta = now - datetime.timedelta(days=day_index)
+
+
+        print "working on %s days ago" % day_index
+
+        number_of_servers = 814
+        if day_index > 4:
+            number_of_servers = 598
+
+        print number_of_servers
+        for log_index in xrange(number_of_servers):
+
+            log = ScanLog(
+                server=server,
+                server_status=0,
+                timestamp=day_delta,
+                status=0,
+                users_expected=[],
+                actual_users=[],
+                unexpected_users=[],
+                keys_added=[],
+                keys_removed=[],
+                unexpected_keys=[],
+            )
+
+            log.save()
+
 
 if __name__ == "__main__":
     manager.run()
