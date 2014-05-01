@@ -6,12 +6,12 @@
       Users
     </div>
     <div class="row sectionBody col-sm-offset-4 col-sm-6">
-      <div id="newUserButton" class="col-sm-3 btn btn-default">
-        New User
-      </div>
-      <div class="col-sm-9 right-inner-addon">
+      <div class="col-sm-9 col-xs-offset-2 right-inner-addon">
         <input ng-model="userSearch" type="text" class="form-control" placeholder="Search">
         <i class="fa fa-search"></i>
+      </div>
+      <div id="newUserButton" class="col-xs-1 btn btn-default">
+        <i class="fa fa-plus"></i>
       </div>
     </div>
   </div>
@@ -45,19 +45,19 @@
         <div class="modal-body">
           <div class="simple-form form-group">
 			<label>Username</label>
-            <input type="text" ng-model="newUser.username" class="form-control" placeholder="Enter username"></input>
+            <input type="text" ng-model="newUser.username" class="form-control"></input>
             
             <label>Password</label>
-            <input type="password" ng-model="newUser.password" class="form-control" placeholder="Enter a password"></input>
+            <input type="password" ng-model="newUser.password" class="form-control"></input>
             
             <label>First Name</label>
-            <input type="text" ng-model="newUser.first_name" class="form-control" placeholder="Enter your first name"></input>
+            <input type="text" ng-model="newUser.first_name" class="form-control"></input>
 
             <label>Last Name</label>
-            <input type="text" ng-model="newUser.last_name" class="form-control" placeholder="Enter your last name"></input>
+            <input type="text" ng-model="newUser.last_name" class="form-control"></input>
             
             <label>Email</label>
-            <input type="email" ng-model="newUser.email" class="form-control" placeholder="Enter your email address"></input>
+            <input type="email" ng-model="newUser.email" class="form-control"></input>
           </div>
         </div>
         <div class="modal-footer">
