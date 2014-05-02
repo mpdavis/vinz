@@ -12,7 +12,10 @@ from models.audit import ActivityLog
 
 
 def get_activity_log_text(log):
-    ctx = {}
+    ctx = {
+        'obj1_name': None,
+        'obj2_name': None,
+    }
     if log.obj:
         ctx['obj1_name'] = getattr(log.obj, 'name')
 
