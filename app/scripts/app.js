@@ -58,6 +58,12 @@ var app = angular.module('vinzApp', [
         templateUrl: '/static/views/dashboard.html',
         controller: 'DashboardCtrl'
       })
+      .when('/logout/', {
+         redirectTo: function(){
+            window.location.href = '/logout/';
+            window.location.reload(true);
+         }
+      })
       .otherwise({
         redirectTo: '/'
       });
