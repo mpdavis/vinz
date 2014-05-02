@@ -38,7 +38,7 @@
     </tbody>
   </table>
 
-  <!-- New User Modal -->
+
   <div id="newUserModal" class="modal fade" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -47,30 +47,32 @@
           <h4 class="modal-title" id="newUserModalLabel">New User</h4>
         </div>
         <div class="modal-body">
-          <form class="simple-form form-group" novalidate>
-			<label>Username</label>
-            <input type="text" ng-model="newUser.username" class="form-control"></input>
-            
-            <label>Password</label>
-            <input type="password" ng-model="newUser.password" class="form-control"></input>
-            
-            <label>First Name</label>
-            <input type="text" ng-model="newUser.first_name" class="form-control"></input>
+          <div class="simple-form form-group">
+            <label>Username</label>
+        <input type="text" ng-model="newUser.username" class="form-control"></input>
 
-            <label>Last Name</label>
-            <input type="text" ng-model="newUser.last_name" class="form-control"></input>
-            
-            <label>Email</label>
-            <input type="email" ng-model="newUser.email" class="form-control"></input>
+        <label>Password</label>
+        <input type="password" ng-model="newUser.password" class="form-control"></input>
+
+        <label>First Name</label>
+        <input type="text" ng-model="newUser.first_name" class="form-control"></input>
+
+        <label>Last Name</label>
+        <input type="text" ng-model="newUser.last_name" class="form-control"></input>
+
+        <label>Email</label>
+        <input type="email" ng-model="newUser.email" class="form-control"></input>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button id="createUserButton" type="button" class="btn btn-primary" ng-click="createUser(newUser)" ng-disabled="form.$invalid">Create</button>
+          <button id="createUserButton" type="button" class="btn btn-primary" ng-click="createUser(newUser)">Create</button>
         </div>
       </div>
     </div>
   </div>
+
+    
 </div>
 
 <script type="text/javascript">
