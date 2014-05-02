@@ -22,6 +22,10 @@ var app = angular.module('vinzApp', [
         templateUrl: '/static/views/users.html',
         controller: 'UsersCtrl'
       })
+      .when('/users/:id', {
+		templateUrl: 'static/views/user_detail.html',
+		controller: 'UserDetailCtrl'
+	  })
       .when('/servers/:id', {
         templateUrl: '/static/views/server_detail.html',
         controller: 'ServerDetailCtrl'
