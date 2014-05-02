@@ -81,7 +81,7 @@ def get_scan_log_stat_graph_by_day():
     success_list = [0, 0, 0, 0, 0, 0, 0]
     fail_list = [0, 0, 0, 0, 0, 0, 0]
 
-    counter = -1
+    counter = 0
 
     day_map = {}
     for log in logs:
@@ -94,9 +94,9 @@ def get_scan_log_stat_graph_by_day():
             counter += 1
 
         if log.server_status >= SERVER_STATUS.SUCCESS:
-            success_list[counter] += 1
+            success_list[day_map[day]] += 1
         else:
-            fail_list[counter] += 1
+            fail_list[day_map[day]] += 1
 
     return {
         'success': success_list,
