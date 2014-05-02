@@ -14,27 +14,19 @@ angular.module('vinzApp')
     //Users API
     return {
       getUsers: function() {
-        var users = User.query();
-        return users;
+        return User.query();
       },
       getUser: function(userId) {
-        var user = User.get({id: userId});
-        return user;
+        return User.get({id: userId});
       },
       createUser: function(newUser) {
         $http.post(usersURL, newUser);
       },
-      getUserServers: function(userId, callback) {
-        var servers = UserServer.query({id: userId}, function() {
-          callback(servers);
-        });
-        return servers;
+      getUserServers: function(userId) {
+        return UserServer.query({id: userId});
       },
-      getUserNonServers: function(userId, callback) {
-        var servers = UserServer.query({id: userId, no_access: true}, function() {
-          callback(servers);
-        });
-        return servers;
+      getNonUserServers: function(userId) {
+        return UserServer.query({id: userId, no_access: true});
       },
       revokeAccess: function(userId, serverId) {
         UserServer.remove({id: userId, server_id: serverId});

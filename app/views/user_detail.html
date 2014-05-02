@@ -36,16 +36,8 @@
     <div class="col-xs-2 sectionTitle">
       Servers
     </div>
-    <div class="row sectionBody col-xs-offset-2 col-xs-8">
-      <div class="btn-group col-xs-6" data-toggle="buttons">
-        <label class="btn btn-default active">
-          <input id="showAccess" type="radio" name="access" checked="checked"> Access
-        </label>
-        <label class="btn btn-default">
-          <input type="radio" name="access"> No Access
-        </label>
-      </div>
-      <div class="col-xs-6 right-inner-addon">
+    <div class="sectionBody col-xs-offset-5 col-xs-5">
+      <div class="right-inner-addon">
         <input ng-model="serverSearch" type="text" class="form-control" placeholder="Search">
         <i class="fa fa-search"></i>
       </div>
@@ -56,16 +48,16 @@
 	<table class="userTable table table-hover table-striped table-bordered">
     <thead>
       <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Access</th>
+        <th>Name</th>
+        <th>Hostname</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="server in serversToDisplayUnderUser | filter:serverSearch">
+      <tr ng-repeat="server in myServers | filter:serverSearch">
         <td>{{server.name}}</td>
         <td>{{server.hostname}}</td>
-        <td class="col-sm-2"><div ng-click="toggleAccess(server);" class="btn userInfoBtn" ng-class="{ 'btn-danger': access.has, 'btn-success':  !access.has }">{{access.message}}</div></td>
+        <td class="col-sm-2"><a href="/servers/{{server.id}}" class="btn userInfoBtn btn btn-primary">Go</div></td>
       </tr>
     </tbody>
   </table>
@@ -79,15 +71,5 @@ $(function() {
   $(".navbar-nav li").removeClass("active");
   $("#users-nav").addClass("active");
 
-  //This should be doable with angular, but I couldn't get it to.
-  $('input:radio[name="access"]').change(function() {
-    scope.$apply(function() {
-        if ($showAccess.is(':checked')) {
-          scope.showHasAccess(true);
-        } else {
-          scope.showHasAccess(false);
-        }
-    });
-  });
 });
 </script>
