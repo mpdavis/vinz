@@ -10,7 +10,7 @@ This project was originally created for a Software/Computer Engineering senior d
 Let's get everything set up.
 
 ### Prerequisites
-
+	
 You need to take care of a couple of things before getting started.
 
 * [Install Vagrant](http://vagrantup.com)
