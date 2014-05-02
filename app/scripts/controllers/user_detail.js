@@ -5,7 +5,9 @@ angular.module('vinzApp')
     
     var userId = $routeParams.id;
     
+    $scope.user = users.getUser(userId);
     $scope.myServers = users.getUserServers(userId);
 
+    
 
   }]);
