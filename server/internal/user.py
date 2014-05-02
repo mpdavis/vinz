@@ -16,7 +16,8 @@ from models.server import Server
 from models.server import ServerGroup
 
 
-def create_user(operator, first_name, last_name, email, username, password, **kwargs):
+def create_user(operator, first_name, last_name, email, username,
+                password, is_admin=False, **kwargs):
     """
     Create a new user in the database with the given values.
     """
@@ -27,7 +28,7 @@ def create_user(operator, first_name, last_name, email, username, password, **kw
     name = "%s %s" % (first_name, last_name)
     lower_name = name.lower()
     user = User(first_name=first_name, last_name=last_name, email=email, username=username,
-                lowercase_display_name=lower_name)
+                lowercase_display_name=lower_name, is_admin=is_admin)
     user.password = User.encode_password(password)
     user.save()
     activity_log.log_user_created(user, operator)

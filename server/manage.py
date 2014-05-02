@@ -34,12 +34,12 @@ DEV_SERVERS = {
 }
 
 DEV_USERS = {
-    'test@test.com': ['Test', 'Tester', 'test', 'testpassword'],
-    'vinz@test.com': ['Vinz', 'Vinzer', 'vinz', 'vinz'],
-    'maxpete@iastate.edu': ['Max', 'Peterson', 'max', 'vinz'],
-    'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz'],
-    'jhummel@iastate.edu': ['Jake', 'Hummel', 'jhummel', 'vinz'],
-    'zheilman@iastate.edu': ['Zach', 'Heilman', 'zheilman', 'vinz'],
+    'test@test.com': ['Test', 'Tester', 'test', 'testpassword', False],
+    'vinz@test.com': ['Vinz', 'Vinzer', 'vinz', 'vinz', False],
+    'maxpete@iastate.edu': ['Max', 'Peterson', 'max', 'vinz', True],
+    'mpdavis@iastate.edu': ['Michael', 'Davis', 'mpdavis', 'vinz', True],
+    'jhummel@iastate.edu': ['Jake', 'Hummel', 'jhummel', 'vinz', True],
+    'zheilman@iastate.edu': ['Zach', 'Heilman', 'zheilman', 'vinz', True],
 }
 
 VINZ_PUBLIC_KEY = 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrFNYehGLTslKj+YBUv4Uo2Gb2QB2IvnkTUY6JbEpl0USrObi8q+kWuV5Yhk+eUszxqu4vIIkFw1B3UK8CH76W5Fu3pcFXhBpui0h/IvDHLePmddFfx/kptdZ0qCs0VxrZgltpjCD8PtWx5nde10xYLI6V/j6yFLao/flB0qt0SJxoIbUdI0Zk99TzOmR4A5yGdW158Nvcsd+bwXshHfmjn3uafksjdSnlcqyNClo1oR3pUJKX9dQuyLA6hlGzF5/f2Sf+eggOkpLcvY7/yStfQMFF6uLZq9DHQAlXsEVnFOmHBGqoFcRKNmV2I7kcJL9QMVxWJrNIkLjBmyxACCsf example@getvinz.com'
@@ -54,7 +54,7 @@ def setup_dev():
     from internal.exceptions import UserAlreadyExistsError
 
     system_user = internal_user.create_user(None, "Vinz", "System", "system@vinz.com",
-                                            "vinz", "vinz")
+                                            "vinz", "vinz", True)
 
     servers = []
     for name, url in DEV_SERVERS.iteritems():
@@ -70,7 +70,8 @@ def setup_dev():
     for email, data in DEV_USERS.iteritems():
         user = None
         try:
-            user = internal_user.create_user(system_user, data[0], data[1], email, data[2], data[3])
+            user = internal_user.create_user(system_user, data[0], data[1], email,
+                                             data[2], data[3], data[4])
             print "Created user %s: %s" % (data[2], email)
         except UserAlreadyExistsError:
             user = internal_user.get_user_by_email(email)

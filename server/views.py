@@ -23,6 +23,10 @@ def initialize_view_urls(app):
 @login_required
 def index():
     g.user = get_current_user()
+
+    # Admin checking
+    if g.user and not g.user.is_admin and not request.path == "/public_key":
+        return redirect("/public_key")
     return render_template('index.html')
 
 
