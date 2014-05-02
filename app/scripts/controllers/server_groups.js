@@ -10,3 +10,4 @@ angular.module('vinzApp')
     	$scope.myServers = serverGroups.getServerGroups();
     }
   }]);
+
