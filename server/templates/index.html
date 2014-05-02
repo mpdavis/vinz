@@ -40,6 +40,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+            {% if g.user.is_admin %}
+
             <li id="dashboard-nav"><a href="/dashboard">Dashboard</a></li>
             <li id="logs-nav"><a href="/logs">Logs</a></li>
             <li id="servers-nav" class="dropdown">
@@ -56,6 +58,10 @@
                 <li><a href="/user_groups">Groups</a></li>
               </ul>
             </li>
+
+           {% else %}
+
+           {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown account">

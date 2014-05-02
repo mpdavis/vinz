@@ -28,6 +28,8 @@ class User(AuditableMixin, Document):
 
     lowercase_display_name = StringField()
 
+    is_admin = BooleanField(default=False)
+
     def get_display_name(self):
         return "%s %s" % (self.first_name, self.last_name)
 
