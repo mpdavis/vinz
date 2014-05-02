@@ -49,26 +49,6 @@
         <div class="modal-body">
           <form class="simple-form form-group" novalidate>
 			<label>Username</label>
-<<<<<<< HEAD
-            <input type="text" name='username' ng-model="newUser.username" class="form-control" placeholder="Enter username" required ></input> 
-            
-            <label>Password</label>
-            <input type="password" name ='password' ng-model="newUser.password" class="form-control" placeholder="Enter a password" required></input>
-            
-            <label>Verify Password</label>
-            <input type="password" name='verify_password' ng-model="newUser.verify_password" ng-model-options="{ updateOn: 'blur' }"class="form-control" placeholder="Re-enter your password" data-match="newUser.password" required ></input>
-            <span ng-show="verify.verify_password.$error.match">Fields do not match!</span> 
-            
-            <label>First Name</label>
-            <input type="text" name='first_name' ng-model="newUser.first_name" class="form-control" placeholder="Enter your first name" required ></input>
-            
-            <label>Last Name</label>
-            <input type="text" name='last_name' ng-model="newUser.last_name" class="form-control" placeholder="Enter your last name" required ></input>
-            
-            <label>Email</label>
-            <input type="email" name='email' ng-model="newUser.email" class="form-control" placeholder="Enter your email address" required ></input>
-          </form>
-=======
             <input type="text" ng-model="newUser.username" class="form-control"></input>
             
             <label>Password</label>
@@ -83,7 +63,6 @@
             <label>Email</label>
             <input type="email" ng-model="newUser.email" class="form-control"></input>
           </div>
->>>>>>> 27b136ece7ed326bc83ae6678e2c73f40abe622f
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -23,7 +23,7 @@ var app = angular.module('vinzApp', [
         controller: 'UsersCtrl'
       })
       .when('/users/:id', {
-		templateUrl: 'static/views/user_detail.html',
+		templateUrl: '/static/views/user_detail.html',
 		controller: 'UserDetailCtrl'
 	  })
       .when('/servers/:id', {
