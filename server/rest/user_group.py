@@ -72,7 +72,7 @@ class UserGroupUsersResourceList(AuthenticatedResource):
 
     @marshal_with(user_fields)
     def get(self, user_group_id):
-        no_access = request.args.get('no_access')
+        no_access = request.args.get('not_in_group')
         user_group = user_group_api.get_user_group(user_group_id)
         if no_access:
             all_users = set(user_api.get_all_users())
