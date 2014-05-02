@@ -28,8 +28,8 @@ angular.module('vinzApp')
       createUserGroup: function(newUserGroup) {
         $http.post(userGroupsURL, newUserGroup);
       },
-      getUserServers: function(userGroupId) {
-        return UserServer.query({id: userGroupId});
+      getGroupUsers: function(userGroupId) {
+        return GroupUser.query({id: userGroupId});
       },
       getNonGroupUsers: function(userGroupId) {
         return GroupUser.query({id: userGroupId, not_in_group: true});
@@ -40,32 +40,6 @@ angular.module('vinzApp')
       addUserToGroup: function(userGroupId, userId) {
         var groupUsersAPI = userGroupsURL + userGroupId + '/users/';
         $http.post(groupUsersAPI, {user_id: userId});
-      },
-      getUserGroupServer: function(userGroupId) {
-        return GroupServer.query({id: userGroupId});
-      },
-      getNonUserGroupServers: function(userGroupId) {
-        return GroupServer.query({id: userGroupId, no_access: true});
-      },
-      revokeServerAccessToGroup: function(userGroupId, serverId) {
-        GroupServer.remove({id: userGroupId, server_id: serverId});
-      },
-      grantServerAccessToGroup: function(userGroupId, serverId) {
-        var groupServersAPI = userGroupsURL + userGroupId + '/servers/';
-        $http.post(groupServersAPI, {server_id: serverId});
-      },
-      getUserGroupServerGroups: function(userGroupId) {
-        return GroupServerGroup.query({id: userGroupId}); 
-      },
-      getNonUserGroupServerGroups: function(userGroupId) {
-        return GroupServerGroup.query({id: userGroupId, no_access: true});
-      },
-      revokeServerGroupAccessToGroup: function(userGroupId, serverGroupId) {
-        GroupServerGroup.remove({id: userGroupId, server_group_id: serverGroupId});
-      },
-      grantServerGroupAccessToGroup: function(userGroupId, serverGroupId) {
-        var groupServerGroupsAPI = userGroupsURL + userGroupId + '/servergroups/';
-        $http.post(groupServerGroupsAPI, {server_group_id: serverGroupId});
       }
     };
   });
