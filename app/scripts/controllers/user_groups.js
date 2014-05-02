@@ -3,7 +3,7 @@
 angular.module('vinzApp')
   .controller('UserGroupsCtrl', ['$scope', 'userGroups', function ($scope, userGroups) {
     $scope.newUserGroup = {name: ""};
-    $scope.myUsers = userGroups.getUserGroups();
+    $scope.myUserGroups = userGroups.getUserGroups();
 
     $scope.createUser = function(newUserGroup) {
     	userGroups.createUserGroup(newUserGroup);

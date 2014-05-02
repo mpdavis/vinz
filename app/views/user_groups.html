@@ -25,9 +25,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in myUsers | filter:userSearch">
-        <td>{{user.username}}</td>
-        <td class="col-sm-2"><div ng-click="detail(user.id);" class="btn btn-default userInfoBtn"><i class="fa fa-dashboard"></i></div></td>
+      <tr ng-repeat="user in myUserGroups | filter:userSearch">
+        <td>{{user.name}}</td>
+        <td class="col-sm-2"><a href="/user_groups/{{user.id}}" class="btn btn-default userInfoBtn"><i class="fa fa-dashboard"></i></a></td>
       </tr>
     </tbody>
   </table>
