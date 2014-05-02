@@ -6,7 +6,7 @@ angular.module('vinzApp')
     $scope.myUsers = users.getUsers();
 
     $scope.createUser = function(newUser) {
-    	servers.createUser(newUser);
+    	users.createUser(newUser);
     	$scope.myUsers = users.getUsers();
     }
 
