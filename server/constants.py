@@ -85,7 +85,7 @@ ACTIVITY_LOG_MESSAGES = {
     AUDIT_ACTIONS.USER_ADDED_TO_GROUP: 'User "%(obj1_name)s" was added to the group "%(obj2_name)s".',
     AUDIT_ACTIONS.USER_REMOVED_FROM_GROUP: 'User "%(obj1_name)s" was removed from the group "%(obj2_name)s".',
     AUDIT_ACTIONS.SERVER_CREATED: 'Server "%(obj1_name)s" was added.',
-    AUDIT_ACTIONS.SERVER_DELETED: 'Server "%(obj1_name)s was deleted.',
+    AUDIT_ACTIONS.SERVER_DELETED: 'Server "%(obj1_name)s" was deleted.',
     AUDIT_ACTIONS.PUBLIC_KEY_ADDED: 'Public key for user "%(obj1_name)s" was added.',
     AUDIT_ACTIONS.PUBLIC_KEY_DELETED: 'Public key for user "%(obj1_name)s" was deleted.',
     AUDIT_ACTIONS.SERVER_GROUP_CREATED: 'Server-group "%(obj1_name)s" was created.',
