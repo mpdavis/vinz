@@ -50,7 +50,7 @@ def add_user(username, hosts):
     if not isinstance(username, basestring):
         raise ValueError("Username must be a string")
 
-    runner = VinzRunner(hosts, module_name='user', module_args='name=%s' % username)
+    runner = VinzRunner(hosts, module_name='user', module_args='name=%s shell=/bin/bash' % username)
     results = runner.run()
 
     if not isinstance(hosts, list):
