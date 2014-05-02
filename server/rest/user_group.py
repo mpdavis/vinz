@@ -2,6 +2,8 @@
 .. module:: rest.user_group
    :synopsis: REST Resource definitions relating to user_groups
 """
+from flask import request
+
 from flask.ext.restful import fields
 from flask.ext.restful import marshal
 from flask.ext.restful import marshal_with
@@ -70,7 +72,12 @@ class UserGroupUsersResourceList(AuthenticatedResource):
 
     @marshal_with(user_fields)
     def get(self, user_group_id):
+        no_access = request.args.get('not_in_group')
         user_group = user_group_api.get_user_group(user_group_id)
+        if no_access:
+            all_users = set(user_api.get_all_users())
+            access = set(user_group.get_users())
+            return list(all_users.difference(access))
         return list(user_group.user_list)
 
     def post(self, user_group_id):

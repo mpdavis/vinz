@@ -1,3 +1,5 @@
+import os
+os.environ['ANSIBLE_HOST_KEY_CHECKING'] = "False"
 
 import datetime
 import pprint
