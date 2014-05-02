@@ -6,6 +6,7 @@
 
 """
 import datetime
+import logging
 
 from constants import SCAN_LOG_STATUS
 from constants import SERVER_STATUS
@@ -76,12 +77,12 @@ def get_num_scan_logs():
 def get_scan_log_stat_graph_by_day():
     now = datetime.datetime.now()
     seven_days_ago = now - datetime.timedelta(days=7)
-    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago).order_by('timestamp'))
+    logs = list(ScanLog.objects.all().filter(timestamp__gt=seven_days_ago).order_by('-timestamp'))
 
     success_list = [0, 0, 0, 0, 0, 0, 0]
     fail_list = [0, 0, 0, 0, 0, 0, 0]
 
-    counter = 0
+    counter = 6
 
     day_map = {}
     for log in logs:
@@ -91,7 +92,7 @@ def get_scan_log_stat_graph_by_day():
             index = day_map[day]
         except KeyError:
             day_map[day] = counter
-            counter += 1
+            counter -= 1
 
         if log.server_status >= SERVER_STATUS.SUCCESS:
             success_list[day_map[day]] += 1
