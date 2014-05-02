@@ -1,6 +1,8 @@
 # Vinz [![Build Status](https://travis-ci.org/mpdavis/vinz.png?branch=master)](https://travis-ci.org/mpdavis/vinz)
 
-Vinz is a SSH key management system leveraging ansible to handle a company-wide deployment of keys.
+Vinz is a SSH key management system leveraging ansible to handle a company-wide deployment of keys. Our objective is to remove the headache of managing SSH public keys for system administrators. This type of system is especially useful when leveraged in an environment with a lot of servers distributed in the cloud.
+
+This project was originally created for a Software/Computer Engineering senior design project at Iowa State University in 2013. [View more information about the project here](http://seniord.ece.iastate.edu/may1432/).
 
 
 ## Dev Environment
